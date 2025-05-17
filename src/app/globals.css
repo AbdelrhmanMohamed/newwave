@@ -36,7 +36,8 @@
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
-  --font-main: var(--font-abel);
+  --font-main: var(--font-prompt);
+  --font-sans: var(--font-prompt);
 }
 
 :root {
@@ -74,8 +75,48 @@
 @layer base {
   * {
     @apply border-border outline-ring/50;
+    @apply font-sans
   }
   body {
     @apply bg-background text-foreground;
   }
+  
 }
+
+.close-icon-container{
+  position: relative;
+  margin: auto;
+  width: 16px;
+  height: 40px;
+  cursor: pointer;
+}
+.close-icon-left-right{
+  height: 2px;
+  width: 16px;
+  position: absolute;
+  margin-top: 24px;
+  background-color: #fff;
+  border-radius: 2px;
+  transform: rotate(45deg);
+  transition: all .4s linear;
+}
+
+.close-icon-right-left{
+  height: 2px;
+  width: 16px;
+  position: absolute;
+  margin-top: 24px;
+  background-color: #fff;
+  border-radius: 2px;
+  transform: rotate(-45deg);
+  transition: all .4s linear;
+}
+
+
+.close-icon-container:hover .close-icon-left-right{
+  transform: rotate(-45deg);
+}
+.close-icon-container:hover .close-icon-right-left{
+  transform: rotate(45deg);
+}
+

@@ -22,7 +22,7 @@ function LinkItem({ name, href, links }: Link_Item) {
     return (
       <HoverCard openDelay={0} closeDelay={100}>
         <HoverCardTrigger asChild>
-          <button className="font-medium cursor-pointer hover:text-primary transition duration-500">
+          <button className="font-medium text-sm cursor-pointer hover:text-primary transition duration-500">
             {name}
           </button>
         </HoverCardTrigger>
@@ -44,7 +44,7 @@ function LinkItem({ name, href, links }: Link_Item) {
                   className="bg-white size-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 "
                   initial={{ x: -10 }}
                   animate={{ x: 0 }}
-                  transition={{ type: "spring", stiffness: 200, damping: 20 }}
+                  transition={{ ease: "easeIn" }}
                 />
                 <span className="transition duration-700">{link.name}</span>
               </Link>

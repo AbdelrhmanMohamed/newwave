@@ -10,9 +10,9 @@ export const menuItems: Link_Item[] = [
   { name: "HOME", href: "/" },
   {
     name: "ABOUT",
-    href: "/",
+    href: "/about",
     links: [
-      { name: "About us", href: "/about-us" },
+      { name: "ABOUT US", href: "/about-us" },
       { name: "OUR PARTNERS", href: "/our-partners" },
       { name: "FAQ", href: "/faq" },
       { name: "OUR TEAM", href: "/team" },

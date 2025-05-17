@@ -7,7 +7,7 @@ import ScrollProgress from "@/components/ui/scroll-progress";
 const promptFont = Prompt({
   variable: "--font-prompt",
   subsets: ["latin"],
-  weight: ["500"],
+  weight: ["400", "500", "600"],
 });
 
 export const metadata: Metadata = {
