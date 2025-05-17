@@ -1,16 +1,13 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Prompt } from "next/font/google";
 import "./globals.css";
 import NavBar from "@/components/layout/navbar";
+import ScrollProgress from "@/components/ui/scroll-progress";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const promptFont = Prompt({
+  variable: "--font-prompt",
   subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+  weight: ["500"],
 });
 
 export const metadata: Metadata = {
@@ -25,10 +22,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        <main className="min-h-screen bg-black text-white overflow-hidden">
+      <body className={`${promptFont.variable} antialiased overflow-x-hidden`}>
+        <main className="min-h-screen bg-background  text-white">
+          <ScrollProgress />
           <NavBar />
           {children}
         </main>

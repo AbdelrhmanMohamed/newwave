@@ -1,36 +1,81 @@
+"use client";
+import { useEffect, useState } from "react";
+import { Link_Item } from "@/types/link";
 import LinkItem from "./link-item";
+import Image from "next/image";
+import { motion, useScroll } from "motion/react";
+import { MobileMenu } from "./mobil-menu";
 
-const menuItems = [
+export const menuItems: Link_Item[] = [
   { name: "HOME", href: "/" },
-  { name: "PAGES", href: "/pages" },
-  { name: "PROJECTS", href: "/projects" },
+  {
+    name: "ABOUT",
+    href: "/",
+    links: [
+      { name: "About us", href: "/about-us" },
+      { name: "OUR PARTNERS", href: "/our-partners" },
+      { name: "FAQ", href: "/faq" },
+      { name: "OUR TEAM", href: "/team" },
+      { name: "CAREERS", href: "/careers" },
+    ],
+  },
   { name: "SERVICES", href: "/services" },
+  { name: "PROJECTS", href: "/projects" },
   { name: "BLOG", href: "/blog" },
   { name: "CONTACT US", href: "/contact" },
 ];
 
 export default function NavBar() {
-  return (
-    <header className="container mx-auto px-16 py-8 flex justify-between items-center text-white">
-      <div className="flex items-center gap-2">
-        <div className="h-2 w-2 bg-white rounded-full"></div>
-        <h1 className="text-3xl font-bold">
-          <span className="text-red-500">Gaa</span>
-          <span className="text-white">Ga</span>
-          <span className="text-red-500 ml-1">•</span>
-        </h1>
-      </div>
+  const { scrollY } = useScroll();
 
-      <nav className="hidden md:flex items-center space-x-8">
+  const [lastScrollY, setLastScrollY] = useState(0);
+  const [visible, setVisible] = useState(true);
+
+  useEffect(() => {
+    // تابع يرصد تغير scrollY ويحدد اتجاه التمرير
+    return scrollY.on("change", (currentY) => {
+      if (currentY <= 10) {
+        setVisible(true);
+      } else if (currentY > lastScrollY) {
+        // Scroll Down → نعرض navbar
+        setVisible(true);
+      } else if (currentY < lastScrollY) {
+        // Scroll Up → نخفي navbar
+        setVisible(false);
+      }
+      setLastScrollY(currentY);
+    });
+  }, [scrollY, lastScrollY]);
+
+  return (
+    <motion.header
+      initial={{ y: 0 }}
+      animate={{ y: visible ? 0 : "-100%" }}
+      transition={{ duration: 0.5, ease: "easeInOut" }}
+      className={`z-30 px-8 md:px-14  py-6 flex justify-between items-center text-white sticky top-0 w-full ${
+        scrollY.get() > 0
+          ? "bg-background/30 backdrop-blur-2xl"
+          : "bg-transparent backdrop-blur-sm"
+      }`}
+    >
+      <Image src="/images/logo.svg" alt="logo-svg" width={180} height={200} />
+      <nav className="hidden xl:flex items-center space-x-10">
         {menuItems.map((item) => (
-          <LinkItem key={item.name} href={item.href} name={item.name} />
+          <LinkItem
+            key={item.name}
+            href={item.href}
+            name={item.name}
+            links={item?.links || []}
+          />
         ))}
       </nav>
-
-      <button className="border border-gray-700 px-6 py-2 rounded flex items-center">
-        <span className="text-red-500 mr-2">•</span>
-        Lets start
-      </button>
-    </header>
+      <div className="flex items-center gap-4">
+        <MobileMenu />
+        <button className="border hidden sm:flex border-zinc-600 px-8 py-3.5 font-bold  items-center cursor-pointer text-base hover:border-primary hover:text-primary transition duration-500 group">
+          <span className="bg-primary mr-2 rounded-full size-2 group-hover:bg-white transition duration-500" />
+          Lets start
+        </button>
+      </div>
+    </motion.header>
   );
 }
