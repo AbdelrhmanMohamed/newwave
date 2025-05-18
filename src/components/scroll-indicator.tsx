@@ -1,13 +1,25 @@
+import { motion } from "motion/react";
+
 export default function ScrollIndicator() {
   return (
-    <div className="fixed left-6 bottom-12 hidden lg:flex flex-col items-center">
-      <div className="transform -rotate-90 origin-center mb-8">
-        <span className="uppercase text-xs tracking-widest text-gray-400">
-          Scroll
-        </span>
+    <div className="flex flex-col items-center gap-1">
+      <div className={"size-2.5 bg-primary rounded-full animate-zoom"} />
+      <div className="h-14">
+        <motion.div
+          className="bg-neutral-500 w-0.5"
+          initial={{ height: 0 }}
+          animate={{ height: 40 }}
+          transition={{
+            duration: 1,
+            ease: "easeInOut",
+            repeat: Infinity,
+            repeatType: "reverse",
+          }}
+        />
       </div>
-      <div className="h-2 w-2 bg-red-600 rounded-full"></div>
-      <div className="h-16 w-px bg-gray-700 mt-2"></div>
+      <div className="transform -rotate-90 origin-center my-2">
+        <span className="uppercase text-sm tracking-widest ">Scroll</span>
+      </div>
     </div>
   );
 }

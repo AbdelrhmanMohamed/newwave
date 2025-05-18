@@ -25,7 +25,7 @@ export default function SectionHead({ title, animate, show }: Props) {
           />
         </div>
       )}
-      <h5 className="text-2xl text-neutral-500">{title}</h5>
+      <h5 className="text-xl text-neutral-500">{title}</h5>
       {/** end line */}
       {show?.end && (
         <div className="flex items-center gap-3">

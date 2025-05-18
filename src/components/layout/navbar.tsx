@@ -1,10 +1,11 @@
 "use client";
-import { useEffect, useState } from "react";
+// import { useEffect, useState } from "react";
 import { Link_Item } from "@/types/link";
 import LinkItem from "./link-item";
 import Image from "next/image";
 import { motion, useScroll } from "motion/react";
 import { MobileMenu } from "./mobil-menu";
+import { useEffect, useState } from "react";
 
 export const menuItems: Link_Item[] = [
   { name: "HOME", href: "/" },
@@ -49,14 +50,10 @@ export default function NavBar() {
 
   return (
     <motion.header
-      initial={{ y: 0 }}
-      animate={{ y: visible ? 0 : "-100%" }}
+      initial={{ y: -30, opacity: 0 }}
+      animate={{ y: visible ? 0 : -100, opacity: 1 }}
       transition={{ duration: 0.5, ease: "easeInOut" }}
-      className={`z-30 px-8 md:px-16  py-6 flex justify-between items-center text-white sticky top-0 w-full ${
-        scrollY.get() > 0
-          ? "bg-background/30 backdrop-blur-2xl"
-          : "bg-transparent backdrop-blur-sm"
-      }`}
+      className={`z-30 px-8 md:px-[4.5rem] py-6 flex justify-between items-center text-white fixed top-0 w-full bg-background/5 backdrop-blur-3xl xl:backdrop-blur-lg`}
     >
       <Image src="/images/logo.svg" alt="logo-svg" width={180} height={200} />
       <nav className="hidden xl:flex items-center space-x-10">

@@ -23,7 +23,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${promptFont.variable} antialiased overflow-x-hidden`}>
-        <main className="min-h-screen bg-background  text-white">
+        <main className="min-h-screen bg-background text-white">
           <ScrollProgress />
           <NavBar />
           {children}
