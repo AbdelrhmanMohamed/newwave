@@ -30,7 +30,7 @@ export function NestedMobileMenu({ item }: Props) {
         open={open}
       >
         <SheetTrigger asChild>
-          <button className="capitalize border-b border-zinc-800 pl-4 pr-2 py-3 text-base font-medium hover:bg-primary transition-colors duration-700 flex justify-between items-center group w-full text-white cursor-pointer">
+          <button className="capitalize border-b border-neutral-800 pl-4 pr-2 py-3 text-base font-medium hover:bg-primary transition-colors duration-700 flex justify-between items-center group w-full text-white cursor-pointer">
             {item.name.toLowerCase()}
             <RightIconWitArrow />
           </button>
@@ -41,25 +41,23 @@ export function NestedMobileMenu({ item }: Props) {
             className="absolute top-[11px] left-2 cursor-pointer"
           >
             <span className="group">
-              <LeftIconWitArrow className="text-zinc-500 before:bg-zinc-500" />
+              <LeftIconWitArrow className="text-neutral-500 before:bg-neutral-500" />
             </span>
           </button>
           <nav className="flex flex-col mt-12">
-            <div className="px-4 capitalize bg-zinc-800 py-2.5 text-zinc-400 border border-zinc-700">
+            <div className="px-4 capitalize bg-neutral-800 py-2.5 text-neutral-400 border border-neutral-700">
               {item.name.toLowerCase()}
             </div>
-            {(item?.links || []).map((item) => (
-              <>
-                <Link
-                  key={item.name}
-                  href={item.href}
-                  className={`capitalize border-b border-zinc-800 pl-4 pr-2 py-3 text-base font-medium hover:bg-primary transition-colors duration-700 flex justify-between items-center group ${isActive(
-                    item.href
-                  )}`}
-                >
-                  {item.name.toLowerCase()}
-                </Link>
-              </>
+            {(item?.links || []).map((nested) => (
+              <Link
+                key={nested.name}
+                href={nested.href}
+                className={`capitalize border-b border-neutral-800 pl-4 pr-2 py-3 text-base font-medium hover:bg-primary transition-colors duration-700 flex justify-between items-center group ${isActive(
+                  nested.href
+                )}`}
+              >
+                {nested.name.toLowerCase()}
+              </Link>
             ))}
           </nav>
         </SheetContent>

@@ -6,7 +6,7 @@ export default function ScrollProgress() {
   const { scrollYProgress } = useScroll();
 
   return (
-    <div className="z-40 bg-zinc-500 h-1 fixed top-0 w-full">
+    <div className="z-40 bg-neutral-500 h-1 fixed top-0 w-full">
       <motion.div
         id="scroll-indicator"
         style={{

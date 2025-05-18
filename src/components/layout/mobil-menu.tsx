@@ -41,23 +41,21 @@ export function MobileMenu() {
         </SheetTrigger>
         <SheetContent className="bg-black shadow-2xl w-68 xl:hidden">
           <nav className="flex flex-col mt-12">
-            {menuItems.map((item) => (
-              <>
-                {item.links && item.links.length > 0 ? (
-                  <NestedMobileMenu item={item} />
-                ) : (
-                  <Link
-                    key={item.name}
-                    href={item.href}
-                    className={`capitalize border-b border-zinc-800 pl-4 pr-2 py-3 text-base font-medium hover:bg-primary transition-colors duration-700 flex justify-between items-center group ${isActive(
-                      item.href
-                    )}`}
-                  >
-                    {item.name.toLowerCase()}
-                  </Link>
-                )}
-              </>
-            ))}
+            {menuItems.map((item) =>
+              item.links && item.links.length > 0 ? (
+                <NestedMobileMenu key={item.name} item={item} />
+              ) : (
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  className={`capitalize border-b border-neutral-800 pl-4 pr-2 py-3 text-base font-medium hover:bg-primary transition-colors duration-700 flex justify-between items-center group ${isActive(
+                    item.href
+                  )}`}
+                >
+                  {item.name.toLowerCase()}
+                </Link>
+              )
+            )}
           </nav>
         </SheetContent>
       </Sheet>

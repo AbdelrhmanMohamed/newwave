@@ -52,7 +52,7 @@ export default function NavBar() {
       initial={{ y: 0 }}
       animate={{ y: visible ? 0 : "-100%" }}
       transition={{ duration: 0.5, ease: "easeInOut" }}
-      className={`z-30 px-8 md:px-14  py-6 flex justify-between items-center text-white sticky top-0 w-full ${
+      className={`z-30 px-8 md:px-16  py-6 flex justify-between items-center text-white sticky top-0 w-full ${
         scrollY.get() > 0
           ? "bg-background/30 backdrop-blur-2xl"
           : "bg-transparent backdrop-blur-sm"
@@ -71,7 +71,7 @@ export default function NavBar() {
       </nav>
       <div className="flex items-center gap-4">
         <MobileMenu />
-        <button className="border hidden sm:flex border-zinc-600 px-8 py-3.5 font-bold  items-center cursor-pointer text-base hover:border-primary hover:text-primary transition duration-500 group">
+        <button className="border hidden sm:flex border-neutral-600 px-8 py-3.5 font-bold  items-center cursor-pointer text-base hover:border-primary hover:text-primary transition duration-500 group">
           <span className="bg-primary mr-2 rounded-full size-2 group-hover:bg-white transition duration-500" />
           Lets start
         </button>

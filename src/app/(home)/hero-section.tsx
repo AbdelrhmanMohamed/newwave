@@ -1,106 +1,89 @@
 "use client";
 import SocialSidebar from "@/components/social-sidebar";
 import React from "react";
-import { Play } from "lucide-react";
-import { motion } from "motion/react";
-import Image from "next/image";
+// import { Play } from "lucide-react";
+// import { motion } from "motion/react";
+import SectionHead from "@/components/headings/section-head";
+import ButtonLine from "@/components/headings/button-line";
+import ImageSwap from "@/components/effects/image-swap";
 
 export default function HeroSection() {
   return (
-    <main className="container mx-auto relative ">
-      <div className="flex flex-col md:flex-row">
+    <main className="relative">
+      {/* Background Image with Framer Motion */}
+      {/* <motion.div
+        initial={{ scale: 1 }}
+        animate={{ scale: 1.4 }}
+        transition={{ duration: 10, ease: "easeOut" }}
+        className="absolute inset-0 bg-[url('/images/slider-Image-1.jpg')] bg-cover bg-center h-screen"
+      /> */}
+
+      {/* Overlay */}
+      {/* <div className="absolute inset-0 bg-black/60 z-10 h-screen" /> */}
+      <div className="flex flex-row ">
         {/* Social Media Sidebar */}
-        <div className="hidden md:flex flex-col items-center space-y-8 pr-16">
+        <div className="flex flex-col items-center space-y-8 px-12 md:px-14 lg:px-20">
           <SocialSidebar />
         </div>
 
         {/* Content */}
-        <div className="md:w-1/2 space-y-6 px-20 mt-12 md:mt-20 ">
-          <div className="flex items-center space-x-4">
-            <div className="h-px w-12 bg-gray-700"></div>
-            <span className="text-primary text-sm">•</span>
-            <span className="text-gray-400 text-lg">Innovative Ideas</span>
-          </div>
-
-          <h2 className="text-5xl md:text-6xl font-bold leading-tight">
-            We Offer You <span className="text-primary">A Digital</span>{" "}
-            Platform <span className="text-primary">.</span>
+        <div className="lg:w-6/12 w-full mt-12 md:mt-20 z-30">
+          <SectionHead
+            title="New Waves"
+            animate
+            show={{
+              start: true,
+            }}
+          />
+          <h2 className="text-3xl md:text-[2.8rem] font-bold leading-16 mb-8 mt-4">
+            Ridding the{" "}
+            <span className="whitespace-nowrap text-primary">
+              Crest of Innovation
+            </span>{" "}
+            <br className="hidden md:block" />
+            <span className="block md:inline"> in Events & PR</span>
           </h2>
 
-          <p className="text-gray-400 max-w-lg">
-            Vulputate enim nulla aliquet porttitor lacus luctus accumsan tortor
-            posuere. Nisl purus in mollis nunc sed id sempe egestas quis ips.
+          <p className="text-neutral-400 max-w-xl ">
+            Pioneering unforgettable experiences in Saudi Arabia and beyond,
+            powered by technology and visionary expertise.
           </p>
 
-          <div className="flex items-center space-x-6 pt-8">
-            <div className="flex items-center space-x-4">
-              <span className="text-primary text-sm">•</span>
-              <button className="text-white hover:text-primary">
-                Get Started
-              </button>
-            </div>
-
-            <button className="flex items-center justify-center bg-red-500 hover:bg-red-600 rounded-full h-12 w-12 text-white">
-              <Play size={20} fill="white" />
-            </button>
-
-            <span className="text-white hover:text-primary">View Video</span>
+          <div className="flex items-center space-x-6 mt-10">
+            <ButtonLine title="Discover Our World" />
           </div>
         </div>
 
         {/* Image */}
-        <div className="md:w-1/2 mt-12 md:mt-0 ">
-          <motion.div
-            animate={{ scale: [1.1, 1.45] }}
-            transition={{
-              duration: 16,
-              repeat: Infinity,
-              repeatType: "reverse",
-              ease: "easeInOut",
-            }}
-            className="relative w-1/1 h-[590px]"
-          >
-            <Image
-              src="/images/slider-Image-1.jpg"
-              alt="Person using VR headset"
-              className="object-cover"
-              fill
-            />
-          </motion.div>
-        </div>
+        {/* <motion.div
+          animate={{ scale: [1.1, 1.26] }}
+          transition={{
+            duration: 9,
+            repeat: Infinity,
+            repeatType: "reverse",
+            ease: "easeInOut",
+          }}
+          className="relative w-1/1 xl:w-7/12 hidden xl:flex bottom-20"
+        >
+          <Image
+            src="/images/slider-Image-1.jpg"
+            alt="Person using VR headset"
+            className="object-contain"
+            width={900}
+            height={900}
+          />
+        </motion.div> */}
       </div>
-      <div>asdsadsada d asdsa dasdsa dsadsadsadsa</div>
-      <div>asdsadsada d asdsa dasdsa dsadsadsadsa</div>
-      <div>asdsadsada d asdsa dasdsa dsadsadsadsa</div>
-      <div>asdsadsada d asdsa dasdsa dsadsadsadsa</div>
-      <div>asdsadsada d asdsa dasdsa dsadsadsadsa</div>
-      <div>asdsadsada d asdsa dasdsa dsadsadsadsa</div>
-      <div>asdsadsada d asdsa dasdsa dsadsadsadsa</div>
-      <div>asdsadsada d asdsa dasdsa dsadsadsadsa</div>
-      <div>asdsadsada d asdsa dasdsa dsadsadsadsa</div>
-      <div>asdsadsada d asdsa dasdsa dsadsadsadsa</div>
-      <div>asdsadsada d asdsa dasdsa dsadsadsadsa</div>
-      <div>asdsadsada d asdsa dasdsa dsadsadsadsa</div>
-      <div>asdsadsada d asdsa dasdsa dsadsadsadsa</div>
-      <div>asdsadsada d asdsa dasdsa dsadsadsadsa</div>
-      <div>asdsadsada d asdsa dasdsa dsadsadsadsa</div>
-      <div>asdsadsada d asdsa dasdsa dsadsadsadsa</div>
-      <div>asdsadsada d asdsa dasdsa dsadsadsadsa</div>
-      <div>asdsadsada d asdsa dasdsa dsadsadsadsa</div>
-      <div>asdsadsada d asdsa dasdsa dsadsadsadsa</div>
-      <div>asdsadsada d asdsa dasdsa dsadsadsadsa</div>
-      <div>asdsadsada d asdsa dasdsa dsadsadsadsa</div>
-      <div>asdsadsada d asdsa dasdsa dsadsadsadsa</div>
-      <div>asdsadsada d asdsa dasdsa dsadsadsadsa</div>
-      <div>asdsadsada d asdsa dasdsa dsadsadsadsa</div>
-      <div>asdsadsada d asdsa dasdsa dsadsadsadsa</div>
-      <div>asdsadsada d asdsa dasdsa dsadsadsadsa</div>
-      <div>asdsadsada d asdsa dasdsa dsadsadsadsa</div>
-      <div>asdsadsada d asdsa dasdsa dsadsadsadsa</div>
-      <div>asdsadsada d asdsa dasdsa dsadsadsadsa</div>
-      <div>asdsadsada d asdsa dasdsa dsadsadsadsa</div>
-      <div>asdsadsada d asdsa dasdsa dsadsadsadsa</div>
-      <div>asdsadsada d asdsa dasdsa dsadsadsadsa</div>
+      {/* Example 1 - Default */}
+      <div className="p-6 border rounded-lg shadow-sm mt-16">
+        <h2 className="mb-4 font-medium">Default</h2>
+        <ImageSwap
+          firstImage="https://newwav.net/wp-content/uploads/2023/06/Gaaga-Slider-Brand-Logo-1-1.png"
+          secondImage="https://newwav.net/wp-content/uploads/2023/06/Gaaga-Slider-Brand-Logo-1-2.png"
+          width={144}
+          height={40}
+        />
+      </div>
     </main>
   );
 }

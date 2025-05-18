@@ -28,7 +28,7 @@ function LinkItem({ name, href, links }: Link_Item) {
         </HoverCardTrigger>
         <HoverCardContent
           align="start"
-          className="w-60  bg-background backdrop-blur-lg border border-zinc-700 rounded-none p-1 py-4 pb-0"
+          className="w-60  bg-background backdrop-blur-lg border border-neutral-700 rounded-none p-1 py-4 pb-0"
           sideOffset={16}
         >
           <div className="flex flex-col w-full">
