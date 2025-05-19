@@ -28,11 +28,15 @@ const images = [
     img1: "Gaaga-Slider-Brand-Logo-6-1.png",
     img2: "Gaaga-Slider-Brand-Logo-6-2.png",
   },
+  // {
+  //   img1: "Gaaga-Brand-Logo-4-1.png",
+  //   img2: "Gaaga-Brand-Logo-4-2.png",
+  // },
 ];
 
 export default function OurPartners() {
   return (
-    <div className="px-40 relative mt-0">
+    <div className="px-6 md:px-12 xl:px-40  relative mt-20 xl:mt-4">
       <motion.div
         initial={{ y: -10, opacity: 0 }}
         whileInView={{ y: 1, opacity: 100 }}

@@ -17,16 +17,18 @@ export default function FeatureCard({
   return (
     <Link href={url}>
       <div className="flex items-center justify-between gap-6">
-        <Image
-          src={image_url}
-          alt={title}
-          width={110}
-          height={110}
-          loading={"lazy"}
-          className="transition hover:scale-105"
-        />
+        <div className="w-32 h-32 relative">
+          <Image
+            src={image_url}
+            alt={title}
+            fill
+            loading={"lazy"}
+            className="transition hover:scale-105"
+          />
+        </div>
+
         <div>
-          <h3 className="text-white text-3xl font-bold mb-4 transition duration-500 hover:text-primary">
+          <h3 className="text-white text-xl lg:text-3xl font-bold mb-4 transition duration-500 hover:text-primary">
             {title}
           </h3>
           <p className="text-neutral-400 max-w-11/12">{description}</p>

@@ -1,11 +1,22 @@
+"use client";
 import SocialSidebar from "@/components/social-sidebar";
 import React from "react";
 import SectionHead from "@/components/headings/section-head";
 import ButtonLine from "@/components/headings/button-line";
 import Image from "next/image";
 import * as motion from "motion/react-client";
+import { useQuery } from "@tanstack/react-query";
+import { heroOptions } from "@/api/hero";
 
 export default function HeroSection() {
+  const { data: hero } = useQuery(heroOptions);
+
+  const parts = (hero?.title || "").split(hero?.highlight_text || "");
+
+  const imageUrl = hero?.cover?.url
+    ? `http://localhost:1337${hero?.cover?.url}`
+    : null;
+
   return (
     <main className="relative">
       <div className="absolute inset-0 bg-[#3D3D3D] opacity-70 z-20 h-screen block xl:hidden " />
@@ -22,21 +33,19 @@ export default function HeroSection() {
               }}
             />
             <h2 className="text-3xl md:text-[2.8rem] font-bold leading-snug mb-4 mt-4 w-11/12">
-              Ridding the{" "}
+              {parts[0]}{" "}
               <span className="md:whitespace-nowrap text-primary">
-                Crest of Innovation
+                {hero?.highlight_text}
               </span>{" "}
               <br className="hidden md:block" />
-              <span className="block md:inline"> in Events & PR</span>
+              <span className="block md:inline">{parts[0]}</span>
+              <span className="text-2xl size-3 bg-primary inline-block rounded-full" />
             </h2>
 
-            <p className="text-neutral-400 max-w-xl ">
-              Pioneering unforgettable experiences in Saudi Arabia and beyond,
-              powered by technology and visionary expertise.
-            </p>
+            <p className="text-neutral-400 max-w-xl ">{hero?.description}</p>
 
             <div className="flex items-center space-x-6 mt-10">
-              <ButtonLine title="Discover Our World" />
+              <ButtonLine title={hero?.button_text || "Discover Our World"} />
             </div>
           </div>
         </div>
@@ -54,7 +63,7 @@ export default function HeroSection() {
           layout
         >
           <Image
-            src="/images/slider-Image-1.jpg"
+            src={imageUrl || "/images/slider-Image-1.jpg"}
             alt="Person using VR headset"
             className="object-contain"
             fill

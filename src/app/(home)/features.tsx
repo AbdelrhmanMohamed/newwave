@@ -22,9 +22,9 @@ const cards = [
 
 export default function FeaturesSection() {
   return (
-    <section className="px-16 mt-60">
+    <section className="px-6 lg:px-16 mt-64 z-50">
       <div className="w-full">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-12">
           {cards.map((card, index) => (
             <motion.div
               key={index}
