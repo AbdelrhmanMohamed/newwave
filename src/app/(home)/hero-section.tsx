@@ -1,11 +1,9 @@
-"use client";
 import SocialSidebar from "@/components/social-sidebar";
 import React from "react";
-// import { Play } from "lucide-react";
-import { motion } from "motion/react";
 import SectionHead from "@/components/headings/section-head";
 import ButtonLine from "@/components/headings/button-line";
 import Image from "next/image";
+import * as motion from "motion/react-client";
 
 export default function HeroSection() {
   return (
@@ -53,7 +51,7 @@ export default function HeroSection() {
             ease: "easeInOut",
           }}
           className="relative w-full h-[650px] xl:h-[700px] bg-gradient md:w-10/12 lg:w-8/12 xl:w-6/12 ml-auto"
-          style={{}}
+          layout
         >
           <Image
             src="/images/slider-Image-1.jpg"

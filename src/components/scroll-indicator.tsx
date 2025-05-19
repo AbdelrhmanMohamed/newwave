@@ -1,8 +1,8 @@
-import { motion } from "motion/react";
+import * as motion from "motion/react-client";
 
 export default function ScrollIndicator() {
   return (
-    <div className="flex flex-col items-center gap-1">
+    <div className="flex flex-col items-center gap-1 mt-6">
       <div className={"size-2.5 bg-primary rounded-full animate-zoom"} />
       <div className="h-14">
         <motion.div
@@ -17,8 +17,8 @@ export default function ScrollIndicator() {
           }}
         />
       </div>
-      <div className="transform -rotate-90 origin-center my-2">
-        <span className="uppercase text-sm tracking-widest ">Scroll</span>
+      <div className="transform -rotate-90 origin-center my-4">
+        <span className="uppercase tracking-widest">Scroll</span>
       </div>
     </div>
   );
