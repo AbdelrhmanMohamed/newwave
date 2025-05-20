@@ -1,11 +1,13 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
-
-import type React from "react";
-
+import { send_message } from "@/app/actions/actions";
+import { Contact } from "@/types/contact";
 import { useState } from "react";
+import { toast } from "sonner";
 
 export default function ContactForm() {
-  const [formData, setFormData] = useState({
+  const [loading, setLoading] = useState<boolean>(false);
+  const [formData, setFormData] = useState<Contact>({
     firstName: "",
     lastName: "",
     phoneNumber: "",
@@ -24,11 +26,16 @@ export default function ContactForm() {
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission logic here
-    console.log("Form submitted:", formData);
-    // Reset form or show success message
+    const form = e.target as any;
+    setLoading(true);
+    const res = await send_message(formData);
+    setLoading(false);
+    if (res) {
+      toast.success("Message sent successfully! Thanks for contacting us!");
+      form.reset();
+    } else toast.error("Failed to send message");
   };
 
   return (
@@ -107,10 +114,10 @@ export default function ContactForm() {
       <div>
         <button
           type="submit"
-          className="flex items-center bg-transparent border border-neutral-700 hover:border-primary px-6 py-2 transition-colors"
+          className="border hidden sm:flex border-neutral-600 px-8 py-3.5 font-bold  items-center cursor-pointer text-base hover:border-primary hover:text-primary transition duration-500 group"
         >
-          <span className="h-2 w-2 bg-priborder-primary rounded-full mr-2"></span>
-          Submit
+          <span className="bg-primary mr-2 rounded-full size-1 group-hover:bg-white transition duration-500" />
+          {loading ? "Sending...." : "Submit"}
         </button>
       </div>
     </form>

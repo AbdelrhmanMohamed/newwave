@@ -4,6 +4,7 @@ import "./globals.css";
 import NavBar from "@/components/layout/navbar";
 import ScrollProgress from "@/components/ui/scroll-progress";
 import Providers from "@/api/provider";
+import { Toaster } from "@/components/ui/sonner";
 
 const promptFont = Prompt({
   variable: "--font-prompt",
@@ -29,6 +30,7 @@ export default function RootLayout({
             <ScrollProgress />
             <NavBar />
             {children}
+            <Toaster />
           </main>
         </Providers>
       </body>
