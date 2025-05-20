@@ -13,8 +13,8 @@ export default function HeroSection() {
 
   const parts = (hero?.title || "").split(hero?.highlight_text || "");
 
-  const imageUrl = hero?.cover?.url
-    ? `${process.env.NEXT_PUBLIC_API_URL}${hero?.cover?.url}`
+  const imageUrl = hero?.cover?.hash
+    ? `${process.env.NEXT_PUBLIC_API_URL}${hero?.cover?.hash}`
     : null;
 
   return (
