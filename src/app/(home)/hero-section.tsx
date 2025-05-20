@@ -14,7 +14,7 @@ export default function HeroSection() {
   const parts = (hero?.title || "").split(hero?.highlight_text || "");
 
   const imageUrl = hero?.cover?.url
-    ? `http://localhost:1337${hero?.cover?.url}`
+    ? `${process.env.NEXT_PUBLIC_API_URL}${hero?.cover?.url}`
     : null;
 
   return (
