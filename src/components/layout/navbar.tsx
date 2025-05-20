@@ -23,7 +23,7 @@ export const menuItems: Link_Item[] = [
   { name: "SERVICES", href: "/services" },
   { name: "PROJECTS", href: "/projects" },
   { name: "BLOG", href: "/blog" },
-  { name: "CONTACT US", href: "/contact" },
+  { name: "CONTACT US", href: "/contact-us" },
 ];
 
 export default function NavBar() {

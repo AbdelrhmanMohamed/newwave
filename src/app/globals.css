@@ -82,6 +82,7 @@
     @apply bg-background text-foreground;
     @apply overflow-x-hidden
   }
+ 
   
 }
 
@@ -121,6 +122,11 @@
 .close-icon-container:hover .close-icon-right-left{
   transform: rotate(45deg);
 }
+
+ .fade-bg::before{
+     background-image: linear-gradient(180deg, #11131900, #121418);
+     z-index: 1;
+  }
 
 
 @theme {
