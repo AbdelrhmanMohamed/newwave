@@ -7,6 +7,7 @@ import BranchCard from "@/components/cards/branch-card";
 import * as motion from "motion/react-client";
 import AnimatedText from "@/components/effects/animate-text";
 import { PageBanner } from "@/components/page-banner";
+import { SocialIcon } from "@/components/social-icon";
 
 export default function ContactUs() {
   return (
@@ -135,6 +136,7 @@ export default function ContactUs() {
           </div>
 
           <div className="flex space-x-4 my-4">
+            <SocialIcon name="facebook" />
             <a
               href="#"
               className="size-6 rounded-full border border-white transition hover:border-primary flex items-center justify-center duration-500 hover:text-primary"
