@@ -4,14 +4,14 @@ import { Facebook, Linkedin, Instagram } from "lucide-react";
 import ContactForm from "@/components/contact-form";
 import SectionHead from "@/components/headings/section-head";
 import BranchCard from "@/components/cards/branch-card";
-import Link from "next/link";
 import * as motion from "motion/react-client";
 import AnimatedText from "@/components/effects/animate-text";
+import { PageBanner } from "@/components/page-banner";
 
 export default function ContactUs() {
   return (
     <div className="">
-      <div className="fade-bg relative w-full h-[20rem] md:h-[24rem] lg:h-[28rem] before:absolute before:content-[''] before:w-full before:h-[75%] before:left-0 before:bottom-0 before:bg-transparent flex justify-center items-center text-center text-white flex-col">
+      {/* <div className="fade-bg relative w-full h-[20rem] md:h-[24rem] lg:h-[28rem] before:absolute before:content-[''] before:w-full before:h-[75%] before:left-0 before:bottom-0 before:bg-transparent flex justify-center items-center text-center text-white flex-col">
         <Image
           src="images/contact-us-breadcrumb.jpg"
           alt="contact-us"
@@ -38,7 +38,13 @@ export default function ContactUs() {
             <span className="text-neutral-400">Contact Us</span>
           </div>
         </motion.div>
-      </div>
+      </div> */}
+
+      <PageBanner
+        title="Contact Us"
+        backgroundImage="images/contact-us-breadcrumb.jpg"
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Contact Us" }]}
+      />
 
       {/* Response Time Section */}
       <motion.section
