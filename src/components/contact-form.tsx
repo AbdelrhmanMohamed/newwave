@@ -39,8 +39,8 @@ export default function ContactForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-14">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <form onSubmit={handleSubmit} className="space-y-8 md:space-y-14">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         <div>
           <input
             type="text"
@@ -48,7 +48,7 @@ export default function ContactForm() {
             placeholder="First Name"
             value={formData.firstName}
             onChange={handleChange}
-            className="w-full bg-transparent border-b border-neutral-700 py-2 px-1 focus:outline-none focus:border-primary transition-colors"
+            className="w-full bg-transparent border-b-2 border-neutral-700 py-2 px-1 focus:outline-none focus:border-primary transition-colors placeholder:text-neutral-500"
             required
           />
         </div>
@@ -59,7 +59,7 @@ export default function ContactForm() {
             placeholder="Last Name"
             value={formData.lastName}
             onChange={handleChange}
-            className="w-full bg-transparent border-b border-neutral-700 py-2 px-1 focus:outline-none focus:border-primary transition-colors"
+            className="w-full bg-transparent border-b-2 border-neutral-700 placeholder:text-neutral-500 py-2 px-1 focus:outline-none focus:border-primary transition-colors"
             required
           />
         </div>
@@ -73,7 +73,7 @@ export default function ContactForm() {
             placeholder="Your Number"
             value={formData.phoneNumber}
             onChange={handleChange}
-            className="w-full bg-transparent border-b border-neutral-700 py-2 px-1 focus:outline-none focus:border-primary transition-colors"
+            className="w-full bg-transparent border-b-2 border-neutral-700 placeholder:text-neutral-500 py-2 px-1 focus:outline-none focus:border-primary transition-colors"
           />
         </div>
         <div>
@@ -83,7 +83,7 @@ export default function ContactForm() {
             placeholder="Your Email"
             value={formData.email}
             onChange={handleChange}
-            className="w-full bg-transparent border-b border-neutral-700 py-2 px-1 focus:outline-none focus:border-primary transition-colors"
+            className="w-full bg-transparent border-b-2 border-neutral-700 placeholder:text-neutral-500 py-2 px-1 focus:outline-none focus:border-primary transition-colors"
             required
           />
         </div>
@@ -96,7 +96,7 @@ export default function ContactForm() {
           placeholder="Company Name"
           value={formData.companyName}
           onChange={handleChange}
-          className="w-full bg-transparent border-b border-neutral-700 py-2 px-1 focus:outline-none focus:border-primary transition-colors"
+          className="w-full bg-transparent border-b-2 border-neutral-700 placeholder:text-neutral-500 py-2 px-1 focus:outline-none focus:border-primary transition-colors"
         />
       </div>
 
@@ -107,14 +107,14 @@ export default function ContactForm() {
           value={formData.message}
           onChange={handleChange}
           rows={4}
-          className="w-full bg-transparent border-b border-neutral-700 py-2 px-1 focus:outline-none focus:border-primary transition-colors resize-none"
+          className="w-full bg-transparent border-b-2 border-neutral-700 placeholder:text-neutral-500 py-2 px-1 focus:outline-none focus:border-primary transition-colors resize-none"
         ></textarea>
       </div>
 
       <div>
         <button
           type="submit"
-          className="border hidden sm:flex border-neutral-600 px-8 py-3.5 font-bold  items-center cursor-pointer text-base hover:border-primary hover:text-primary transition duration-500 group"
+          className="border flex border-neutral-600 px-10 py-4 font-semibold  items-center cursor-pointer text-base hover:border-primary hover:text-primary transition duration-500 group mb-20"
         >
           <span className="bg-primary mr-2 rounded-full size-1 group-hover:bg-white transition duration-500" />
           {loading ? "Sending...." : "Submit"}

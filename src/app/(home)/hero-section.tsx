@@ -14,9 +14,11 @@ export default function HeroSection() {
   const parts = (hero?.title || "").split(hero?.highlight_text || "");
 
   const imageUrl =
-    process.env.NODE_ENV === "development"
+    process.env.NODE_ENV === "development" && hero?.cover?.url
       ? `${process.env.NEXT_PUBLIC_API_URL}${hero?.cover?.url}`
-      : hero?.cover.url;
+      : hero?.cover?.url;
+
+  console.log(imageUrl, "imageUrl");
 
   return (
     <main className="relative">

@@ -1,169 +1,126 @@
-// "use client";
-
-// import Link from "next/link";
-// import { Facebook, Instagram, Linkedin, ArrowUp, Loader2 } from "lucide-react";
-// import { useQuery } from "@tanstack/react-query";
-
-// // Types for our footer data
-// export interface FooterData {
-//   company: {
-//     name: string;
-//     description: string;
-//   };
-//   contact: {
-//     address: string;
-//     city: string;
-//     state: string;
-//     country: string;
-//     zip: string;
-//     phone: string;
-//     email: string;
-//     workingHours: string;
-//   };
-//   services: string[];
-//   navigation: {
-//     name: string;
-//     href: string;
-//   }[];
-//   socialMedia: {
-//     platform: string;
-//     href: string;
-//   }[];
-//   copyright: string;
-// }
-
-// export default function Footer() {
-//   const { data, isLoading, error } = useQuery({
-//     queryKey: ["footerData"],
-//     queryFn: fetchFooterData,
-//   });
-
-//   const footerData = data as FooterData;
-
-//   return (
-//     <footer className="bg-[#121212] text-gray-300">
-//       <div className="container mx-auto px-4 py-12">
-//         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-//           {/* Logo and About */}
-//           <div>
-//             <div className="flex items-center mb-6">
-//               <div className="h-2 w-2 bg-white rounded-full mr-1"></div>
-//               <span className="text-2xl font-bold">
-//                 <span className="text-red-500">
-//                   {footerData.company.name.substring(0, 3)}
-//                 </span>
-//                 <span className="text-white">
-//                   {footerData.company.name.substring(3)}
-//                 </span>
-//               </span>
-//               <div className="h-2 w-2 bg-red-500 rounded-full ml-1"></div>
-//             </div>
-//             <p className="text-sm mb-8">{footerData.company.description}</p>
-//             <div className="flex items-center">
-//               <div className="h-[1px] bg-gray-700 flex-grow mr-4"></div>
-//               <div className="h-2 w-2 bg-red-500 rounded-full mr-2"></div>
-//               <span className="text-xl font-medium text-white">Subscribe</span>
-//             </div>
-//           </div>
-
-//           {/* Contact Us */}
-//           <div>
-//             <h3 className="text-2xl font-medium text-white mb-6">Contact Us</h3>
-//             <div className="space-y-4">
-//               <p className="text-sm">
-//                 No: {footerData.contact.address},
-//                 <br />
-//                 {footerData.contact.city}, {footerData.contact.state},{" "}
-//                 {footerData.contact.country} {footerData.contact.zip}
-//               </p>
-//               <p className="text-sm">Phone : {footerData.contact.phone}</p>
-//               <p className="text-sm">Mail : {footerData.contact.email}</p>
-//               <p className="text-sm">
-//                 Working Hours : {footerData.contact.workingHours}
-//               </p>
-//             </div>
-//           </div>
-
-//           {/* Services */}
-//           <div>
-//             <h3 className="text-2xl font-medium text-white mb-6">Services</h3>
-//             <div className="space-y-4">
-//               {footerData.services.map((service, index) => (
-//                 <p key={index} className="text-sm">
-//                   {service}
-//                 </p>
-//               ))}
-//             </div>
-//           </div>
-//         </div>
-//       </div>
-
-//       {/* Bottom Navigation */}
-//       <div className="border-t border-gray-800">
-//         <div className="container mx-auto px-4 py-6">
-//           <div className="flex flex-col md:flex-row justify-between items-center">
-//             <div className="flex space-x-8 mb-4 md:mb-0">
-//               {footerData.navigation.map((item, index) => (
-//                 <Link
-//                   key={index}
-//                   href={item.href}
-//                   className="text-sm hover:text-white transition-colors"
-//                 >
-//                   {item.name}
-//                 </Link>
-//               ))}
-//             </div>
-
-//             <div className="flex items-center space-x-4">
-//               <div className="flex space-x-4 mr-8">
-//                 {footerData.socialMedia.map((social, index) => {
-//                   const Icon = getSocialIcon(social.platform);
-//                   return (
-//                     <Link
-//                       key={index}
-//                       href={social.href}
-//                       className="h-8 w-8 rounded-full border border-gray-700 flex items-center justify-center hover:border-white transition-colors"
-//                     >
-//                       <Icon size={16} />
-//                     </Link>
-//                   );
-//                 })}
-//               </div>
-//               <p className="text-xs">{footerData.copyright}</p>
-//             </div>
-//           </div>
-//         </div>
-//       </div>
-
-//       {/* Back to top button */}
-//       <div className="fixed bottom-6 right-6">
-//         <Link
-//           href="#top"
-//           className="h-10 w-10 bg-red-500 rounded-full flex items-center justify-center text-white shadow-lg hover:bg-red-600 transition-colors"
-//         >
-//           <ArrowUp size={20} />
-//         </Link>
-//       </div>
-//     </footer>
-//   );
-// }
-
-// // Helper function to get the appropriate social media icon
-// function getSocialIcon(platform: string) {
-//   switch (platform.toLowerCase()) {
-//     case "linkedin":
-//       return Linkedin;
-//     case "facebook":
-//       return Facebook;
-//     case "instagram":
-//       return Instagram;
-//     default:
-//       return Linkedin;
-//   }
-// }
-
-import React from "react";
+import Link from "next/link";
+import Image from "next/image";
+import { Twitter, Facebook, Linkedin } from "lucide-react";
 
 export default function Footer() {
-  return <div>Footer</div>;
+  return (
+    <footer className="text-white">
+      <div className="flex items-center justify-between gap-32 px-4 pt-20 pb-16">
+        {/* Logo and Description */}
+        <div className="space-y-4 w-5/12">
+          <div className="flex items-center">
+            <Image
+              src="/images/logo.png"
+              alt="NEW WAVE Logo"
+              width={180}
+              height={50}
+              className="object-contain"
+            />
+          </div>
+          <p className="text-neutral-400 text-sm leading-relaxed ">
+            Sodales ut etiam sit amet. Eget nulla facilisi etiam dignissim.
+            Aliquam vestibulum morbi blandit cursus risus. Ultrices vitae auctor
+            eu augue ut lectus. Ultricies integer quis auctor elit sed vulputate
+            mi sit amet.
+          </p>
+          <div className="flex items-center space-x-2 pt-4">
+            <div className="h-px bg-neutral-700 flex-grow"></div>
+            <div className="flex items-center">
+              <span className="h-2 w-2 rounded-full bg-orange-500 mr-2"></span>
+              <span className="text-xl font-medium">Subscribe</span>
+            </div>
+          </div>
+        </div>
+
+        <div className="flex justify-center gap-16 items-center w-7/12 pr-12">
+          {/* Contact Us */}
+          <div className="space-y-6 ">
+            <h3 className="text-2xl font-bold">Contact Us</h3>
+            <div className="space-y-4">
+              <p className="text-neutral-400">
+                No: 58 A, East Madison Street, Baltimore, MD, USA 4508
+              </p>
+              <p className="text-neutral-400">Phone : +974 - 411 - 3687</p>
+              <p className="text-neutral-400">Mail : info@example.com</p>
+              <p className="text-neutral-400">Working Hours : 8hrs</p>
+            </div>
+          </div>
+
+          {/* Services */}
+          <div className="space-y-6">
+            <h3 className="text-2xl font-bold">Services</h3>
+            <ul className="space-y-3  list-none">
+              <li className="flex items-center ">
+                <span className="text-neutral-400">Branding & Identity</span>
+              </li>
+              <li className="flex items-center">
+                <span className="text-neutral-400">
+                  Web Design & Development
+                </span>
+              </li>
+              <li className="flex items-center">
+                <span className="text-neutral-400">Mobile App Development</span>
+              </li>
+              <li className="flex items-center">
+                <span className="text-neutral-400">UI & UX Designing</span>
+              </li>
+              <li className="flex items-center">
+                <span className="text-neutral-400">Digital Marketing</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      {/* Bottom Bar */}
+      <div className="border-t border-neutral-600 py-4 px-4 w-full">
+        <div className="flex justify-between text-center items-center gap-6">
+          <div className="flex items-center w-4/12">
+            <nav>
+              <ul className="flex space-x-8">
+                <li>
+                  <Link href="#" className="text-neutral-400 hover:text-white">
+                    Home
+                  </Link>
+                </li>
+                <li>
+                  <Link href="#" className="text-neutral-400 hover:text-white">
+                    Projects
+                  </Link>
+                </li>
+                <li>
+                  <Link href="#" className="text-neutral-400 hover:text-white">
+                    Services
+                  </Link>
+                </li>
+              </ul>
+            </nav>
+          </div>
+          <div className="flex justify-center items-center gap-4 w-4/12">
+            <Link
+              href="#"
+              className="p-2 border rounded-full hover:border-neutral-500"
+            >
+              <Twitter className="h-4 w-4 text-neutral-400" />
+            </Link>
+            <Link
+              href="#"
+              className="p-2 border rounded-full hover:border-neutral-500"
+            >
+              <Facebook className="h-4 w-4 text-neutral-400" />
+            </Link>
+            <Link
+              href="#"
+              className="p-2 border rounded-full hover:border-neutral-500"
+            >
+              <Linkedin className="h-4 w-4 text-neutral-400" />
+            </Link>
+          </div>
+          <div className="text-right text-neutral-400 text-sm w-4/12">
+            Copyright © NEWWAVE 2025. Developed by Minaret A
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
 }
