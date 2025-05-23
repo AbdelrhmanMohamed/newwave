@@ -29,42 +29,55 @@ export async function generateMetadata(): Promise<Metadata> {
 
 
 async function getBaseContactPageData() {
-  const res = await fetchContentType('contact-us-page', {
-    'populate': {
-      'header_cover': {
-        fields: ['url'],
+  try {
+    const res = await fetchContentType('contact-us-page', {
+      'populate': {
+        'header_cover': {
+          fields: ['url'],
+        },
+        "say_hello_image": {
+          fields: ['url'],
+        },
       },
-      "say_hello_image": {
-        fields: ['url'],
-      },
-
-    },
-  }, true)
-  return res as ContactPageWithBranchesAndSocialLinks;
+    }, true)
+    return res as ContactPageWithBranchesAndSocialLinks;
+  } catch (error) {
+    console.error("Error fetching base contact page data:", error);
+    return {} as ContactPageWithBranchesAndSocialLinks;
+  }
 }
 
 async function getBranchesData() {
-  const res = await fetchContentType('contact-us-page', {
-    'populate': {
-      'branches': {
-        fields: ['id', 'name', 'address', 'email', 'tel'],
-        populate: {
-          cover: {
-            fields: ['url'],
+  try {
+    const res = await fetchContentType('contact-us-page', {
+      'populate': {
+        'branches': {
+          fields: ['id', 'name', 'address', 'email', 'tel'],
+          populate: {
+            cover: {
+              fields: ['url'],
+            },
           },
         },
       },
-    },
-  }, true)
-  return res as ContactPageWithBranchesAndSocialLinks;
+    }, true)
+    return res as ContactPageWithBranchesAndSocialLinks;
+  } catch (error) {
+    console.error("Error fetching branches data:", error);
+    return {} as ContactPageWithBranchesAndSocialLinks;
+  }
 }
 
 async function getSocialLinksData() {
-  const res = await fetchContentType('contact-us-page', {
-    'populate': 'social_links',
-  }, true) as ContactPageWithBranchesAndSocialLinks;
-
-  return res;
+  try {
+    const res = await fetchContentType('contact-us-page', {
+      'populate': 'social_links',
+    }, true) as ContactPageWithBranchesAndSocialLinks;
+    return res;
+  } catch (error) {
+    console.error("Error fetching social links data:", error);
+    return {} as ContactPageWithBranchesAndSocialLinks;
+  }
 }
 
 export default async function ContactUs() {

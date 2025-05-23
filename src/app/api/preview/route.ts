@@ -26,6 +26,11 @@ export const GET = async (request: Request) => {
     }
   } else if (contentType === "article" || contentType?.includes("blog")) {
     slugToReturn = `/blog${slug ? `/${slug}` : ""}`;
+  } else if (
+    contentType === "contact-us-page" ||
+    contentType?.includes("contact-us-page")
+  ) {
+    slugToReturn = `/contact-us${slug ? `/${slug}` : ""}`;
   } else if (contentType?.includes("product")) {
     slugToReturn = `/en/products${slug ? `/${slug}` : ""}`;
   }

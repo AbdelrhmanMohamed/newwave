@@ -30,7 +30,7 @@ export const PageBanner: React.FC<HeroBannerProps> = ({
       />
       <motion.div
         initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
+        animate={{ opacity: 1 }}
         viewport={{ once: true }}
         transition={{ duration: 0.1 }}
         className="mt-20 z-16 text-center w-full"
