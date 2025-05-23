@@ -1,3 +1,5 @@
+import { Media } from "./common";
+
 export type Contact = {
   firstName: string;
   lastName: string;
@@ -26,21 +28,6 @@ export interface Contact_Page {
   working_hours: string;
   header_cover: Media;
   say_hello_image: Media | null;
-}
-
-export interface Media {
-  url: string;
-  hash: string;
-  height: number;
-  id: number;
-  mime: string;
-  name: string;
-  previewUrl: string | null;
-  provider: string;
-  publishedAt: string;
-  size: number;
-  updatedAt: string;
-  width: number;
 }
 
 export interface BranchLocation {
