@@ -1,6 +1,5 @@
 import React from "react";
 import Image from "next/image";
-import { Facebook, Linkedin, Instagram } from "lucide-react";
 import ContactForm from "@/components/contact-form";
 import SectionHead from "@/components/headings/section-head";
 import BranchCard from "@/components/cards/branch-card";
@@ -8,42 +7,83 @@ import * as motion from "motion/react-client";
 import AnimatedText from "@/components/effects/animate-text";
 import { PageBanner } from "@/components/page-banner";
 import { SocialIcon } from "@/components/social-icon";
+import fetchContentType from "@/lib/strapi/fetchContentType";
+import { generateMetadataObject } from "@/lib/shared/metadata";
+import { Metadata } from 'next';
+import { ContactPageWithBranchesAndSocialLinks } from "@/types/contact";
 
-export default function ContactUs() {
+
+export const revalidate = 60
+export const dynamicParams = true
+
+
+export async function generateMetadata(): Promise<Metadata> {
+  const pageData = await fetchContentType("contact-us-page", {
+    populate: "seo",
+  }, true)
+
+  const seo = pageData?.seo;
+  const metadata = generateMetadataObject(seo);
+  return metadata;
+}
+
+
+async function getBaseContactPageData() {
+  const res = await fetchContentType('contact-us-page', {
+    'populate': {
+      'header_cover': {
+        fields: ['url'],
+      },
+      "say_hello_image": {
+        fields: ['url'],
+      },
+
+    },
+  }, true)
+  return res as ContactPageWithBranchesAndSocialLinks;
+}
+
+async function getBranchesData() {
+  const res = await fetchContentType('contact-us-page', {
+    'populate': {
+      'branches': {
+        fields: ['id', 'name', 'address', 'email', 'tel'],
+        populate: {
+          cover: {
+            fields: ['url'],
+          },
+        },
+      },
+    },
+  }, true)
+  return res as ContactPageWithBranchesAndSocialLinks;
+}
+
+async function getSocialLinksData() {
+  const res = await fetchContentType('contact-us-page', {
+    'populate': 'social_links',
+  }, true) as ContactPageWithBranchesAndSocialLinks;
+
+  return res;
+}
+
+export default async function ContactUs() {
+  // Initiate both requests in parallel
+  const [contactPage, contactBranches, contactSocialLinks] = await Promise.all([
+    getBaseContactPageData(),
+    getBranchesData(),
+    getSocialLinksData(),
+  ]);
+  const activeSocialLinks = contactSocialLinks?.social_links?.filter((link) => link.active);
+  const branches = contactBranches.branches || [];
+
+  console.log("Contact Page Data", contactPage);
+
   return (
     <div className="">
-      {/* <div className="fade-bg relative w-full h-[20rem] md:h-[24rem] lg:h-[28rem] before:absolute before:content-[''] before:w-full before:h-[75%] before:left-0 before:bottom-0 before:bg-transparent flex justify-center items-center text-center text-white flex-col">
-        <Image
-          src="images/contact-us-breadcrumb.jpg"
-          alt="contact-us"
-          fill
-          className="object-cover mix-blend-luminosity opacity-15"
-        />
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 100 }}
-          viewport={{ once: true }}
-          transition={{
-            duration: 0.1,
-          }}
-          className="mt-20 z-16"
-        >
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold">
-            Contact Us
-          </h1>
-          <div className="mt-6 space-x-2">
-            <Link href="/" className="hover:text-primary transition">
-              Home
-            </Link>
-            <span className="text-neutral-400">/</span>
-            <span className="text-neutral-400">Contact Us</span>
-          </div>
-        </motion.div>
-      </div> */}
-
       <PageBanner
         title="Contact Us"
-        backgroundImage="images/contact-us-breadcrumb.jpg"
+        backgroundImage={`${process.env.NEXT_PUBLIC_API_URL}${contactPage?.header_cover?.url}` || "/images/office.png"}
         breadcrumbs={[{ label: "Home", href: "/" }, { label: "Contact Us" }]}
       />
 
@@ -62,14 +102,12 @@ export default function ContactUs() {
             <Image src="/icons/24hour.svg" alt="24 work hour" fill />
           </div>
           <h2 className="text-5xl xl:text-[3.4rem] font-bold text-primary leading-12 md:leading-16">
-            We&apos;ll respond to you in an hour.
+            {contactPage?.response_time_title}
           </h2>
         </div>
         <div className="text-neutral-400 w-full text-center lg:text-left lg:w-5/12">
           <p>
-            Egestas diam in arcu cursus euismod quis viverra. Enim sed faucibus
-            turpis in eu mi bibendum neque egestas. Bibendum ut tristique et
-            egestas. Facilisi cras fermentum odio eu feugiat nulla lacus.
+            {contactPage.response_time_description}
           </p>
         </div>
       </motion.section>
@@ -82,7 +120,7 @@ export default function ContactUs() {
           viewport={{ once: true }}
           transition={{
             duration: 0.8,
-            delay: 1,
+            delay: 0.5,
           }}
           className="basis-full w-full md:basis-8/12 pr-4 md:pr-16 lg:pr-32"
         >
@@ -94,7 +132,7 @@ export default function ContactUs() {
             }}
           />
           <AnimatedText
-            text="Reach Out To Us"
+            text={contactPage.contact_form_title || 'Reach Out To Us'}
             className="text-4xl md:text-5xl font-bold mt-6 mb-10 lg:my-10 "
           />
           <ContactForm />
@@ -105,19 +143,19 @@ export default function ContactUs() {
           viewport={{ once: true }}
           transition={{
             duration: 0.8,
-            delay: 1.2,
+            delay: 0.5,
+
           }}
           className="border border-primary p-6 md:p-8 xl:p-14 basis-3/12 md:basis-4/12"
         >
-          <h2 className="text-4xl lg:text-5xl font-bold mb-6">Say Hello!</h2>
+          <h2 className="text-4xl lg:text-5xl font-bold mb-6">{contactPage?.say_hello_title || 'Say Hello!'}</h2>
           <p className="text-neutral-400">
-            Duis convallis convallis pretium risus squamattis ut interdum velit
-            laoreet
+            {contactPage.say_hello_title_description}
           </p>
 
           <div className="mt-8 mb-16">
             <Image
-              src="/images/career-img-1.jpg"
+              src={`${process.env.NEXT_PUBLIC_API_URL}${contactPage?.say_hello_image?.url}` || "/images/office.png"}
               alt="People working together"
               width={200}
               height={50}
@@ -125,40 +163,30 @@ export default function ContactUs() {
             />
           </div>
 
-          <h3 className="text-3xl font-bold mb-3">Enquiries</h3>
+          <h3 className="text-3xl font-bold mb-3">{contactPage?.enquiries_title || 'Enquiries'}</h3>
           <div className="flex gap-4 md:gap-3 lg:gap-8 flex-col sm:flex-row md:flex-col lg:flex-row">
-            <a href="mailto:info@example.com" className="text-white">
-              info@example.com
+            <a href={`mailto:${contactPage.enquiries_emails_1}`} className="text-white">
+              {contactPage.enquiries_emails_1}
             </a>
-            <a href="mailto:contact@example.com" className="vs">
-              contact@example.com
+            <a href={`mailto:${contactPage.enquiries_emails_2}`} className="vs">
+              {contactPage.enquiries_emails_2}
             </a>
           </div>
 
           <div className="flex space-x-4 my-4">
-            <SocialIcon name="facebook" />
-            <a
-              href="#"
-              className="size-6 rounded-full border border-white transition hover:border-primary flex items-center justify-center duration-500 hover:text-primary"
-            >
-              <Linkedin className="h-3 w-3" />
-            </a>
-            <a
-              href="#"
-              className="size-6 rounded-full border border-white transition hover:border-primary flex items-center justify-center duration-500 hover:text-primary"
-            >
-              <Facebook className="h-3 w-3" />
-            </a>
-            <a
-              href="#"
-              className="size-6 rounded-full border border-white transition hover:border-primary flex items-center justify-center hover:text-primary duration-500"
-            >
-              <Instagram className="h-3 w-3" />
-            </a>
+            {activeSocialLinks?.map((link) => (
+              <a
+                key={link.id}
+                href={link.url}
+                className="size-6 rounded-full border border-white transition hover:border-primary flex items-center justify-center duration-500 hover:text-primary"
+              >
+                <SocialIcon name={link.name as keyof typeof SocialIcon} className="h-3 w-3" />
+              </a>
+            ))}
           </div>
 
           <div className="text-neutral-400">
-            <p className="text-base">Working Hours : 8hrs</p>
+            <p className="text-base">{contactPage.working_hours || 'Working Hours : 8hrs'}</p>
           </div>
         </motion.div>
       </section>
@@ -175,19 +203,28 @@ export default function ContactUs() {
         className="px-5 pt-24 relative z-20 "
       >
         <AnimatedText
-          text="Our Affiliate Branches"
+          text={contactPage.branches_title || "Our Affiliate Branches"}
           className="text-4xl md:text-4xl font-bold text-center mb-4 justify-center"
         />
 
         <p className="text-neutral-400 text-center max-w-4xl mx-auto mb-16">
-          Et tortor consequat id porta nibh venenatis cras sed felis. Pharetra
-          diam sit amet nisl suscipit. Etiam dignissim diam quis enim lobortis
-          scelerisque fermentum. Volutpat blandit aliquam etiam erat velit
-          sceleris.
+          {contactPage.branches_description}
         </p>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 px-0 sm:px-8 md:px-0">
-          <BranchCard
+          {branches.map((branch) => (
+            <BranchCard
+              key={branch.id}
+              title={branch.name}
+              address={[branch.address]}
+              backgroundImage={`${process.env.NEXT_PUBLIC_API_URL}${branch.cover?.url}` || "/images/office.png"}
+              email={branch.email}
+              phone={branch.tel}
+            />
+          ))}
+
+          {/* Placeholder Branch Cards for Testing */}
+          {/* <BranchCard
             title="Saudi Arabia"
             address={["45 Lagoon Street, Canberra, Looloith, E1 6GL"]}
             backgroundImage="/images/office.png"
@@ -214,7 +251,7 @@ export default function ContactUs() {
             backgroundImage="/images/office.png"
             email="canbeera@example.com"
             phone="(02)26874491"
-          />
+          /> */}
         </div>
       </motion.section>
 

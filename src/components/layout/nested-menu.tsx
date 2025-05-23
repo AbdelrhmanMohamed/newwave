@@ -16,7 +16,7 @@ export function NestedMobileMenu({ item }: Props) {
   const pathName = usePathname();
 
   const isActive = (path: string) => {
-    return pathName.includes(path)
+    return pathName.startsWith(path)
       ? "bg-primary text-white hover:text-white"
       : "text-white";
   };

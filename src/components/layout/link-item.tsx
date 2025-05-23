@@ -14,8 +14,8 @@ function LinkItem({ name, href, links }: Link_Item) {
   const pathName = usePathname();
 
   const isActive = (path: string) => {
-    return pathName.startsWith(path)
-      ? "text-primary font-semibold"
+    return pathName === path
+      ? "text-primary"
       : "text-white";
   };
   if (links && links.length > 0) {

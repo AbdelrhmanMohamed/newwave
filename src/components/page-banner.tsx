@@ -20,12 +20,13 @@ export const PageBanner: React.FC<HeroBannerProps> = ({
   breadcrumbs,
 }) => {
   return (
-    <div className="fade-bg relative w-full h-[20rem] md:h-[24rem] lg:h-[28rem] before:absolute before:content-[''] before:w-full before:h-[75%] before:left-0 before:bottom-0 before:bg-transparent flex justify-center items-center text-center text-white flex-col">
+    <div className="fade-bg relative w-full h-[20rem] md:h-[24rem] lg:h-[28rem] before:absolute before:content-[''] before:w-full before:h-[50%] before:left-0 before:bottom-0 before:bg-transparent flex justify-center items-center text-center text-white flex-col">
       <Image
         src={backgroundImage}
         alt={title}
         fill
-        className="object-cover mix-blend-luminosity opacity-10"
+        className="mix-blend-luminosity opacity-20 object-cover bg-size-[100%] bg-repeat-no-repeat"
+        loading="lazy"
       />
       <motion.div
         initial={{ opacity: 0 }}

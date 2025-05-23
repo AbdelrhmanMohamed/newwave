@@ -37,5 +37,5 @@ const iconMap: Record<SocialPlatform, React.ElementType> = {
 
 export const SocialIcon = ({ name, className }: SocialIconProps) => {
   const Icon = iconMap[name] ?? Globe;
-  return <Icon className={cn("size-7 stroke-[1px]", className)} />;
+  return <Icon className={cn("size-7", className)} />;
 };

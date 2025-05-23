@@ -6,3 +6,76 @@ export type Contact = {
   companyName: string;
   message: string;
 };
+
+export interface Contact_Page {
+  branches_description: string;
+  branches_title: string;
+  contact_form_title: string | null;
+  createdAt: string;
+  documentId: string;
+  enquiries_emails_1: string;
+  enquiries_emails_2: string;
+  enquiries_title: string;
+  id: number;
+  publishedAt: string;
+  response_time_description: string;
+  response_time_title: string;
+  say_hello_title: string | null;
+  say_hello_title_description: string | null;
+  updatedAt: string;
+  working_hours: string;
+  header_cover: Media;
+  say_hello_image: Media | null;
+}
+
+export interface Media {
+  url: string;
+  hash: string;
+  height: number;
+  id: number;
+  mime: string;
+  name: string;
+  previewUrl: string | null;
+  provider: string;
+  publishedAt: string;
+  size: number;
+  updatedAt: string;
+  width: number;
+}
+
+export interface BranchLocation {
+  id: number;
+  lat: number;
+  lng: number;
+}
+
+export interface Branch {
+  id: number;
+  documentId: string;
+  name: string;
+  address: string;
+  email: string;
+  tel: string;
+  is_main: boolean | null;
+  location: BranchLocation;
+  createdAt: string;
+  updatedAt: string;
+  publishedAt: string;
+  cover: Media | null;
+}
+
+export interface SocialLink {
+  id: number;
+  documentId: string;
+  name: string;
+  url: string;
+  active: boolean;
+  createdAt: string;
+  updatedAt: string;
+  publishedAt: string;
+}
+
+export interface ContactPageWithBranchesAndSocialLinks extends Contact_Page {
+  branches: Branch[];
+  social_links: SocialLink[];
+}

@@ -4,10 +4,14 @@ import { Contact } from "@/types/contact";
 export async function send_message(data: Contact): Promise<boolean> {
   try {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/call-us`,
+      `${process.env.NEXT_PUBLIC_API_URL}/api/contact-uses`,
       {
         method: "POST",
-        body: JSON.stringify(data),
+        body: JSON.stringify({
+          data: {
+            ...data,
+          },
+        }),
         headers: {
           "content-type": "application/json",
         },

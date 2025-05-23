@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import { send_message } from "@/app/actions/actions";
 import { Contact } from "@/types/contact";
@@ -28,13 +27,21 @@ export default function ContactForm() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const form = e.target as any;
     setLoading(true);
+    console.log("formData", formData);
     const res = await send_message(formData);
+
     setLoading(false);
     if (res) {
       toast.success("Message sent successfully! Thanks for contacting us!");
-      form.reset();
+      setFormData({
+        firstName: "",
+        lastName: "",
+        phoneNumber: "",
+        email: "",
+        companyName: "",
+        message: "",
+      })
     } else toast.error("Failed to send message");
   };
 
