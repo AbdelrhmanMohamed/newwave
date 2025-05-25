@@ -90,7 +90,6 @@ export default async function ContactUs() {
   const activeSocialLinks = contactSocialLinks?.social_links?.filter((link) => link.active);
   const branches = (contactBranches.branches || []) || [];
 
-  console.log("Contact Page Data", contactPage);
 
   return (
     <div className="">

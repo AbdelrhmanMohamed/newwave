@@ -35,7 +35,7 @@ export const PageBanner: React.FC<HeroBannerProps> = ({
         transition={{ duration: 0.1 }}
         className="mt-20 z-16 text-center w-full"
       >
-        <h1 className="text-4xl sm:text-5xl lg:text-5xl font-bold mx-auto max-w-10/12 break-words whitespace-break-spaces leading-12 md:leading-16 lg:leading-16">
+        <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mx-auto max-w-10/12 break-words whitespace-break-spaces leading-12 md:leading-16 lg:leading-16">
           {title}
         </h1>
         <div className="mt-6 space-x-2">

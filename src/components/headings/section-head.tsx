@@ -16,7 +16,7 @@ export default function SectionHead({ title, animate, show }: Props) {
       {/** start line */}
       {show?.start && (
         <div className="flex items-center gap-3">
-          <div className="bg-neutral-500 w-8.5 h-[1.7px]" />
+          <div className="bg-neutral-500 w-8.5 h-[1.5px]" />
           <div
             className={cn(
               "size-2.5 bg-primary rounded-full",
@@ -25,7 +25,7 @@ export default function SectionHead({ title, animate, show }: Props) {
           />
         </div>
       )}
-      <h5 className="text-xl text-neutral-500">{title}</h5>
+      <h5 className="text-2xl text-neutral-500">{title}</h5>
       {/** end line */}
       {show?.end && (
         <div className="flex items-center gap-3">
@@ -35,7 +35,7 @@ export default function SectionHead({ title, animate, show }: Props) {
               animate && "animate-zoom"
             )}
           />
-          <div className="bg-neutral-500 w-8.5 h-[1.7px]" />
+          <div className="bg-neutral-500 w-8.5 h-[1.5px]" />
         </div>
       )}
     </div>

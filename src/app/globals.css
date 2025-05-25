@@ -73,27 +73,25 @@
 @layer base {
   * {
     @apply border-border outline-ring/50;
-    @apply font-sans
+    @apply font-sans;
   }
   html {
-        @apply overflow-x-hidden
+    @apply overflow-x-hidden;
   }
   body {
     @apply bg-background text-foreground;
-    @apply overflow-x-hidden
+    @apply overflow-x-hidden;
   }
- 
-  
 }
 
-.close-icon-container{
+.close-icon-container {
   position: relative;
   margin: auto;
   width: 16px;
   height: 40px;
   cursor: pointer;
 }
-.close-icon-left-right{
+.close-icon-left-right {
   height: 2px;
   width: 16px;
   position: absolute;
@@ -101,10 +99,10 @@
   background-color: #fff;
   border-radius: 2px;
   transform: rotate(45deg);
-  transition: all .4s linear;
+  transition: all 0.4s linear;
 }
 
-.close-icon-right-left{
+.close-icon-right-left {
   height: 2px;
   width: 16px;
   position: absolute;
@@ -112,33 +110,53 @@
   background-color: #fff;
   border-radius: 2px;
   transform: rotate(-45deg);
-  transition: all .4s linear;
+  transition: all 0.4s linear;
 }
 
-
-.close-icon-container:hover .close-icon-left-right{
+.close-icon-container:hover .close-icon-left-right {
   transform: rotate(-45deg);
 }
-.close-icon-container:hover .close-icon-right-left{
+.close-icon-container:hover .close-icon-right-left {
   transform: rotate(45deg);
 }
 
- .fade-bg::before{
-     background-image: linear-gradient(180deg, #11131900, #121418);
-     z-index: 1;
-  }
-
+.fade-bg::before {
+  background-image: linear-gradient(180deg, #11131900, #121418);
+  z-index: 1;
+}
 
 @theme {
   --animate-zoom: zoom 2s ease-in infinite;
   @keyframes zoom {
-    0% ,
-    100
-    {
+    0%,
+    100 {
       transform: scale(1.1);
     }
     50% {
       transform: scale(1.2);
     }
   }
+}
+.bordered {
+  position: relative;
+}
+.bordered::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border: 1px solid var(--primary);
+  -webkit-transform: translate3d(0px, 0px, 0px);
+  transform: translate3d(0px, 0px, 0px);
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  z-index: -1;
+  -webkit-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+.bordered:hover::before {
+  transform: translate3d(20px, 20px, 10px);
 }

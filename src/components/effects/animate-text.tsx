@@ -5,80 +5,78 @@ import { useEffect, useState } from "react";
 
 type Props = {
   text: string;
-  className: string;
+  className?: string;
 };
 
-const AnimatedText = ({ text, className }: Props) => {
-  const letters = Array.from(text);
+const AnimatedText = ({ text, className = "" }: Props) => {
+  const words = text.split(" ");
   const [startFadeOut, setStartFadeOut] = useState(false);
-
-  const container = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.08,
-        delayChildren: 0.2,
-      },
-    },
-  };
 
   const child = {
     hidden: { opacity: 0, x: 20 },
-    visible: {
+    visible: (i: number) => ({
       opacity: 1,
       x: 0,
       transition: {
+        delay: i * 0.06,
         type: "spring",
         damping: 12,
         stiffness: 100,
       },
-    },
+    }),
   };
 
   useEffect(() => {
-    // الوقت اللي تاخده الحركة بالكامل (delay + stagger + زيادة بسيطة)
-    const totalDuration = 0.5 + letters.length * 0.05 + 0.5;
+    const totalLetters = text.replace(/\s/g, "").length;
+    const totalDuration = 0.5 + totalLetters * 0.06 + 0.5;
 
     const timeout = setTimeout(() => {
       setStartFadeOut(true);
     }, totalDuration * 1000);
 
     return () => clearTimeout(timeout);
-  }, [letters.length]);
+  }, [text]);
+
+  let letterIndex = 0;
 
   return (
-    <motion.div
-      className={cn("relative flex text-white", className)}
-      variants={container}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, amount: 0.5 }}
-    >
-      {letters.map((letter, index) => (
-        <motion.span
-          key={index}
-          variants={child}
-          className="relative inline-block"
+    <h1 className={cn("flex flex-wrap text-white", className)}>
+      {words.map((word, wordIdx) => (
+        <span
+          key={wordIdx}
+          className="inline-flex mr-2 whitespace-nowrap"
         >
-          {/* الظل مع fade out */}
-          <motion.span
-            initial={{ opacity: 1 }}
-            animate={startFadeOut ? { opacity: 0 } : { opacity: 1 }}
-            transition={{ duration: 0.5 }}
-            className={cn("absolute left-0 top-0", "text-primary")}
-            style={{ transform: "translate(3px, 3px)", zIndex: 0 }}
-          >
-            {letter === " " ? "\u00A0" : letter}
-          </motion.span>
+          {Array.from(word).map((letter) => {
+            const index = letterIndex++;
+            return (
+              <motion.span
+                key={index}
+                className="relative inline-block"
+                custom={index}
+                variants={child}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, amount: 0.5 }}
+              >
+                {/* الظل */}
+                <motion.span
+                  initial={{ opacity: 1 }}
+                  animate={startFadeOut ? { opacity: 0 } : { opacity: 1 }}
+                  transition={{ duration: 0.5 }}
+                  className={cn("absolute left-0 top-0", "text-primary")}
+                  style={{ transform: "translate(3px, 3px)", zIndex: 0 }}
+                >
+                  {letter}
+                </motion.span>
 
-          {/* النص */}
-          <span className={cn("relative z-10")}>
-            {letter === " " ? "\u00A0" : letter}
-          </span>
-        </motion.span>
+                {/* النص */}
+                <span className="relative z-10">{letter}</span>
+              </motion.span>
+            );
+          })}
+        </span>
       ))}
-    </motion.div>
+    </h1>
   );
 };
 
