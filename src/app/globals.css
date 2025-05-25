@@ -175,3 +175,13 @@
   color: var(--primary);
   -webkit-text-stroke: 1px var(--primary);
 }
+
+.stroke-text2 {
+  -webkit-text-stroke: 1px #737373;
+}
+
+.newwave-icon {
+  fill: var(--primary);
+  stroke: var(--primary);
+  color: var(--primary);
+}

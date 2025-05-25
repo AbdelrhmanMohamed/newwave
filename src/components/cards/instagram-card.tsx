@@ -8,10 +8,10 @@ type InstagramCardProps = {
 
 export default function InstagramCard({ bgUrl }: InstagramCardProps) {
     return (
-        <div className='w-full h-full bg-center bg-cover bg-no-repeat relative group' style={{
+        <div className='w-full h-full bg-center bg-cover bg-no-repeat relative group cursor-pointer' style={{
             backgroundImage: `url(${bgUrl})`
         }}>
-            <div className='absolute inset-0 bg-black/80 border-primary border flex items-center justify-center flex-col opacity-0 group-hover:opacity-100 scale-90 group-hover:scale-100 transition duration-500'>
+            <div className='absolute inset-0 bg-black/80 border-primary border flex items-center justify-center flex-col opacity-0 group-hover:opacity-100 scale-90 group-hover:scale-100 transition duration-700'>
                 <div className='border-3 border-white size-22 rounded-full flex justify-center items-center '>
                     <InstagramIcon className='h-10 w-10 text-white' />
                 </div>

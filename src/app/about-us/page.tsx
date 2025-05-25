@@ -5,6 +5,8 @@ import * as motion from "motion/react-client";
 import ProcedureSection from './_components/proceture';
 import MarketingSection from './_components/marketing';
 import InstagramCard from '@/components/cards/instagram-card';
+import Querries from './_components/querries';
+import Stepper from '@/components/steper';
 
 export default function AboutUsPage() {
     return (
@@ -62,9 +64,19 @@ export default function AboutUsPage() {
                 transition={{
                     duration: 0.5,
                 }}
+                className="py-20"
+            >
+                <Querries />
+            </motion.section>
+            <motion.section
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                transition={{
+                    duration: 0.5,
+                }}
                 className="px-4 py-80"
             >
-                <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 h-[300px]'>
+                <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 h-[320px]'>
                     <InstagramCard
                         bgUrl="http://gaaga.wpengine.com/wp-content/uploads/2023/05/Gaaga-Insta-Img-2-300x300.png"
                     />
@@ -78,6 +90,36 @@ export default function AboutUsPage() {
                         bgUrl="http://gaaga.wpengine.com/wp-content/uploads/2023/05/Gaaga-Insta-Img-2-300x300.png"
                     />
                 </div>
+            </motion.section>
+            <motion.section
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                transition={{
+                    duration: 0.5,
+                }}
+                className="px-4 py-20">
+                <Stepper steps={[
+                    {
+                        title: "Gather The Ideas",
+                        description: "Curabitur at pretium odio, sit amet tincidunt erat. Pellentesque fringilla rutrum nisl, nec vulputate libero mattis vel. Integer bibendum metus ac metus varius, eget vestibulum arcu. Sed vehicula mattis purus.",
+                        imgUrl: "https://gaaga.wpengine.com/wp-content/uploads/2023/05/Gaaga-Process-Img-2.png"
+                    },
+                    {
+                        title: "Create Modules",
+                        description: "Curabitur at pretium odio, sit amet tincidunt erat. Pellentesque fringilla rutrum nisl, nec vulputate libero mattis vel. Integer bibendum metus ac metus varius, eget vestibulum arcu. Sed vehicula mattis purus.",
+                        imgUrl: "https://gaaga.wpengine.com/wp-content/uploads/2023/05/Gaaga-Process-Img-2.png"
+                    },
+                    {
+                        title: "Integrate & Execute",
+                        description: "Curabitur at pretium odio, sit amet tincidunt erat. Pellentesque fringilla rutrum nisl, nec vulputate libero mattis vel. Integer bibendum metus ac metus varius, eget vestibulum arcu. Sed vehicula mattis purus.",
+                        imgUrl: "https://gaaga.wpengine.com/wp-content/uploads/2023/05/Gaaga-Process-Img-2.png"
+                    },
+                    {
+                        title: "Deliver",
+                        description: "Curabitur at pretium odio, sit amet tincidunt erat. Pellentesque fringilla rutrum nisl, nec vulputate libero mattis vel. Integer bibendum metus ac metus varius, eget vestibulum arcu. Sed vehicula mattis purus.",
+                        imgUrl: "https://gaaga.wpengine.com/wp-content/uploads/2023/05/Gaaga-Process-Img-2.png"
+                    }
+                ]} />
             </motion.section>
         </div>
     )

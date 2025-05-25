@@ -47,3 +47,44 @@ export function FacebookIcon({ className }: IconProps) {
     </svg>
   );
 }
+
+export function ArrowLeftIcon({ className }: IconProps) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      xmlSpace="preserve"
+      width={24}
+      height={22.7}
+      style={{
+        strokeWidth: 1,
+      }}
+      className={`newwave-icon ${className}`}
+    >
+      <path
+        fill="currentColor"
+        stroke="currentColor"
+        d="M.5 11h23M.3 11.5 11.2.7M0 10.4l11.2 11.2"
+      />
+    </svg>
+  );
+}
+export function ArrowRightIcon({ className }: IconProps) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      xmlSpace="preserve"
+      width={24}
+      height={22.7}
+      style={{
+        strokeWidth: 1,
+      }}
+      className={`newwave-icon ${className}`}
+    >
+      <path
+        fill="currentColor"
+        stroke="currentColor"
+        d="M0 11h23M11.2.7l11.2 11.2M11.2 21.9l11.2-11.2"
+      />
+    </svg>
+  );
+}
