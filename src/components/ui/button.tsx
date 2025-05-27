@@ -16,7 +16,7 @@ export default function Button({ loading, onClick, className, disabled, type, la
     return (
         <button
             type={type || "button"}
-            className={`border flex border-neutral-600 px-10 py-4 font-semibold  items-center cursor-pointer text-base hover:border-primary hover:text-primary transition duration-500 group ${className}`}
+            className={`border flex border-neutral-600 px-10 py-4 font-semibold  items-center cursor-pointer text-base hover:border-primary hover:text-primary transition duration-300 group ${className}`}
             onClick={onClick}
             disabled={disabled}
         >

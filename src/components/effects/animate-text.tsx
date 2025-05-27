@@ -6,9 +6,10 @@ import { useEffect, useState } from "react";
 type Props = {
   text: string;
   className?: string;
+  once?: boolean;
 };
 
-const AnimatedText = ({ text, className = "" }: Props) => {
+const AnimatedText = ({ text, className = "", once = true }: Props) => {
   const words = text.split(" ");
   const [startFadeOut, setStartFadeOut] = useState(false);
 
@@ -56,7 +57,7 @@ const AnimatedText = ({ text, className = "" }: Props) => {
                 variants={child}
                 initial="hidden"
                 whileInView="visible"
-                viewport={{ once: true, amount: 0.5 }}
+                viewport={{ once: once, amount: 0.5 }}
               >
                 {/* الظل */}
                 <motion.span

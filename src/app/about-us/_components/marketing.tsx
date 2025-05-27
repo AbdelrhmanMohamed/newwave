@@ -2,6 +2,7 @@
 import StrokeNumber from '@/components/stroke-number';
 import { Play } from 'lucide-react';
 import React from 'react'
+import * as motion from "motion/react-client";
 
 
 type ProcedureProps = {
@@ -14,7 +15,13 @@ export default function MarketingSection({ bgUrl }: ProcedureProps) {
         <div className='relative bg-background'>
             {/* Content container */}
             <div className="z-10 pt-32 pb-20 px-16 relative">
-                <div className="flex flex-col items-center text-center container mx-auto max-w-5xl">
+                <motion.div
+                    initial={{ opacity: 0, x: -100 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{
+                        duration: 0.5,
+                    }}
+                    className="flex flex-col items-center text-center container mx-auto max-w-5xl">
                     {/* Main heading */}
                     <h1 className="text-white text-3xl md:text-4xl lg:text-5xl font-bold leading-14 mb-8">
                         It&apos;s Time To Take Your Digital Marketing
@@ -56,24 +63,24 @@ export default function MarketingSection({ bgUrl }: ProcedureProps) {
                         </span>
 
                     </h1>
-                </div>
+                </motion.div>
                 {/* Stats section */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16 mt-12 w-full justify-center items-center">
-                    <div className="flex items-center text-left gap-8">
-                        <StrokeNumber number={10} className='text-[6.5rem]' />
+                    <div className="flex items-center text-left gap-12">
+                        <StrokeNumber animate number={10} className='text-[7rem]' />
                         <span className='text-2xl text-neutral-300 leading-10'> Years Experience</span>
                     </div>
-                    <div className="flex items-center text-left gap-8">
-                        <StrokeNumber number={12} className='text-[6.5rem]' />
+                    <div className="flex items-center text-left gap-12">
+                        <StrokeNumber animate number={12} className='text-[7rem]' />
                         <span className='text-2xl text-neutral-300 leading-10'> Professional Key Peoples</span>
                     </div>
-                    <div className="flex items-center text-left gap-8">
-                        <StrokeNumber number={50} className='text-[6.5rem]' />
+                    <div className="flex items-center text-left gap-12">
+                        <StrokeNumber animate number={50} className='text-[7rem]' />
                         <span className='text-2xl text-neutral-300 leading-10'> Clients Statisfied</span>
 
                     </div>
-                    <div className="flex items-center text-left gap-8">
-                        <StrokeNumber number={90} className='text-[6.5rem]' />
+                    <div className="flex items-center text-left gap-12">
+                        <StrokeNumber animate number={90} className='text-[7rem]' />
                         <span className='text-2xl text-neutral-300 leading-10'> Projects Compeleted</span>
                     </div>
                 </div>

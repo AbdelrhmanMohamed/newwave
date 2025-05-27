@@ -31,13 +31,13 @@ const websitesFAQs: FAQItem[] = [
 
 export default function FAQ() {
     return (
-        <div className="px-5">
+        <div className="">
             <PageBanner
                 title="FAQ"
                 backgroundImage={"/images/office.png"}
                 breadcrumbs={[{ label: "Home", href: "/" }, { label: "FAQ" }]}
             />
-            <div className='flex items-center gap-28 overflow-y-hidden'>
+            <div className='flex items-center gap-28 overflow-y-hidden px-5'>
 
                 <div className='min-w-5/12 max-w-5/12  pr-4'>
                     <SectionHead title="Our Expert Answers" show={{
