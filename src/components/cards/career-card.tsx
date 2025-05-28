@@ -11,7 +11,7 @@ type CareerCardProps = {
 
 export default function CareerCard({ jobTitle, jobDescription, href }: CareerCardProps) {
     return (
-        <div className="group/edit relative  w-full bg-black border border-primary text-neutral-400 py-8 px-16 hover:bg-primary hover:text-white transition-all duration-500 flex justify-between items-center mb-4">
+        <div className="group/edit relative  w-full bg-black border border-primary text-neutral-400 py-4 md:py-8 px-4 md:px-16 hover:bg-primary hover:text-white transition-all duration-500 flex justify-between items-start md:items-center mb-4 flex-col md:flex-row gap-4">
             <div>
                 <h3 className="text-[1.8rem] font-semibold">
                     {jobTitle}
@@ -20,7 +20,7 @@ export default function CareerCard({ jobTitle, jobDescription, href }: CareerCar
                     {jobDescription}
                 </p>
             </div>
-            <div className='flex items-center gap-4'>
+            <div className='flex items-center gap-4 '>
                 <Link href={href} className='invisible opacity-0 group-hover/edit:opacity-100 transition-all duration-500 group-hover/edit:block group-hover/edit:visible translate-x-20' >
                     <ButtonLine title='View more' className='hover:text-black' isBlack />
                 </Link>

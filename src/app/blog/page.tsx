@@ -46,7 +46,10 @@ async function getBlogPageData() {
 
 async function fetchBlogs(): Promise<Blog[]> {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/api/blogs?populate=cover`
+    `${process.env.NEXT_PUBLIC_API_URL}/api/blogs?populate=cover`, {
+    next: { revalidate: 60 }, // Revalidate every 60 seconds
+    method: "GET",
+  }
   );
   const blogs = await res.json();
 

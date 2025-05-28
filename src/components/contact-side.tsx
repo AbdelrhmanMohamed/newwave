@@ -1,7 +1,6 @@
 import React from 'react'
 import Image from 'next/image'
 import { SocialIcon } from '@/components/social-icon'
-import { SocialLink } from '@/types/contact'
 import { cn } from '@/lib/utils'
 
 
@@ -13,11 +12,19 @@ type Props = {
     enquiries_emails_1: string;
     enquiries_emails_2: string;
     working_hours?: string;
-    activeSocialLinks: SocialLink[];
     className?: string;
+    facebook_link?: string;
+    instagram_link?: string;
+    linkedin_link?: string;
+    twitter_link?: string;
 }
 
-export default function ContactSide({ title, description, imgUrl, enquiries_title, enquiries_emails_1, enquiries_emails_2, working_hours, activeSocialLinks, className }: Props) {
+export default function ContactSide({ title, description, imgUrl, enquiries_title, enquiries_emails_1, enquiries_emails_2, working_hours, className, facebook_link, instagram_link, linkedin_link }: Props) {
+    const links = [
+        { id: 1, name: 'facebook', url: facebook_link || '#', },
+        { id: 2, name: 'instagram', url: instagram_link || '#', },
+        { id: 3, name: 'linkedin', url: linkedin_link || '#', },
+    ];
     return (
         <div className={cn("border border-primary p-6 md:p-8 xl:p-14 basis-3/12 md:basis-4/12", className)}>
             <h2 className="text-4xl lg:text-5xl font-bold mb-6">{title || 'Say Hello!'}</h2>
@@ -46,7 +53,7 @@ export default function ContactSide({ title, description, imgUrl, enquiries_titl
             </div>
 
             <div className="flex space-x-4 my-4">
-                {activeSocialLinks?.map((link) => (
+                {links.map((link) => (
                     <a
                         key={link.id}
                         href={link.url}
