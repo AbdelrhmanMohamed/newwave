@@ -1,4 +1,4 @@
-// useMediaQuery.ts
+"use client";
 import { useEffect, useState } from "react";
 
 function useMediaQuery(size: ScreenSize): boolean {

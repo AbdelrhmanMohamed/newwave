@@ -41,3 +41,9 @@ export interface Format {
   sizeInBytes: number;
   url: string;
 }
+
+export interface PageHeader {
+  title: string;
+  icon?: Media;
+  description: string;
+}
