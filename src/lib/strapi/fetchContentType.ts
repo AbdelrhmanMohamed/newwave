@@ -48,6 +48,7 @@ export default async function fetchContentType(
     // Perform the fetch request with the provided query parameters
     const response = await fetch(`${url.href}?${qs.stringify(queryParams)}`, {
       method: "GET",
+      next: { revalidate: 60 }, // Revalidate every 60 seconds
     });
 
     if (!response.ok) {
