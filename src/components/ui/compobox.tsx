@@ -17,33 +17,24 @@ import {
     PopoverContent,
     PopoverTrigger,
 } from "@/components/ui/popover"
+import { Career } from "@/types/career"
 
-const frameworks = [
-    {
-        value: "next.js",
-        label: "Next.js",
-    },
-    {
-        value: "sveltekit",
-        label: "SvelteKit",
-    },
-    {
-        value: "nuxt.js",
-        label: "Nuxt.js",
-    },
-    {
-        value: "remix",
-        label: "Remix",
-    },
-    {
-        value: "astro",
-        label: "Astro",
-    },
-]
 
-export function ComboboxDemo() {
+type CareerMenuProps = {
+    careers: Career[];
+    onSelect: (careerId: number) => void;
+    initialValue?: string;
+
+}
+
+export function CareerMenu({ careers, onSelect, initialValue }: CareerMenuProps) {
     const [open, setOpen] = React.useState(false)
-    const [value, setValue] = React.useState("")
+    const [value, setValue] = React.useState(initialValue || "")
+
+    React.useEffect(() => {
+        setValue(initialValue || "")
+
+    }, [initialValue])
 
     return (
         <Popover open={open} onOpenChange={setOpen} >
@@ -52,8 +43,8 @@ export function ComboboxDemo() {
                     className="w-full bg-transparent border-b-2 border-neutral-700 py-2 focus:outline-none focus:border-primary transition-colors placeholder:text-neutral-500 flex justify-between px-1"                >
                     <span className="text-neutral-500">
                         {value
-                            ? frameworks.find((framework) => framework.value === value)?.label
-                            : "Select framework..."}
+                            ? careers.find((career) => career.id.toString() === value)?.title
+                            : "Select career..."}
                     </span>
                     {open ? (
                         <ChevronUp className="ml-2 h-4 w-4 text-neutral-500" />
@@ -62,27 +53,29 @@ export function ComboboxDemo() {
                     )}
                 </button>
             </PopoverTrigger>
-            <PopoverContent className="popover-content-width-full p-0" align="start">
+            <PopoverContent className="popover-content-width-full p-0" align="start" >
                 <Command className="w-full">
-                    <CommandInput placeholder="Search framework..." />
+                    <CommandInput placeholder="Search career..." />
                     <CommandList>
-                        <CommandEmpty>No framework found.</CommandEmpty>
+                        <CommandEmpty>No career found.</CommandEmpty>
                         <CommandGroup>
-                            {frameworks.map((framework) => (
+                            {careers.map((career) => (
                                 <CommandItem
-                                    key={framework.value}
-                                    value={framework.value}
+                                    key={career.id}
+                                    value={career.id.toString()}
                                     onSelect={(currentValue) => {
+                                        console.log("Selected value:", careers, currentValue)
                                         setValue(currentValue === value ? "" : currentValue)
                                         setOpen(false)
+                                        onSelect(parseInt(currentValue, 10))
                                     }}
                                     className="text-neutral-500 hover:!bg-primary rounded-none"
                                 >
-                                    {framework.label}
+                                    {career.title}
                                     <Check
                                         className={cn(
                                             "ml-auto",
-                                            value === framework.value ? "opacity-100" : "opacity-0"
+                                            value === career.id ? "opacity-100" : "opacity-0"
                                         )}
                                     />
                                 </CommandItem>

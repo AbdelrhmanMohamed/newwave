@@ -26,3 +26,12 @@ export interface Career {
   image: Media | null;
   slug: string;
 }
+
+export interface ApplyCareer {
+  fullName: string;
+  email: string;
+  phone_number: string;
+  message: string;
+  cv: File | null;
+  career: number;
+}

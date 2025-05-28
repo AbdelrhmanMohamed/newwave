@@ -3,6 +3,7 @@ import Image from 'next/image'
 import CareerForm from './form'
 import AnimatedText from '@/components/effects/animate-text'
 
+
 export default function CareerSection() {
     return (
         <div className='grid grid-cols-12  justify-center items-center px-6 lg:px-0'>
@@ -25,7 +26,7 @@ export default function CareerSection() {
                         once={false}
                     />
                 </div>
-                <CareerForm />
+                <CareerForm careers={[]} />
             </div>
         </div>
     )

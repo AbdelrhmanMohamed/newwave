@@ -3,32 +3,34 @@ import { useState } from "react";
 // import { toast } from "sonner";
 import { cn } from "@/lib/utils";
 import UploadFile from "@/components/ui/upload-file";
-import { ComboboxDemo } from "@/components/ui/compobox";
+import { CareerMenu } from "@/components/ui/compobox";
+import { ApplyCareer, Career } from "@/types/career";
+import { applyJob } from "@/app/actions/apply-job";
+import { toast } from "sonner";
 
 
-type CarrerForm = {
-    fullName: string;
-    email: string;
-    mobileNumber: string;
-    jobPosition: string;
-    message: string;
+type CareerFormProps = {
+    careers: Career[];
 }
 
-export default function CareerForm() {
+
+export default function CareerForm({ careers }: CareerFormProps) {
     const [loading, setLoading] = useState<boolean>(false);
-    const [formData, setFormData] = useState<CarrerForm>({
+    const [selectedFile, setSelectedFile] = useState<File | null>(null);
+    const [state, setState] = useState<ApplyCareer>({
         fullName: "",
         email: "",
-        mobileNumber: "",
-        jobPosition: "",
         message: "",
+        phone_number: "",
+        career: 0,
+        cv: null,
     });
 
     const handleChange = (
         e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
     ) => {
         const { name, value } = e.target;
-        setFormData((prev) => ({
+        setState((prev) => ({
             ...prev,
             [name]: value,
         }));
@@ -36,22 +38,25 @@ export default function CareerForm() {
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        setLoading(true);
-        console.log("formData", formData);
-        // const res = await send_message(formData);
+        if (!selectedFile) return alert("Please upload a file.");
+        if (!state.career) return alert("Please select a career.");
 
-        // setLoading(false);
-        // if (res) {
-        //     toast.success("Message sent successfully! Thanks for contacting us!");
-        //     setFormData({
-        //         firstName: "",
-        //         lastName: "",
-        //         phoneNumber: "",
-        //         email: "",
-        //         companyName: "",
-        //         message: "",
-        //     })
-        // } else toast.error("Failed to send message");
+        try {
+            setLoading(true);
+            await applyJob({
+                ...state,
+                cv: selectedFile,
+            });
+            toast.success("Application submitted successfully!");
+            // Reset form state
+            setSelectedFile(null);
+            setState({ fullName: "", email: "", phone_number: "", career: 0, message: "", cv: null });
+        } catch (err) {
+            console.error(err);
+            toast.error("Error submitting application");
+        } finally {
+            setLoading(false);
+        }
     };
 
     return (
@@ -62,7 +67,7 @@ export default function CareerForm() {
                         type="text"
                         name="fullName"
                         placeholder="Full Name"
-                        value={formData.fullName}
+                        value={state.fullName}
                         onChange={handleChange}
                         className={cn("w-full bg-transparent border-b-2 border-neutral-700 py-2 px-1 focus:outline-none focus:border-primary transition-colors placeholder:text-neutral-500")}
                         required
@@ -73,7 +78,7 @@ export default function CareerForm() {
                         type="email"
                         name="email"
                         placeholder="Your Email"
-                        value={formData.email}
+                        value={state.email}
                         onChange={handleChange}
                         className={cn("w-full bg-transparent border-b-2 border-neutral-700 py-2 px-1 focus:outline-none focus:border-primary transition-colors placeholder:text-neutral-500 ")}
                         required
@@ -81,26 +86,26 @@ export default function CareerForm() {
                 </div>
             </div>
 
-            <div className={cn("grid grid-cols-2 md:grid-cols-2 gap-8")}>
+            <div className={cn("grid grid-cols-1 md:grid-cols-2 gap-8")}>
                 <div>
                     <input
                         type="text"
-                        name="mobileNumber"
+                        name="phone_number"
                         placeholder="Your Number"
-                        value={formData.mobileNumber}
+                        value={state.phone_number}
                         onChange={handleChange}
                         className={cn("w-full bg-transparent border-b-2 border-neutral-700 py-2 px-1 focus:outline-none focus:border-primary transition-colors placeholder:text-neutral-500 ")}
                     />
                 </div>
                 <div className={cn("w-full")}>
-                    <ComboboxDemo />
+                    <CareerMenu careers={careers} onSelect={(id) => setState((prev) => ({ ...prev, career: id }))} />
                 </div>
             </div>
             <div className={cn("w-full")}>
                 <textarea
                     name="message"
                     placeholder="Additional Message"
-                    value={formData.message}
+                    value={state.message}
                     onChange={handleChange}
                     rows={4}
                     className={cn("w-full bg-transparent border-b-2 border-neutral-700 placeholder:text-neutral-500 py-2 px-1 focus:outline-none focus:border-primary transition-colors resize-none ")}
@@ -108,7 +113,7 @@ export default function CareerForm() {
             </div>
 
             <div className={cn("flex gap-8 items-start mb-20")}>
-                <UploadFile />
+                <UploadFile onFileSelect={(file) => setSelectedFile(file)} initialFile={selectedFile} />
                 <button
                     type="submit"
                     className={cn("border flex border-neutral-500 px-8 py-4 font-medium  items-center cursor-pointer hover:border-primary hover:text-primary transition duration-500 group")}

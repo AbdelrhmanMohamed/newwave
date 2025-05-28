@@ -1,9 +1,9 @@
 "use client"
 import type React from "react"
-import { useState, useRef } from "react"
+import { useState, useRef, useEffect } from "react"
 import { Upload, X } from "lucide-react"
 
-export default function UploadFile() {
+export default function UploadFile({ onFileSelect, initialFile }: { onFileSelect: (file: File | null) => void, initialFile: File | null }) {
     const [selectedFile, setSelectedFile] = useState<File | null>(null)
     const fileInputRef = useRef<HTMLInputElement>(null)
 
@@ -11,6 +11,7 @@ export default function UploadFile() {
         const file = event.target.files?.[0]
         if (file) {
             setSelectedFile(file)
+            onFileSelect(file)
         }
     }
 
@@ -19,11 +20,14 @@ export default function UploadFile() {
     }
 
     const handleClearFile = () => {
-        setSelectedFile(null)
-        if (fileInputRef.current) {
-            fileInputRef.current.value = ""
-        }
-    }
+        setSelectedFile(null);
+        onFileSelect(null);
+        if (fileInputRef.current) fileInputRef.current.value = '';
+    };
+
+    useEffect(() => {
+        setSelectedFile(initialFile || null);
+    }, [initialFile]);
 
     return (
         <div className="w-full max-w-md">
@@ -51,11 +55,11 @@ export default function UploadFile() {
                     </div>
                 </div>
             </div>
-            <p className="text-neutral-400 text-sm mt-3">*Upload your resume in pdf, jpg, png, or doc format.</p>
+            <p className="text-neutral-400 text-sm mt-3">*Upload your resume in pdf, doc, or docx format.</p>
             <input
                 ref={fileInputRef}
                 type="file"
-                accept=".pdf,.jpg,.jpeg,.png,.doc,.docx"
+                accept=".pdf,.doc,.docx"
                 onChange={handleFileSelect}
                 className="hidden"
 

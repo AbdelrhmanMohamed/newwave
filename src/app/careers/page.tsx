@@ -5,7 +5,6 @@ import React from 'react'
 import * as motion from "motion/react-client";
 import CareerCard from '@/components/cards/career-card'
 import ContactSide from '@/components/contact-side';
-import CareerSection from './_components/career-contact';
 import InstagramCard from '@/components/cards/instagram-card';
 import { LampIcon } from '@/components/icons';
 import { Metadata } from 'next';
@@ -15,6 +14,8 @@ import { Career, CareerPageData } from '@/types/career';
 import { console } from 'inspector';
 import Image from 'next/image';
 import { getGlobalData } from '@/lib/shared/globalData';
+import AnimatedText from '@/components/effects/animate-text';
+import CareerForm from './_components/form';
 
 
 
@@ -74,9 +75,6 @@ export default async function CareerPage() {
     const careers = await getCareers();
     const globalData = await getGlobalData();
 
-    console.log("Careers Data:", careers);
-    console.log("Career Page Data:", pageData);
-    console.log("Global Data:", globalData);
 
     return (
         <div>
@@ -152,7 +150,29 @@ export default async function CareerPage() {
                 }}
                 className="py-24"
             >
-                <CareerSection />
+                <div className='grid grid-cols-12  justify-center items-center px-6 lg:px-0'>
+                    <div className='col-span-12 lg:col-span-5 lg:mr-20 h-[500px] sm:h-[650px] md:h-[750px] relative  '>
+                        <Image fill src="https://gaaga.wpengine.com/wp-content/uploads/2023/06/Gaaga-Contact-Form-Img-1-1337x1536.png" alt="Query 1" className='object-cover bg-center' />
+
+                        <div className='absolute p-8 pt-16 bottom-0 flex justify-center items-center bg-gradient-to-t from-background  to-[#11131900]  w-full gap-6'>
+                            <Image src="/icons/message.svg" width={100} height={100} alt="message Icon" />
+                            <div>
+                                <h6 className='text-xl'>{pageData?.contact_support_title || " 24/7 Contact Support"}</h6>
+                                <p>{globalData?.email1 || "info@.com"}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div className='col-span-12 lg:col-span-7 lg:pr-5 '>
+                        <div className='break-words w-full text-center flex items-center justify-center max-w-11/12 relative my-14'>
+                            <AnimatedText
+                                text={pageData?.contact_form_title || "If You Have Any Doubts Contact Us"}
+                                className="text-4xl md:text-5xl font-bold text-white my-8 leading-14 flex flex-wrap tracking-wide"
+                                once={false}
+                            />
+                        </div>
+                        <CareerForm careers={careers || []} />
+                    </div>
+                </div>
             </motion.section>
             <motion.section
                 initial={{ x: 200, opacity: 0 }}
