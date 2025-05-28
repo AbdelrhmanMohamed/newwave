@@ -52,7 +52,7 @@ export default function AboutUsPage() {
                         end: true,
                         start: true,
                     }} animate />
-                    <AnimatedText text="What Kind Of Service We Offer" className='text-5xl font-bold mt-6 mb-10 tracking-wide' />
+                    <AnimatedText text="What Kind Of Service We Offer" className='text-3xl md:text-4xl xl:text-5xl font-bold mt-6 mb-10 tracking-wide text-center justify-center' />
 
                 </motion.div>
                 <Stepper steps={[
@@ -102,18 +102,24 @@ export default function AboutUsPage() {
                 }}
                 className="px-4 py-20"
             >
-                <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 h-[360px]'>
+                <div className='flex overflow-hidden flex-nowrap gap-4 h-[420px] sm:h-[350px] md:h-[290px] lg:h-[270px] xl:h-[320px] items-center justify-center'>
                     <InstagramCard
                         bgUrl="http://gaaga.wpengine.com/wp-content/uploads/2023/05/Gaaga-Insta-Img-2-300x300.png"
                     />
                     <InstagramCard
                         bgUrl="http://gaaga.wpengine.com/wp-content/uploads/2023/05/Gaaga-Insta-Img-2-300x300.png"
+                        className='hidden sm:block'
+
                     />
                     <InstagramCard
                         bgUrl="http://gaaga.wpengine.com/wp-content/uploads/2023/05/Gaaga-Insta-Img-2-300x300.png"
+                        className='hidden md:block'
+
                     />
                     <InstagramCard
                         bgUrl="http://gaaga.wpengine.com/wp-content/uploads/2023/05/Gaaga-Insta-Img-2-300x300.png"
+                        className='hidden lg:block'
+
                     />
                 </div>
             </motion.section>

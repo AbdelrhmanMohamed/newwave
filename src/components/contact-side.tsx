@@ -36,11 +36,11 @@ export default function ContactSide({ title, description, imgUrl, enquiries_titl
             </div>
 
             <h3 className="text-3xl font-bold mb-3">{enquiries_title || 'Enquiries'}</h3>
-            <div className="flex gap-4 md:gap-3 lg:gap-8 flex-col sm:flex-row md:flex-col lg:flex-row">
-                <a href={`mailto:${enquiries_emails_1}`} className="text-white">
+            <div className="flex gap-4  flex-wrap">
+                <a href={`mailto:${enquiries_emails_1}`} className="text-white min-w-32">
                     {enquiries_emails_1}
                 </a>
-                <a href={`mailto:${enquiries_emails_2}`} className="vs">
+                <a href={`mailto:${enquiries_emails_2}`} className="text-white min-w-32">
                     {enquiries_emails_2}
                 </a>
             </div>

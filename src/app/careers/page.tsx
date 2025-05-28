@@ -59,24 +59,24 @@ export default function Career() {
                 transition={{
                     duration: 1,
                 }}
-                className="pl-12 pr-6 py-20 lg:py-26 flex gap-8 flex-col lg:flex-row"
+                className="xl:pl-12 px-6 py-20 lg:py-26 flex gap-8 flex-col lg:flex-row"
             >
-                <div className="flex items-center flex-col md:flex-row text-center lg:text-left gap-6 md:gap-12 xl:gap-16 w-full justify-center xl:justify-start xl:w-7/12 ">
-                    <LampIcon className="size-24 text-white fill-white stroke-white stroke-[0.5px]" />
+                <div className="flex items-start md:items-center lg:items-start flex-col md:flex-row  text-left gap-6 md:gap-12 xl:gap-16 w-full justify-start xl:w-7/12 ">
+                    <LampIcon className="w-24 h-24 min-w-24 min-h-24 text-white fill-white stroke-white stroke-[0.5px]" />
 
-                    <h2 className="text-5xl xl:text-[3.4rem] font-bold text-primary leading-12 md:leading-16">
+                    <h2 className="text-4xl md:text-[2.5rem] xl:text-[3.4rem] font-bold text-primary leading-12 md:leading-16">
                         Begin Your Career With Us
                     </h2>
                 </div>
-                <div className="text-neutral-400 w-full text-center lg:text-left lg:w-5/12">
+                <div className="text-neutral-400 w-full text-left lg:w-5/12">
                     <p>
                         Sit amet nisl suscipit adipiscing. Aliquam nulla facilisi cras fermentum odio eu. Gravida arcu ac tortor dignissim convallis aenean et tortor. Ultrices gravida dictum fusce ut placerat orci nulla facilisi.
                     </p>
                 </div>
             </motion.section>
             {/** Reach Us Section */}
-            <div className='grid grid-cols-12 px-4 gap-12'>
-                <div className='col-span-8'>
+            <div className='grid grid-cols-12 px-4 gap-4 lg:gap-12'>
+                <div className='col-span-12 lg:col-span-8'>
                     {JobOpenings.map((job, index) => (
                         <CareerCard
                             key={index}
@@ -86,7 +86,7 @@ export default function Career() {
                         />
                     ))}
                 </div>
-                <div className='col-span-4'>
+                <div className='col-span-12 lg:col-span-4'>
                     <ContactSide
                         title='Reach Us'
                         description='Pellentesque habitant morbi tristique senectus er eget duis.'
@@ -132,25 +132,31 @@ export default function Career() {
                 <CareerSection />
             </motion.section>
             <motion.section
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
+                initial={{ x: 200, opacity: 0 }}
+                whileInView={{ x: 0, opacity: 1 }}
                 transition={{
-                    duration: 0.5,
+                    duration: 0.8,
                 }}
-                className="px-4 pt-20 mb-10"
+                className="px-4 py-20"
             >
-                <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 h-[320px]'>
+                <div className='flex overflow-hidden flex-nowrap gap-4 h-[420px] sm:h-[350px] md:h-[290px] lg:h-[270px] xl:h-[320px] items-center justify-center'>
                     <InstagramCard
                         bgUrl="http://gaaga.wpengine.com/wp-content/uploads/2023/05/Gaaga-Insta-Img-2-300x300.png"
                     />
                     <InstagramCard
                         bgUrl="http://gaaga.wpengine.com/wp-content/uploads/2023/05/Gaaga-Insta-Img-2-300x300.png"
+                        className='hidden sm:block'
+
                     />
                     <InstagramCard
                         bgUrl="http://gaaga.wpengine.com/wp-content/uploads/2023/05/Gaaga-Insta-Img-2-300x300.png"
+                        className='hidden md:block'
+
                     />
                     <InstagramCard
                         bgUrl="http://gaaga.wpengine.com/wp-content/uploads/2023/05/Gaaga-Insta-Img-2-300x300.png"
+                        className='hidden lg:block'
+
                     />
                 </div>
             </motion.section>

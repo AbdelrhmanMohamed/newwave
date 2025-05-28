@@ -1,9 +1,11 @@
+"use client";
 import React from 'react'
 import Image from 'next/image';
 import StrokeNumber from './stroke-number';
 import { cn } from '@/lib/utils';
 import { ArrowLeftIcon, ArrowRightIcon } from './icons';
 import * as motion from "motion/react-client";
+import useMediaQuery, { ScreenSize } from '@/hooks/useMediaQuery';
 
 type Step = {
     title: string;
@@ -16,10 +18,24 @@ type StepperProps = {
 };
 
 export default function Stepper({ steps }: StepperProps) {
+    const isMobile = useMediaQuery(ScreenSize.Mobile);
+    const isTablet = useMediaQuery(ScreenSize.Tablet);
+    const [newSteps, setNewSteps] = React.useState<Step[]>(steps);
+
+    React.useEffect(() => {
+        if (isMobile) {
+            setNewSteps(steps.slice(0, 1));
+        } else if (isTablet) {
+            setNewSteps(steps.slice(0, 2));
+        } else {
+            setNewSteps(steps);
+        }
+    }, [isMobile, isTablet, steps]);
+
     return (
-        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 relative'>
-            {steps.map((step, index) => (
-                <StepperItem index={index} reverse={index % 2 === 1} key={index} step={step} isLast={index === steps.length - 1} isFirst={index === 0} />
+        <div className='grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 relative '>
+            {newSteps.map((step, index) => (
+                <StepperItem index={index} reverse={index % 2 === 1} key={index} step={step} isLast={index === newSteps.length - 1} isFirst={index === 0} />
             ))}
         </div>
     )

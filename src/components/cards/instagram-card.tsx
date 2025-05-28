@@ -4,11 +4,12 @@ import React from 'react'
 
 type InstagramCardProps = {
     bgUrl?: string;
+    className?: string;
 }
 
-export default function InstagramCard({ bgUrl }: InstagramCardProps) {
+export default function InstagramCard({ bgUrl, className }: InstagramCardProps) {
     return (
-        <div className='w-full h-full bg-center bg-cover bg-no-repeat relative group cursor-pointer' style={{
+        <div className={`w-full h-full bg-center bg-cover bg-no-repeat relative group cursor-pointer ${className}`} style={{
             backgroundImage: `url(${bgUrl})`
         }}>
             <div className='absolute inset-0 bg-black/80 border-primary border flex items-center justify-center flex-col opacity-0 group-hover:opacity-100 scale-90 group-hover:scale-100 transition duration-700'>
