@@ -88,7 +88,7 @@ export default async function ContactUs() {
     getSocialLinksData(),
   ]);
   const activeSocialLinks = contactSocialLinks?.social_links?.filter((link) => link.active);
-  const branches = (contactBranches.branches || []) || [];
+  const branches = (contactBranches?.branches || []) || [];
 
 
   return (
