@@ -25,6 +25,7 @@ export interface Career {
   skillsets: BlocksContent | null;
   image: Media | null;
   slug: string;
+  description: string;
 }
 
 export interface ApplyCareer {

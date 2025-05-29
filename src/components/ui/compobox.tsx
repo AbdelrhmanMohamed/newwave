@@ -24,10 +24,11 @@ type CareerMenuProps = {
     careers: Career[];
     onSelect: (careerId: number) => void;
     initialValue?: string;
+    disabled?: boolean;
 
 }
 
-export function CareerMenu({ careers, onSelect, initialValue }: CareerMenuProps) {
+export function CareerMenu({ careers, onSelect, initialValue, disabled }: CareerMenuProps) {
     const [open, setOpen] = React.useState(false)
     const [value, setValue] = React.useState(initialValue || "")
 
@@ -37,8 +38,8 @@ export function CareerMenu({ careers, onSelect, initialValue }: CareerMenuProps)
     }, [initialValue])
 
     return (
-        <Popover open={open} onOpenChange={setOpen} >
-            <PopoverTrigger asChild>
+        <Popover open={open} onOpenChange={setOpen}>
+            <PopoverTrigger asChild disabled={disabled}>
                 <button
                     className="w-full bg-transparent border-b-2 border-neutral-700 py-2 focus:outline-none focus:border-primary transition-colors placeholder:text-neutral-500 flex justify-between px-1"                >
                     <span className="text-neutral-500">

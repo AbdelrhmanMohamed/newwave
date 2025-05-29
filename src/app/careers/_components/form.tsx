@@ -7,14 +7,17 @@ import { CareerMenu } from "@/components/ui/compobox";
 import { ApplyCareer, Career } from "@/types/career";
 import { applyJob } from "@/app/actions/apply-job";
 import { toast } from "sonner";
+import { useEffect } from "react";
 
 
 type CareerFormProps = {
     careers: Career[];
+    isSide?: boolean;
+    careerId?: number;
 }
 
 
-export default function CareerForm({ careers }: CareerFormProps) {
+export default function CareerForm({ careers, isSide, careerId }: CareerFormProps) {
     const [loading, setLoading] = useState<boolean>(false);
     const [selectedFile, setSelectedFile] = useState<File | null>(null);
     const [state, setState] = useState<ApplyCareer>({
@@ -59,9 +62,19 @@ export default function CareerForm({ careers }: CareerFormProps) {
         }
     };
 
+    useEffect(() => {
+        if (isSide && careers.length > 0 && careerId) {
+            const defaultCareer = careers.find((career) => Number(career.id) === careerId); // Assuming you want to set the first career as default
+            setState((prev) => ({
+                ...prev,
+                career: defaultCareer ? Number(defaultCareer.id) : 0, // Set default career if available
+            }));
+        }
+    }, [careerId, careers, isSide]);
+
     return (
-        <form onSubmit={handleSubmit} className={cn("space-y-8 md:space-y-14")}>
-            <div className={cn("grid grid-cols-1 md:grid-cols-2 gap-8")}>
+        <form onSubmit={handleSubmit} className={cn("space-y-8 ", isSide ? "md:space-y-8" : "md:space-y-14")}>
+            <div className={cn("grid grid-cols-1  gap-8", isSide ? "md:grid-cols-1" : "md:grid-cols-2")}>
                 <div>
                     <input
                         type="text"
@@ -86,7 +99,7 @@ export default function CareerForm({ careers }: CareerFormProps) {
                 </div>
             </div>
 
-            <div className={cn("grid grid-cols-1 md:grid-cols-2 gap-8")}>
+            <div className={cn("grid grid-cols-1 md:grid-cols-2 gap-8", isSide ? "md:grid-cols-1" : "md:grid-cols-2")}>
                 <div>
                     <input
                         type="text"
@@ -97,9 +110,11 @@ export default function CareerForm({ careers }: CareerFormProps) {
                         className={cn("w-full bg-transparent border-b-2 border-neutral-700 py-2 px-1 focus:outline-none focus:border-primary transition-colors placeholder:text-neutral-500 ")}
                     />
                 </div>
-                <div className={cn("w-full")}>
-                    <CareerMenu careers={careers} onSelect={(id) => setState((prev) => ({ ...prev, career: id }))} />
-                </div>
+                {!careerId && (
+                    <div className={cn("w-full")}>
+                        <CareerMenu disabled initialValue={String(state.career)} careers={careers} onSelect={(id) => setState((prev) => ({ ...prev, career: id }))} />
+                    </div>
+                )}
             </div>
             <div className={cn("w-full")}>
                 <textarea
@@ -112,15 +127,24 @@ export default function CareerForm({ careers }: CareerFormProps) {
                 ></textarea>
             </div>
 
-            <div className={cn("flex gap-8 items-start mb-20")}>
+            <div className={cn("flex gap-8 items-start mb-20", isSide ? "flex-col mb-0" : "flex-row")}>
                 <UploadFile onFileSelect={(file) => setSelectedFile(file)} initialFile={selectedFile} />
-                <button
-                    type="submit"
-                    className={cn("border flex border-neutral-500 px-8 py-4 font-medium  items-center cursor-pointer hover:border-primary hover:text-primary transition duration-500 group")}
-                >
-                    <span className="bg-primary mr-2 rounded-full size-1 group-hover:bg-white transition duration-500" />
-                    {loading ? "Sending...." : "Submit"}
-                </button>
+                {isSide ?
+                    <button
+                        type="submit"
+                        className={cn("flex bg-primary w-full justify-center px-8 py-2 font-medium items-center cursor-pointer hover:text-black hover:bg-white transition duration-500 group")}
+                    >
+                        <span className="bg-white mr-2 rounded-full size-1 group-hover:bg-black transition duration-500" />
+                        {loading ? "applying...." : "Apply Now"}
+                    </button>
+                    :
+                    <button
+                        type="submit"
+                        className={cn("border flex border-neutral-500 px-8 py-4 font-medium  items-center cursor-pointer hover:border-primary hover:text-primary transition duration-500 group")}
+                    >
+                        <span className="bg-primary mr-2 rounded-full size-1 group-hover:bg-white transition duration-500" />
+                        {loading ? "Sending...." : "Submit"}
+                    </button>}
             </div>
         </form >
     );

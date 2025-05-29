@@ -93,8 +93,8 @@ export default async function CareerPage() {
                 }}
                 className="xl:pl-12 px-6 py-20 lg:py-26 flex gap-8 flex-col lg:flex-row"
             >
-                <div className="flex items-start md:items-center lg:items-start flex-col md:flex-row  text-left gap-6 md:gap-12 xl:gap-16 w-full justify-start xl:w-7/12 ">
-                    {pageData?.header?.icon ? (
+                <div className="flex items-start md:items-center lg:items-start flex-col md:flex-row text-left gap-6 md:gap-12 xl:gap-12 w-full justify-start -mt-1 min-w-[60%]">
+                    {/* {pageData?.header?.icon ? (
                         <Image
                             width={100}
                             height={100}
@@ -105,15 +105,16 @@ export default async function CareerPage() {
                         />
                     ) : (
                         <LampIcon className="w-16 h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 xl:w-28 xl:h-28 text-primary" />
-                    )}
+                    )} */}
+                    <LampIcon className="text-primary w-16 h-16 md:w-20 md:h-20 lg:w-22 lg:h-22 lg:min-w-22 lg:min-h-22 md:min-h-20 md:min-w-20 min-w-16 min-h-16" />
 
-                    <h2 className="text-4xl md:text-[2.5rem] xl:text-[3.4rem] font-bold text-primary leading-12 md:leading-16">
+                    <h2 className="text-4xl md:text-[2.5rem] xl:text-[3rem] font-bold text-primary leading-12 md:leading-16">
                         {pageData?.header?.title || "Begin Your Career With Us"}
                     </h2>
                 </div>
-                <div className="text-neutral-400 w-full text-left lg:w-5/12">
+                <div className="text-neutral-400 w-full text-[1rem] text-left ">
                     <p>
-                        {pageData?.header?.description || "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."}
+                        {pageData?.header?.description}
                     </p>
                 </div>
             </motion.section>
