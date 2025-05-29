@@ -43,6 +43,12 @@ async function getCareerData() {
                 'cover': {
                     fields: ['url'],
                 },
+                'reach_us_image': {
+                    fields: ['url'],
+                },
+                'contact_support_image': {
+                    fields: ['url'],
+                },
                 'header': {
                     populate: "*",
                 },
