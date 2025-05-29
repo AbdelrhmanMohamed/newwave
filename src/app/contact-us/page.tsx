@@ -81,14 +81,16 @@ async function getSocialLinksData() {
 }
 
 export default async function ContactUs() {
-  // Initiate both requests in parallel
-  const [contactPage, contactBranches, contactSocialLinks] = await Promise.all([
-    getBaseContactPageData(),
-    getBranchesData(),
-    getSocialLinksData(),
-  ]);
+  // Initiate both requests in sequence
+  const contactPage = await getBaseContactPageData();
+  const contactBranches = await getBranchesData();
+  const contactSocialLinks = await getSocialLinksData();
   const activeSocialLinks = contactSocialLinks?.social_links?.filter((link) => link.active);
   const branches = (contactBranches?.branches || []) || [];
+
+  if (!contactPage) {
+    return <div className="text-center p-10">Contact page data not found.</div>;
+  }
 
 
   return (
@@ -119,7 +121,7 @@ export default async function ContactUs() {
         </div>
         <div className="text-neutral-400 w-full text-center lg:text-left lg:w-5/12">
           <p>
-            {contactPage.response_time_description}
+            {contactPage?.response_time_description}
           </p>
         </div>
       </motion.section>
@@ -144,7 +146,7 @@ export default async function ContactUs() {
             }}
           />
           <AnimatedText
-            text={contactPage.contact_form_title || 'Reach Out To Us'}
+            text={contactPage?.contact_form_title || 'Reach Out To Us'}
             className="text-4xl md:text-5xl font-bold mt-6 mb-10 lg:my-10 "
           />
           <ContactForm />
@@ -162,7 +164,7 @@ export default async function ContactUs() {
         >
           <h2 className="text-4xl lg:text-5xl font-bold mb-6">{contactPage?.say_hello_title || 'Say Hello!'}</h2>
           <p className="text-neutral-400">
-            {contactPage.say_hello_title_description}
+            {contactPage?.say_hello_title_description}
           </p>
 
           <div className="mt-8 mb-16">
@@ -186,19 +188,19 @@ export default async function ContactUs() {
           </div>
 
           <div className="flex space-x-4 my-4">
-            {activeSocialLinks?.map((link) => (
+            {(activeSocialLinks || []).map((link) => (
               <a
-                key={link.id}
-                href={link.url}
+                key={link?.id}
+                href={link?.url}
                 className="size-6 rounded-full border border-white transition hover:border-primary flex items-center justify-center duration-500 hover:text-primary"
               >
-                <SocialIcon name={link.name as keyof typeof SocialIcon} className="h-3 w-3" />
+                <SocialIcon name={link?.name as keyof typeof SocialIcon} className="h-3 w-3" />
               </a>
             ))}
           </div>
 
           <div className="text-neutral-400">
-            <p className="text-base">{contactPage.working_hours || 'Working Hours : 8hrs'}</p>
+            <p className="text-base">{contactPage?.working_hours || 'Working Hours : 8hrs'}</p>
           </div>
         </motion.div>
       </section>
@@ -215,23 +217,23 @@ export default async function ContactUs() {
         className="px-5 pt-24 relative z-20 "
       >
         <AnimatedText
-          text={contactPage.branches_title || "Our Affiliate Branches"}
+          text={contactPage?.branches_title || "Our Affiliate Branches"}
           className="text-4xl md:text-4xl font-bold text-center mb-4 justify-center"
         />
 
         <p className="text-neutral-400 text-center max-w-4xl mx-auto mb-16">
-          {contactPage.branches_description}
+          {contactPage?.branches_description}
         </p>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 px-0 sm:px-8 md:px-0">
-          {branches.map((branch) => (
+          {(branches || []).map((branch) => (
             <BranchCard
-              key={branch.id}
-              title={branch.name}
-              address={[branch.address]}
-              backgroundImage={`${process.env.NEXT_PUBLIC_API_URL}${branch.cover?.url}` || "/images/office.png"}
-              email={branch.email}
-              phone={branch.tel}
+              key={branch?.id}
+              title={branch?.name}
+              address={[branch?.address]}
+              backgroundImage={`${process.env.NEXT_PUBLIC_API_URL}${branch?.cover?.url}` || "/images/office.png"}
+              email={branch?.email}
+              phone={branch?.tel}
             />
           ))}
 
