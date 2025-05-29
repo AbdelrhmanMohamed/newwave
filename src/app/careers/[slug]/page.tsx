@@ -92,6 +92,7 @@ import Image from "next/image"
 import { PageBanner } from '@/components/page-banner';
 import BlockRendererClient from '@/components/block-render';
 import CareerForm from '../_components/form';
+import { getImageUrl } from '@/lib/utils';
 
 export default async function CareerDetailsPage({
     params,
@@ -111,7 +112,7 @@ export default async function CareerDetailsPage({
             {/* Header */}
             <PageBanner
                 title={careerData?.title || "Career Details"}
-                backgroundImage={careerData.image ? `${process.env.NEXT_PUBLIC_API_URL}${careerData.image.url}` : "/images/office.png"}
+                backgroundImage={getImageUrl(careerData?.image?.url) || "/images/office.png"}
                 breadcrumbs={[{ label: "Home", href: "/" }, { label: "Careers", href: "/careers" }, { label: careerData.title || "Career Details" }]} />
 
             {/* Main Content */}
@@ -121,7 +122,7 @@ export default async function CareerDetailsPage({
                     {/* Job Image */}
                     <div className="relative mb-12">
                         <Image
-                            src={careerData.image ? `${process.env.NEXT_PUBLIC_API_URL}${careerData.image.url}` : "/images/office.png"}
+                            src={getImageUrl(careerData?.image?.url) || "/images/office.png"}
                             alt={careerData.title || "Job Image"}
                             width={800}
                             height={500}

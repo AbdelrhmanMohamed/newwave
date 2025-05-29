@@ -7,6 +7,7 @@ import fetchContentType from "@/lib/strapi/fetchContentType";
 import { Metadata } from "next";
 import { generateMetadataObject } from "@/lib/shared/metadata";
 import { Blog, BlogPageData } from "@/types/blog";
+import { getImageUrl } from "@/lib/utils";
 
 
 export const revalidate = 60
@@ -66,7 +67,7 @@ export default async function BlogPage() {
     <div className="pb-60">
       <PageBanner
         title="Blog"
-        backgroundImage={`${process.env.NEXT_PUBLIC_API_URL}${blogPageData?.cover?.url}`}
+        backgroundImage={getImageUrl(blogPageData.cover?.url)}
         breadcrumbs={[{ label: "Home", href: "/" }, { label: "Blog" }]}
       />
       <motion.section
@@ -81,7 +82,7 @@ export default async function BlogPage() {
           {blogs.map((blog) => (
             <BlogCard
               key={blog.id}
-              imageUrl={`${process.env.NEXT_PUBLIC_API_URL}${blog.cover?.url}`}
+              imageUrl={getImageUrl(blog.cover?.url)}
               imageAlt={blog.cover?.alternativeText || ""}
               date={blog.date}
               title={blog.title}

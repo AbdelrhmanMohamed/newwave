@@ -16,6 +16,7 @@ import Image from 'next/image';
 import { getGlobalData } from '@/lib/shared/globalData';
 import AnimatedText from '@/components/effects/animate-text';
 import CareerForm from './_components/form';
+import { getImageUrl } from '@/lib/utils';
 
 
 
@@ -80,7 +81,7 @@ export default async function CareerPage() {
         <div>
             <PageBanner
                 title={pageData?.title || "Career"}
-                backgroundImage={pageData?.cover?.url ? `${process.env.NEXT_PUBLIC_API_URL}${pageData?.cover?.url}` : "/images/office.png"}
+                backgroundImage={getImageUrl(pageData?.cover?.url) || "/images/office.png"}
                 breadcrumbs={[{ label: "Home", href: "/" }, { label: pageData?.title || "Career" }]}
             />
             {/*  Section */}
@@ -134,7 +135,7 @@ export default async function CareerPage() {
                     <ContactSide
                         title={pageData?.reach_us || 'Reach Us'}
                         description={pageData?.reach_us_description || 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'}
-                        imgUrl={pageData?.reach_us_image?.url ? `${process.env.NEXT_PUBLIC_API_URL}${pageData?.reach_us_image?.url}` : 'https://gaaga.wpengine.com/wp-content/uploads/2023/06/career-img-768x501.jpg'}
+                        imgUrl={getImageUrl(pageData?.reach_us_image?.url) || "/images/office.png"}
                         enquiries_title={pageData?.mail_us || 'Mail Us'}
                         enquiries_emails_1={globalData?.email1 || 'info@example.com'}
                         enquiries_emails_2={globalData?.email2 || globalData.email_career || 'info@example.com'}
@@ -153,7 +154,7 @@ export default async function CareerPage() {
             >
                 <div className='grid grid-cols-12  justify-center items-center px-6 lg:px-0'>
                     <div className='col-span-12 lg:col-span-5 lg:mr-20 h-[500px] sm:h-[650px] md:h-[750px] relative  '>
-                        <Image fill src="https://gaaga.wpengine.com/wp-content/uploads/2023/06/Gaaga-Contact-Form-Img-1-1337x1536.png" alt="Query 1" className='object-cover bg-center' />
+                        <Image fill src={getImageUrl(pageData?.contact_support_image?.url)} alt="Query 1" className='object-cover bg-center' />
 
                         <div className='absolute p-8 pt-16 bottom-0 flex justify-center items-center bg-gradient-to-t from-background  to-[#11131900]  w-full gap-6'>
                             <Image src="/icons/message.svg" width={100} height={100} alt="message Icon" />

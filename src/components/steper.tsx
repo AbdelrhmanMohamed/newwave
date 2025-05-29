@@ -2,7 +2,7 @@
 import React from 'react'
 import Image from 'next/image';
 import StrokeNumber from './stroke-number';
-import { cn } from '@/lib/utils';
+import { cn, getImageUrl } from '@/lib/utils';
 import { ArrowLeftIcon, ArrowRightIcon } from './icons';
 import * as motion from "motion/react-client";
 import useMediaQuery, { ScreenSize } from '@/hooks/useMediaQuery';
@@ -63,7 +63,7 @@ function StepperItem({ step, reverse, index, isLast, isFirst }: StepperItemProps
 
                 className={cn("relative h-[280px]", reverse ? 'mt-20' : 'mb-20')}>
                 <Image
-                    src={`${process.env.NEXT_PUBLIC_API_URL}${step.icon?.url}`}
+                    src={getImageUrl(step.icon?.url)}
                     alt={step.title}
                     fill
                     className='object-cover'

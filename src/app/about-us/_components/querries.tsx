@@ -5,6 +5,7 @@ import * as motion from "motion/react-client";
 import AnimatedText from '@/components/effects/animate-text';
 import { AboutUsData } from '@/types/about-us';
 import { GlobalData } from '@/types/global';
+import { getImageUrl } from '@/lib/utils';
 
 type QuerriesProps = {
     aboutData: AboutUsData;
@@ -24,7 +25,7 @@ export default function Querries({ aboutData, globalData }: QuerriesProps) {
                 }}
                 className='col-span-12 lg:col-span-5 w-full h-[500px] sm:h-[650px] md:h-[750px]  relative overflow-hidden max-w-5xl'>
 
-                <Image fill src={`${aboutData?.contact_support_image?.url ? `${process.env.NEXT_PUBLIC_API_URL}${aboutData?.contact_support_image?.url}` : '/images/office.png'}`} alt="Query 1" className='opacity-85' />
+                <Image fill src={getImageUrl(aboutData?.contact_support_image?.url)} alt="Query 1" className='opacity-85' />
 
                 <div className='absolute p-8 pt-16 bottom-0 flex justify-center items-center bg-gradient-to-t from-background  to-[#11131900]  w-full gap-6'>
                     <Image src="/icons/message.svg" width={100} height={100} alt="message Icon" />

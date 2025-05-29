@@ -14,6 +14,7 @@ import fetchContentType from '@/lib/strapi/fetchContentType';
 import { Metadata } from 'next';
 import { AboutUsData } from '@/types/about-us';
 import { getGlobalData } from '@/lib/shared/globalData';
+import { getImageUrl } from '@/lib/utils';
 
 
 export const revalidate = 60
@@ -77,7 +78,7 @@ export default async function AboutUsPage() {
         <div>
             <PageBanner
                 title={aboutUsData.title || "About Us"}
-                backgroundImage={aboutUsData.cover ? `${process.env.NEXT_PUBLIC_API_URL}${aboutUsData.cover.url}` : "/images/office.png"}
+                backgroundImage={getImageUrl(aboutUsData.cover?.url) || "/images/office.png"}
                 breadcrumbs={[{ label: "Home", href: "/" }, { label: aboutUsData.title || "About Us" }]}
             />
             <motion.section

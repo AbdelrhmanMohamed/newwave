@@ -10,6 +10,7 @@ import fetchContentType from '@/lib/strapi/fetchContentType'
 import { Metadata } from 'next'
 import { FAQGroup, FAQPageData } from '@/types/faq'
 import MotionClient from './_components/motion-client'
+import { getImageUrl } from '@/lib/utils'
 
 
 export const revalidate = 60
@@ -73,7 +74,7 @@ export default async function FAQ() {
         <div className="">
             <PageBanner
                 title={faqPageData?.title || "FAQ"}
-                backgroundImage={faqPageData?.cover?.url ? `${process.env.NEXT_PUBLIC_API_URL}${faqPageData?.cover?.url}` : "/images/office.png"}
+                backgroundImage={getImageUrl(faqPageData?.cover?.url) || "/images/office.png"}
                 breadcrumbs={[{ label: "Home", href: "/" }, { label: faqPageData?.title || "FAQ" }]}
             />
             {faqGroups.map((group, index) => {
@@ -103,7 +104,7 @@ export default async function FAQ() {
                                     transition={{ duration: 3, repeat: Infinity, repeatType: "reverse" }}
                                     className={`relative h-[420px] sm:h-[450px] md:h-[500px] lg:h-[600px] xl:h-[650px] flex items-center justify-center ${isEven(index) ? 'right-12 sm:right-24' : 'left-12 sm:left-24'}`}
                                 >
-                                    <Image src={`${process.env.NEXT_PUBLIC_API_URL}${group.image?.url}`} alt="FAQ Image" fill className="object-cover" />
+                                    <Image src={getImageUrl(group.image?.url)} alt="FAQ Image" fill className="object-cover" />
                                 </MotionClient>
                                 <MotionClient
                                     initial={{ y: -44 }}

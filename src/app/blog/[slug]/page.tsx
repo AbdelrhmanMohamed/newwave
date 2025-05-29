@@ -7,6 +7,7 @@ import { generateMetadataObject } from "@/lib/shared/metadata";
 import { Blog, BlogSubject } from "@/types/blog";
 import fetchContentType from "@/lib/strapi/fetchContentType";
 import RenderSubject from "@/components/subject";
+import { getImageUrl } from "@/lib/utils";
 
 type Props = {
   params: Promise<{ slug: string }>
@@ -105,7 +106,7 @@ export default async function BlogDetails({
         {/** MAIN IMAGE */}
         <div className="relative w-full h-[550px]">
           <Image
-            src={`${process.env.NEXT_PUBLIC_API_URL}${blog?.cover?.url}`}
+            src={getImageUrl(blog.cover?.url)}
             alt="main blog image"
             fill
             className="object-cover"
