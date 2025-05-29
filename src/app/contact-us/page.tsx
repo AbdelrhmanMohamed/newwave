@@ -11,6 +11,7 @@ import fetchContentType from "@/lib/strapi/fetchContentType";
 import { generateMetadataObject } from "@/lib/shared/metadata";
 import { Metadata } from 'next';
 import { ContactPageWithBranchesAndSocialLinks } from "@/types/contact";
+import { getImageUrl } from "@/lib/utils";
 
 
 export const revalidate = 60
@@ -169,7 +170,7 @@ export default async function ContactUs() {
 
           <div className="mt-8 mb-16">
             <Image
-              src={`${process.env.NEXT_PUBLIC_API_URL}${contactPage?.say_hello_image?.url}` || "/images/office.png"}
+              src={getImageUrl(contactPage?.say_hello_image?.url) || "/images/people-working-together.png"}
               alt="People working together"
               width={200}
               height={50}
@@ -231,7 +232,7 @@ export default async function ContactUs() {
               key={branch?.id}
               title={branch?.name}
               address={[branch?.address]}
-              backgroundImage={`${process.env.NEXT_PUBLIC_API_URL}${branch?.cover?.url}` || "/images/office.png"}
+              backgroundImage={getImageUrl(branch?.cover?.url) || "/images/office.png"}
               email={branch?.email}
               phone={branch?.tel}
             />
