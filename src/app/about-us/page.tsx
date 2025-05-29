@@ -13,6 +13,7 @@ import { generateMetadataObject } from '@/lib/shared/metadata';
 import fetchContentType from '@/lib/strapi/fetchContentType';
 import { Metadata } from 'next';
 import { AboutUsData } from '@/types/about-us';
+import { getGlobalData } from '@/lib/shared/globalData';
 
 
 export const revalidate = 60
@@ -31,7 +32,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 
-async function getAboutUsData() {
+export async function getAboutUsData() {
     try {
         const res = await fetchContentType('about-us-page', {
             'populate': {
@@ -44,8 +45,14 @@ async function getAboutUsData() {
                 'proceture': {
                     populate: "*",
                 },
+                'process': {
+                    populate: "*",
+                },
                 'impact_highlights': {
                     populate: "*",
+                },
+                'contact_support_image': {
+                    fields: ['url'],
                 },
             },
         }, true)
@@ -59,6 +66,9 @@ async function getAboutUsData() {
 
 export default async function AboutUsPage() {
     const aboutUsData = await getAboutUsData();
+    const globalData = await getGlobalData();
+
+    console.log("About Us Data:", aboutUsData);
     if (!aboutUsData) {
         return <div className="text-center py-20">No data found</div>;
     }
@@ -101,35 +111,15 @@ export default async function AboutUsPage() {
                     }}
                     className='flex flex-col items-center justify-center text-center mb-10'
                 >
-                    <SectionHead title="Know Us" show={{
+                    <SectionHead title={aboutUsData?.process_title || "Know Us"} show={{
                         end: true,
                         start: true,
                     }} animate />
-                    <AnimatedText text="What Kind Of Service We Offer" className='text-3xl md:text-4xl xl:text-5xl font-bold mt-6 mb-10 tracking-wide text-center justify-center' />
+                    <AnimatedText text={aboutUsData?.process_headline || "What Kind Of Service We Offer"} className='text-3xl md:text-4xl xl:text-5xl font-bold mt-6 mb-10 tracking-wide text-center justify-center' />
 
                 </motion.div>
-                <Stepper steps={[
-                    {
-                        title: "Gather The Ideas",
-                        description: "Curabitur at pretium odio, sit amet tincidunt erat. Pellentesque fringilla rutrum nisl, nec vulputate libero mattis vel. Integer bibendum metus ac metus varius, eget vestibulum arcu. Sed vehicula mattis purus.",
-                        imgUrl: "https://gaaga.wpengine.com/wp-content/uploads/2023/05/Gaaga-Process-Img-2.png"
-                    },
-                    {
-                        title: "Create Modules",
-                        description: "Curabitur at pretium odio, sit amet tincidunt erat. Pellentesque fringilla rutrum nisl, nec vulputate libero mattis vel. Integer bibendum metus ac metus varius, eget vestibulum arcu. Sed vehicula mattis purus.",
-                        imgUrl: "https://gaaga.wpengine.com/wp-content/uploads/2023/05/Gaaga-Process-Img-2.png"
-                    },
-                    {
-                        title: "Integrate & Execute",
-                        description: "Curabitur at pretium odio, sit amet tincidunt erat. Pellentesque fringilla rutrum nisl, nec vulputate libero mattis vel. Integer bibendum metus ac metus varius, eget vestibulum arcu. Sed vehicula mattis purus.",
-                        imgUrl: "https://gaaga.wpengine.com/wp-content/uploads/2023/05/Gaaga-Process-Img-2.png"
-                    },
-                    {
-                        title: "Deliver",
-                        description: "Curabitur at pretium odio, sit amet tincidunt erat. Pellentesque fringilla rutrum nisl, nec vulputate libero mattis vel. Integer bibendum metus ac metus varius, eget vestibulum arcu. Sed vehicula mattis purus.",
-                        imgUrl: "https://gaaga.wpengine.com/wp-content/uploads/2023/05/Gaaga-Process-Img-2.png"
-                    }
-                ]} />
+
+                <Stepper steps={aboutUsData?.process || []} />
             </div>
             <motion.section
                 initial={{ opacity: 0 }}
@@ -146,7 +136,7 @@ export default async function AboutUsPage() {
                 />
             </motion.section>
             <section className="py-20">
-                <Querries />
+                <Querries aboutData={aboutUsData} globalData={globalData} />
             </section>
             <motion.section
                 initial={{ x: 200, opacity: 0 }}

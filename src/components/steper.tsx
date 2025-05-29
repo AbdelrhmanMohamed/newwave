@@ -6,21 +6,19 @@ import { cn } from '@/lib/utils';
 import { ArrowLeftIcon, ArrowRightIcon } from './icons';
 import * as motion from "motion/react-client";
 import useMediaQuery, { ScreenSize } from '@/hooks/useMediaQuery';
+import { Process } from '@/types/about-us';
 
-type Step = {
-    title: string;
-    description: string;
-    imgUrl: string;
-};
+
 
 type StepperProps = {
-    steps: Step[];
+    steps: Process[];
 };
 
 export default function Stepper({ steps }: StepperProps) {
     const isMobile = useMediaQuery(ScreenSize.Mobile);
     const isTablet = useMediaQuery(ScreenSize.Tablet);
-    const [newSteps, setNewSteps] = React.useState<Step[]>(steps);
+    const [newSteps, setNewSteps] = React.useState<Process[]>(steps);
+    console.log("Stepper rendered with steps:", steps);
 
     React.useEffect(() => {
         if (isMobile) {
@@ -42,7 +40,7 @@ export default function Stepper({ steps }: StepperProps) {
 }
 
 type StepperItemProps = {
-    step: Step;
+    step: Process;
     reverse?: boolean;
     index: number;
     isLast?: boolean;
@@ -65,7 +63,7 @@ function StepperItem({ step, reverse, index, isLast, isFirst }: StepperItemProps
 
                 className={cn("relative h-[280px]", reverse ? 'mt-20' : 'mb-20')}>
                 <Image
-                    src={step.imgUrl}
+                    src={`${process.env.NEXT_PUBLIC_API_URL}${step.icon?.url}`}
                     alt={step.title}
                     fill
                     className='object-cover'
