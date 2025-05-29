@@ -32,7 +32,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 
-export async function getAboutUsData() {
+async function getAboutUsData() {
     try {
         const res = await fetchContentType('about-us-page', {
             'populate': {
