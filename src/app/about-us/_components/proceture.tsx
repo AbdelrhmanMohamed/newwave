@@ -12,7 +12,6 @@ type ProcedureProps = {
 }
 
 export default function ProcedureSection({ bgUrl, title, proceses }: ProcedureProps) {
-    console.log("ProcedureSection rendered with processes:", `${process.env.NEXT_PUBLIC_API_URL}${proceses[0].icon?.url}`);
     return (
         <div className='relative bg-background'>
             <div className='py-24 px-4 z-10 relative'>
