@@ -9,14 +9,66 @@ import Querries from './_components/querries';
 import Stepper from '@/components/steper';
 import SectionHead from '@/components/headings/section-head';
 import AnimatedText from '@/components/effects/animate-text';
+import { generateMetadataObject } from '@/lib/shared/metadata';
+import fetchContentType from '@/lib/strapi/fetchContentType';
+import { Metadata } from 'next';
+import { AboutUsData } from '@/types/about-us';
 
-export default function AboutUsPage() {
+
+export const revalidate = 60
+
+export async function generateMetadata(): Promise<Metadata> {
+    const pageData = await fetchContentType("about-us-page", {
+        populate: {
+            seo: {
+                populate: "*",
+            },
+        }
+    }, true)
+    const seo = pageData?.seo;
+    const metadata = generateMetadataObject(seo);
+    return metadata;
+}
+
+
+async function getAboutUsData() {
+    try {
+        const res = await fetchContentType('about-us-page', {
+            'populate': {
+                'cover': {
+                    fields: ['url'],
+                },
+                'header': {
+                    populate: "*",
+                },
+                'proceture': {
+                    populate: "*",
+                },
+                'impact_highlights': {
+                    populate: "*",
+                },
+            },
+        }, true)
+        return res as AboutUsData;
+    } catch (error) {
+        console.error("Error fetching base About Us page data:", error);
+        return {} as AboutUsData;
+    }
+}
+
+
+export default async function AboutUsPage() {
+    const aboutUsData = await getAboutUsData();
+    if (!aboutUsData) {
+        return <div className="text-center py-20">No data found</div>;
+    }
+
     return (
         <div>
             <PageBanner
-                title="About Us"
-                backgroundImage={"/images/office.png"}
-                breadcrumbs={[{ label: "Home", href: "/" }, { label: "About Us" }]}
+                title={aboutUsData.title || "About Us"}
+                backgroundImage={aboutUsData.cover ? `${process.env.NEXT_PUBLIC_API_URL}${aboutUsData.cover.url}` : "/images/office.png"}
+                breadcrumbs={[{ label: "Home", href: "/" }, { label: aboutUsData.title || "About Us" }]}
             />
             <motion.section
                 initial={{ opacity: 0 }}
@@ -35,8 +87,9 @@ export default function AboutUsPage() {
             </motion.section>
             <div className='my-20'>
                 <ProcedureSection
-                    title="Our Best Stratergy"
+                    title={aboutUsData.proceture_title || "Our Procedure"}
                     bgUrl="https://gaaga.wpengine.com/wp-content/uploads/2023/06/Gaaga-Process-Icon-Box-Bg-Img-1-scaled.jpg"
+                    proceses={aboutUsData.proceture || []}
                 />
             </div>
             <div className="px-4 py-20">
@@ -89,6 +142,7 @@ export default function AboutUsPage() {
                 <MarketingSection
                     bgUrl="https://gaaga.wpengine.com/wp-content/uploads/2023/06/Gaaga-Process-Counter-Bg-Img-1-scaled.jpg"
                     title="Our Marketing Approach"
+                    highlights={aboutUsData.impact_highlights || []}
                 />
             </motion.section>
             <section className="py-20">

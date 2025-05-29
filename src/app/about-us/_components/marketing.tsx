@@ -3,14 +3,16 @@ import StrokeNumber from '@/components/stroke-number';
 import { Play } from 'lucide-react';
 import React from 'react'
 import * as motion from "motion/react-client";
+import { ImpactHighlight } from '@/types/about-us';
 
 
 type ProcedureProps = {
     bgUrl?: string;
-    title: string;
+    title?: string;
+    highlights: ImpactHighlight[];
 }
 
-export default function MarketingSection({ bgUrl }: ProcedureProps) {
+export default function MarketingSection({ bgUrl, highlights }: ProcedureProps) {
     return (
         <div className='relative bg-background'>
             {/* Content container */}
@@ -23,7 +25,7 @@ export default function MarketingSection({ bgUrl }: ProcedureProps) {
                     }}
                     className="flex flex-col items-center text-center container mx-auto max-w-5xl">
                     {/* Main heading */}
-                    <h1 className="text-white text-4xl sm:text-4xl md:text-5xl font-bold leading-tight mb-8 text-center md:text-left">
+                    <h1 className="text-white text-4xl sm:text-4xl md:text-5xl font-bold leading-tight mb-8 text-center md:text-left lg:text-center">
                         It&apos;s Time To Take Your Digital Marketing
                         <img
                             src="https://gaaga.wpengine.com/wp-content/uploads/2023/06/content-image-small-size-4.png"
@@ -62,13 +64,19 @@ export default function MarketingSection({ bgUrl }: ProcedureProps) {
                 </motion.div>
                 {/* Stats section */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 md:gap-20 lg:gap-16 mt-12  justify-center items-center mx-auto w-7/12 sm:6/12 md:w-full">
-                    <div className="flex items-center text-left gap-6 lg:gap-12">
+                    {(highlights || []).map((highlight) => (
+                        <div key={highlight?.id} className="flex items-center text-left gap-6 lg:gap-12">
+                            <StrokeNumber animate number={highlight?.count} className='lg:text-[7rem] md:text-[6rem] text-[5rem]' />
+                            <span className='text-2xl text-neutral-300 leading-10'>{highlight?.title}</span>
+                        </div>
+                    ))}
+                    {/* <div className="flex items-center text-left gap-6 lg:gap-12">
                         <StrokeNumber animate number={10} className='lg:text-[7rem] md:text-[6rem] text-[5rem]' />
                         <span className='text-2xl text-neutral-300 leading-10'> Years Experience</span>
                     </div>
                     <div className="flex items-center text-left gap-6 lg:gap-12">
                         <StrokeNumber animate number={12} className='lg:text-[7rem] md:text-[6rem] text-[5rem]' />
-                        <span className='text-2xl text-neutral-300 leading-10'> Professional Key Peoples</span>
+                        <span className='text-2xl text-neutral-300 leading-10'> Professional Peoples</span>
                     </div>
                     <div className="flex items-center text-left gap-6 lg:gap-12">
                         <StrokeNumber animate number={50} className='lg:text-[7rem] md:text-[6rem] text-[5rem]' />
@@ -78,7 +86,7 @@ export default function MarketingSection({ bgUrl }: ProcedureProps) {
                     <div className="flex items-center text-left gap-6 lg:gap-12">
                         <StrokeNumber animate number={90} className='lg:text-[7rem] md:text-[6rem] text-[5rem]' />
                         <span className='text-2xl text-neutral-300 leading-10'> Projects Compeleted</span>
-                    </div>
+                    </div> */}
                 </div>
             </div>
             <div className='bg-cover pointer-events-none absolute top-0 bg-center mix-blend-luminosity opacity-15 w-full h-full' style={{

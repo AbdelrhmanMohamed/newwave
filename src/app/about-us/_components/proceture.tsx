@@ -3,14 +3,16 @@ import React from 'react'
 import ProcedureCard from './proceture-card';
 import * as motion from "motion/react-client";
 import AnimatedText from '@/components/effects/animate-text';
-import { FindIcon, IntegrateIcon, LampIcon, TargetIcon } from '@/components/icons';
+import { Process } from '@/types/about-us';
 
 type ProcedureProps = {
     bgUrl?: string;
     title: string;
+    proceses: Process[]
 }
 
-export default function ProcedureSection({ bgUrl, title }: ProcedureProps) {
+export default function ProcedureSection({ bgUrl, title, proceses }: ProcedureProps) {
+    console.log("ProcedureSection rendered with processes:", `${process.env.NEXT_PUBLIC_API_URL}${proceses[0].icon?.url}`);
     return (
         <div className='relative bg-background'>
             <div className='py-24 px-4 z-10 relative'>
@@ -35,9 +37,17 @@ export default function ProcedureSection({ bgUrl, title }: ProcedureProps) {
                         once={false}
                     />
                 </div>
-                <div className='grid grid-cols-1 lg:grid-cols-4'>
+                <div className='grid grid-cols-1 md:grid-cols-2  xl:grid-cols-4'>
+                    {proceses.map((item) => (
+                        <ProcedureCard
+                            key={item.id}
+                            IconUrl={item.icon?.url || ''}
+                            title={item.title}
+                            href={`/#`}
+                        />
+                    ))}
                     {/** Procedure Cards */}
-                    <ProcedureCard icon={
+                    {/* <ProcedureCard icon={
                         <FindIcon />
                     } title='Find Solution' />
                     <ProcedureCard icon={
@@ -48,7 +58,7 @@ export default function ProcedureSection({ bgUrl, title }: ProcedureProps) {
                     } title='Integrate Solutions' />
                     <ProcedureCard icon={
                         <TargetIcon />
-                    } title='Target Outcomes' />
+                    } title='Target Outcomes' /> */}
                 </div>
             </div>
             <div className='bg-cover pointer-events-none bg-black absolute top-0 bg-center mix-blend-luminosity opacity-10 w-full h-full' style={{
