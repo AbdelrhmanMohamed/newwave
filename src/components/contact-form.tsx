@@ -4,8 +4,6 @@ import { Contact } from "@/types/contact";
 import { useState } from "react";
 import { toast } from "sonner";
 
-
-
 export default function ContactForm() {
   const [loading, setLoading] = useState<boolean>(false);
   const [formData, setFormData] = useState<Contact>({
@@ -43,7 +41,7 @@ export default function ContactForm() {
         email: "",
         companyName: "",
         message: "",
-      })
+      });
     } else toast.error("Failed to send message");
   };
 
@@ -123,7 +121,7 @@ export default function ContactForm() {
       <div>
         <button
           type="submit"
-          className="border flex border-neutral-600 px-10 py-4 font-semibold  items-center cursor-pointer text-base hover:border-primary hover:text-primary transition duration-500 group mb-20"
+          className="border flex border-neutral-600 px-10 py-4 font-semibold  items-center cursor-pointer text-base hover:border-primary hover:text-primary transition duration-500 group mb-20 w-full sm:w-auto"
         >
           <span className="bg-primary mr-2 rounded-full size-1 group-hover:bg-white transition duration-500" />
           {loading ? "Sending...." : "Submit"}
