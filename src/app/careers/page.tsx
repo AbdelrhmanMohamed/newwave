@@ -145,7 +145,12 @@ export default async function CareerPage() {
                         enquiries_title={pageData?.mail_us || 'Mail Us'}
                         enquiries_emails_1={globalData?.email1 || 'info@example.com'}
                         enquiries_emails_2={globalData?.email2 || globalData.email_career || 'info@example.com'}
+                        facebook_link={globalData?.facebook_link}
+                        instagram_link={globalData?.instagram_link}
+                        linkedin_link={globalData?.linkedin_link}
+                        twitter_link={globalData?.twitter_link}
                         className='p-6 md:p-6 xl:p-10 ' />
+
 
                 </div>
             </div>

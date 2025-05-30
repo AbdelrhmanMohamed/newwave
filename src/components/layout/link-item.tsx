@@ -22,7 +22,7 @@ function LinkItem({ name, href, links }: Link_Item) {
     return (
       <HoverCard openDelay={0} closeDelay={100}>
         <HoverCardTrigger asChild>
-          <button className="font-medium text-sm cursor-pointer hover:text-primary transition duration-500">
+          <button className="font-medium text-[13px] cursor-pointer hover:text-primary transition duration-500">
             {name}
           </button>
         </HoverCardTrigger>
@@ -36,7 +36,7 @@ function LinkItem({ name, href, links }: Link_Item) {
               <Link
                 key={link.name}
                 href={`${link.href}`}
-                className={`uppercase mb-4 tracking-[2.5px] text-sm hover:text-primary flex gap-2 items-center group hover:pl-4  font-medium duration-500 transition-all ${isActive(
+                className={`uppercase mb-4 tracking-[2.5px] text-[13px] hover:text-primary flex gap-2 items-center group hover:pl-4  font-medium duration-500 transition-all ${isActive(
                   link.href
                 )}`}
               >
@@ -57,7 +57,7 @@ function LinkItem({ name, href, links }: Link_Item) {
   return (
     <Link
       href={href}
-      className={`uppercase my-4 tracking-[2.5px] text-sm font-medium hover:text-primary transition-colors duration-300 ${isActive(
+      className={`uppercase my-4 tracking-[2.5px] text-[13px] font-medium hover:text-primary transition-colors duration-300 ${isActive(
         href
       )}`}
     >

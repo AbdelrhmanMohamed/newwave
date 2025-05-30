@@ -27,7 +27,7 @@ export default function BranchCard({
       {/* Background image that shows on hover */}
       <div
         className={cn(
-          "absolute inset-0 bg-cover mix-blend-luminosity opacity-0 bg-center transition-opacity duration-500 group-hover:opacity-15"
+          "absolute inset-0 bg-cover mix-blend-luminosity opacity-15 md:opacity-0 bg-center transition-opacity duration-500 group-hover:opacity-15"
         )}
         style={{ backgroundImage: `url(${backgroundImage})` }}
       />

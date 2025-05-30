@@ -1,15 +1,12 @@
 "use client";
 
+import { Globe } from "lucide-react";
 import {
-  Linkedin,
-  Twitter,
-  Facebook,
-  Instagram,
-  Github,
-  Youtube,
-  Globe,
-} from "lucide-react";
-
+  LinkedinIcon,
+  FacebookIcon,
+  InstagramIcon,
+  TwitterIcon,
+} from "./icons";
 import { cn } from "@/lib/utils";
 
 export enum SocialPlatform {
@@ -17,8 +14,8 @@ export enum SocialPlatform {
   Twitter = "twitter",
   Facebook = "facebook",
   Instagram = "instagram",
-  Github = "github",
-  Youtube = "youtube",
+  // Github = "github",
+  // Youtube = "youtube",
 }
 
 type SocialIconProps = {
@@ -27,12 +24,12 @@ type SocialIconProps = {
 };
 
 const iconMap: Record<SocialPlatform, React.ElementType> = {
-  [SocialPlatform.Linkedin]: Linkedin,
-  [SocialPlatform.Twitter]: Twitter,
-  [SocialPlatform.Facebook]: Facebook,
-  [SocialPlatform.Instagram]: Instagram,
-  [SocialPlatform.Github]: Github,
-  [SocialPlatform.Youtube]: Youtube,
+  [SocialPlatform.Linkedin]: LinkedinIcon,
+  [SocialPlatform.Twitter]: TwitterIcon,
+  [SocialPlatform.Facebook]: FacebookIcon,
+  [SocialPlatform.Instagram]: InstagramIcon,
+  // [SocialPlatform.Github]: GithubIcon,
+  // [SocialPlatform.Youtube]: YoutubeIcon,
 };
 
 export const SocialIcon = ({ name, className }: SocialIconProps) => {

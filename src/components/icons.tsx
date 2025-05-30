@@ -27,28 +27,6 @@ export function LeftIconWitArrow({ className }: IconProps) {
     </span>
   );
 }
-
-export function FacebookIcon({ className }: IconProps) {
-  return (
-    <svg
-      stroke="currentColor"
-      fill="currentColor"
-      strokeWidth="0"
-      viewBox="0 0 320 512"
-      height="200px"
-      width="200px"
-      xmlns="http://www.w3.org/2000/svg"
-      className={className}
-    >
-      <path
-        d="M279.14 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.43 0 225.36 0c-73.22 0-121.08 44.38-121.08 124.72v70.62H22.89V288h81.39v224h100.17V288z"
-        stroke="currentColor"
-        strokeWidth="0px"
-      ></path>
-    </svg>
-  );
-}
-
 export function ArrowLeftIcon({ className }: IconProps) {
   return (
     <svg
@@ -89,7 +67,6 @@ export function ArrowRightIcon({ className }: IconProps) {
     </svg>
   );
 }
-
 export function ArrowAccordingIcon({ className }: IconProps) {
   return (
     <svg
@@ -100,11 +77,14 @@ export function ArrowAccordingIcon({ className }: IconProps) {
       viewBox="0 0 16.8 8.5"
       className={`newwave-icon ${className}`}
     >
-      <path fill="currentColor" stroke="currentColor" d="M16.3 4.3.5 8.3v-8l15.8 4z" />
+      <path
+        fill="currentColor"
+        stroke="currentColor"
+        d="M16.3 4.3.5 8.3v-8l15.8 4z"
+      />
     </svg>
   );
 }
-
 export function Dots({ className }: IconProps) {
   return (
     <svg
@@ -516,7 +496,6 @@ export function Dots({ className }: IconProps) {
     </svg>
   );
 }
-
 export function ChevronLeftIcon({ className }: IconProps) {
   return (
     <svg
@@ -550,7 +529,6 @@ export function LampIcon({ className }: IconProps) {
     </svg>
   );
 }
-
 export function FindIcon({ className, strokeWidth }: IconProps) {
   return (
     <svg
@@ -571,9 +549,6 @@ export function FindIcon({ className, strokeWidth }: IconProps) {
     </svg>
   );
 }
-
-
-
 export function IntegrateIcon({ className }: IconProps) {
   return (
     <svg
@@ -590,9 +565,6 @@ export function IntegrateIcon({ className }: IconProps) {
     </svg>
   );
 }
-
-
-
 export function TargetIcon({ className }: IconProps) {
   return (
     <svg
@@ -610,6 +582,65 @@ export function TargetIcon({ className }: IconProps) {
         <path d="M70.9 71.6c-.2 0-.5-.1-.7-.3L10.8 11.9c-.4-.4-.4-.9 0-1.3s.9-.4 1.3 0L71.6 70c.4.4.4.9 0 1.3-.2.2-.4.3-.7.3z" />
         <path d="M19.6 38.5c-.2 0-.5-.1-.7-.3l-14-14c-.2-.2-.3-.6-.2-.9 0-.3.3-.6.6-.7l12-3.8c.5-.2 1 .1 1.2.6.2.5-.1 1-.6 1.2L7.3 24l12.6 12.6L31.4 33c.5-.2 1 .1 1.2.6.2.5-.1 1-.6 1.2l-12 3.8c-.2-.1-.3-.1-.4-.1zM33.8 32.5h-.3c-.5-.2-.8-.7-.6-1.2l3.6-11.5L24 7.3l-3.3 10.6c-.2.5-.7.8-1.2.6-.5-.2-.8-.7-.6-1.2l3.8-12c.1-.3.3-.6.6-.7.3-.1.6 0 .9.2l14 14c.2.2.3.6.2.9l-3.8 12c0 .6-.4.8-.8.8z" />
       </g>
+    </svg>
+  );
+}
+
+export function FacebookIcon({ className }: IconProps) {
+  return (
+    <svg
+      className={className}
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+    >
+      <path
+        fill="currentColor"
+        d="M14.2 2.875A4.625 4.625 0 0 0 9.575 7.5v2.575H7.1c-.124 0-.225.1-.225.225v3.4c0 .124.1.225.225.225h2.475V20.9c0 .124.1.225.225.225h3.4c.124 0 .225-.1.225-.225v-6.975h2.497c.103 0 .193-.07.218-.17l.85-3.4a.225.225 0 0 0-.218-.28h-3.347V7.5a.775.775 0 0 1 .775-.775h2.6c.124 0 .225-.1.225-.225V3.1c0-.124-.1-.225-.225-.225z"
+      ></path>
+    </svg>
+  );
+}
+
+export function InstagramIcon({ className }: IconProps) {
+  return (
+    <svg
+      className={className}
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+    >
+      <path
+        fill="currentColor"
+        d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2m-.2 2A3.6 3.6 0 0 0 4 7.6v8.8C4 18.39 5.61 20 7.6 20h8.8a3.6 3.6 0 0 0 3.6-3.6V7.6C20 5.61 18.39 4 16.4 4zm9.65 1.5a1.25 1.25 0 0 1 1.25 1.25A1.25 1.25 0 0 1 17.25 8A1.25 1.25 0 0 1 16 6.75a1.25 1.25 0 0 1 1.25-1.25M12 7a5 5 0 0 1 5 5a5 5 0 0 1-5 5a5 5 0 0 1-5-5a5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3a3 3 0 0 0 3 3a3 3 0 0 0 3-3a3 3 0 0 0-3-3"
+      ></path>
+    </svg>
+  );
+}
+export function LinkedinIcon({ className }: IconProps) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      className={className}
+    >
+      <path
+        fill="currentColor"
+        d="M6.94 5a2 2 0 1 1-4-.002a2 2 0 0 1 4 .002M7 8.48H3V21h4zm6.32 0H9.34V21h3.94v-6.57c0-3.66 4.77-4 4.77 0V21H22v-7.93c0-6.17-7.06-5.94-8.72-2.91z"
+      ></path>
+    </svg>
+  );
+}
+
+export function TwitterIcon({ className }: IconProps) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      className={className}
+    >
+      <path
+        fill="currentColor"
+        d="M22.46 6c-.77.35-1.6.58-2.46.69c.88-.53 1.56-1.37 1.88-2.38c-.83.5-1.75.85-2.72 1.05C18.37 4.5 17.26 4 16 4c-2.35 0-4.27 1.92-4.27 4.29c0 .34.04.67.11.98C8.28 9.09 5.11 7.38 3 4.79c-.37.63-.58 1.37-.58 2.15c0 1.49.75 2.81 1.91 3.56c-.71 0-1.37-.2-1.95-.5v.03c0 2.08 1.48 3.82 3.44 4.21a4.2 4.2 0 0 1-1.93.07a4.28 4.28 0 0 0 4 2.98a8.52 8.52 0 0 1-5.33 1.84q-.51 0-1.02-.06C3.44 20.29 5.7 21 8.12 21C16 21 20.33 14.46 20.33 8.79c0-.19 0-.37-.01-.56c.84-.6 1.56-1.36 2.14-2.23"
+      ></path>
     </svg>
   );
 }

@@ -28,13 +28,17 @@ export async function send_message(data: Contact): Promise<boolean> {
   }
 }
 
-export async function subscribe(email: string): Promise<boolean> {
+export async function subscribe_api(email: string): Promise<boolean> {
   try {
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_API_URL}/api/subscribers`,
       {
         method: "POST",
-        body: JSON.stringify(email),
+        body: JSON.stringify({
+          data: {
+            email: email,
+          },
+        }),
         headers: {
           "content-type": "application/json",
         },

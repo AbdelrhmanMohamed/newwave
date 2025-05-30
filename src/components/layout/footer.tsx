@@ -1,8 +1,11 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Twitter, Facebook, Linkedin } from "lucide-react";
+import SubscriptionForm from "./susbscripe";
 
 export default function Footer() {
+
+
   return (
     <footer className="text-white">
       <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8 lg:gap-32 px-4 pt-20 pb-16">
@@ -23,12 +26,8 @@ export default function Footer() {
             eu augue ut lectus. Ultricies integer quis auctor elit sed vulputate
             mi sit amet.
           </p>
-          <div className="flex items-center space-x-2 pt-4">
-            <div className="h-px bg-neutral-700 flex-grow"></div>
-            <div className="flex items-center">
-              <span className="h-2 w-2 rounded-full bg-orange-500 mr-2"></span>
-              <span className="text-xl font-medium">Subscribe</span>
-            </div>
+          <div className="flex items-center space-x-2 pt-4 w-full">
+            <SubscriptionForm />
           </div>
         </div>
 
