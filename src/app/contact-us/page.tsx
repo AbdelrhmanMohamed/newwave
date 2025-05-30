@@ -128,13 +128,13 @@ export default async function ContactUs() {
         transition={{
           duration: 1,
         }}
-        className="px-4 lg:pl-12 lg:pr-6 py-14 md:py-20 lg:py-26 flex gap-8 flex-col lg:flex-row"
+        className="px-4 lg:pl-12 lg:pr-6 py-14 md:py-20 lg:py-26 flex gap-6 md:gap-8 flex-col lg:flex-row"
       >
-        <div className="flex items-center flex-col md:flex-row text-center lg:text-left gap-6 md:gap-12 xl:gap-8 w-full justify-center xl:justify-start xl:w-7/12 ">
+        <div className="flex items-center flex-col md:flex-row text-center lg:text-left gap-4 md:gap-12 xl:gap-8 w-full justify-center xl:justify-start xl:w-7/12 ">
           <div className="size-[100px] min-w-[100px] relative lg:size-[115px] lg:min-w-[115px] xl:size-[130px] xl:min-w-[130px]">
             <Image src="/icons/24hour.svg" alt="24 work hour" fill />
           </div>
-          <h2 className="text-5xl xl:text-[3.4rem] font-bold text-primary leading-12 md:leading-16">
+          <h2 className="text-4xl md:text-5xl xl:text-[3.4rem] font-bold text-primary leading-12 md:leading-16">
             {contactPage?.response_time_title}
           </h2>
         </div>
@@ -252,7 +252,7 @@ export default async function ContactUs() {
           className="text-4xl md:text-4xl font-bold text-center mb-4 justify-center"
         />
 
-        <p className="text-neutral-400 text-center max-w-4xl mx-auto mb-16">
+        <p className="text-neutral-400 text-center max-w-4xl mx-auto mb-8 md:mb-16">
           {contactPage?.branches_description}
         </p>
 
