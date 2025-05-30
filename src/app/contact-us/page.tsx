@@ -115,8 +115,7 @@ export default async function ContactUs() {
       <PageBanner
         title="Contact Us"
         backgroundImage={
-          `${process.env.NEXT_PUBLIC_API_URL}${contactPage?.header_cover?.url}` ||
-          "/images/office.png"
+          getImageUrl(contactPage?.header_cover?.url) || "/images/office.png"
         }
         breadcrumbs={[{ label: "Home", href: "/" }, { label: "Contact Us" }]}
       />
