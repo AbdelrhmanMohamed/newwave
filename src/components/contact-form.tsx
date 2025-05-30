@@ -121,7 +121,7 @@ export default function ContactForm() {
       <div>
         <button
           type="submit"
-          className="border flex border-neutral-600 px-10 py-4 font-semibold  items-center cursor-pointer text-base hover:border-primary hover:text-primary transition duration-500 group mb-20 w-full sm:w-auto"
+          className="border flex border-neutral-600 px-12 py-4 font-semibold  items-center cursor-pointer text-base hover:border-primary hover:text-primary transition duration-500 group mb-20 w-full sm:w-auto justify-center "
         >
           <span className="bg-primary mr-2 rounded-full size-1 group-hover:bg-white transition duration-500" />
           {loading ? "Sending...." : "Submit"}
