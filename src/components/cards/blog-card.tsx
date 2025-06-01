@@ -8,7 +8,7 @@ interface BlogCardProps {
   date: string;
   title: string;
   excerpt: string;
-  slug: string
+  slug: string;
 }
 
 export default function BlogCard({
@@ -17,7 +17,7 @@ export default function BlogCard({
   date,
   title,
   excerpt,
-  slug
+  slug,
 }: BlogCardProps) {
   return (
     <Link href={`blog/${slug}`}>
@@ -38,7 +38,7 @@ export default function BlogCard({
               {date}
             </p>
 
-            <h2 className="text-3xl font-bold line-clamp-2 text-white hover:text-primary transition duration-500">
+            <h2 className="text-2xl md:text-3xl font-bold line-clamp-2 text-white hover:text-primary transition duration-500">
               {title}
             </h2>
 

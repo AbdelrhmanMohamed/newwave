@@ -1,10 +1,11 @@
 import { BlocksContent } from "@strapi/blocks-react-renderer";
-import { Media } from "./common";
+import { Media, PageHeader } from "./common";
 
 export interface BlogPageData {
   id: number;
   title: string;
   cover: Media;
+  header: PageHeader;
 }
 
 export interface Blog {

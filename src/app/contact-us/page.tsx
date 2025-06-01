@@ -128,6 +128,7 @@ export default async function ContactUs() {
         transition={{
           duration: 1,
         }}
+        layout
         className="px-4 lg:pl-12 lg:pr-6 py-14 md:py-20 lg:py-26 flex gap-6 md:gap-8 flex-col lg:flex-row"
       >
         <div className="flex items-center flex-col md:flex-row text-center lg:text-left gap-4 md:gap-12 xl:gap-8 w-full justify-center xl:justify-start xl:w-7/12 ">
@@ -202,14 +203,14 @@ export default async function ContactUs() {
             {contactPage?.enquiries_title || "Enquiries"}
           </h3>
           <div className="flex gap-4 md:gap-3 lg:gap-8 flex-col sm:flex-row md:flex-col lg:flex-row">
-            <a
-              href={`mailto:${contactPage.enquiries_emails_1}`}
-              className="text-white"
-            >
-              {contactPage.enquiries_emails_1}
+            <a href={`mailto:${globalData.email1}`} className="text-white">
+              {globalData.email1}
             </a>
-            <a href={`mailto:${contactPage.enquiries_emails_2}`} className="vs">
-              {contactPage.enquiries_emails_2}
+            <a
+              href={`mailto:${globalData.email2 || globalData.email_career}`}
+              className="vs"
+            >
+              {globalData.email2 || globalData.email_career}
             </a>
           </div>
 
@@ -230,7 +231,7 @@ export default async function ContactUs() {
 
           <div className="text-neutral-400">
             <p className="text-base">
-              {contactPage?.working_hours || "Working Hours : 8hrs"}
+              {globalData?.working_hours || "Working Hours : 8hrs"}
             </p>
           </div>
         </motion.div>

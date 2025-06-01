@@ -10,26 +10,22 @@ import RenderSubject from "@/components/subject";
 import { getImageUrl } from "@/lib/utils";
 
 type Props = {
-  params: Promise<{ slug: string }>
-  searchParams: Promise<{ [key: string]: string | string[] | undefined }>
-}
-
+  params: Promise<{ slug: string }>;
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+};
 
 export const revalidate = 60;
 
-
-export async function generateMetadata(
-  { params }: Props
-): Promise<Metadata> {
-  const { slug } = await params
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await params;
   const blog = await fetchContentType(
     "blogs",
     {
       filters: {
         slug: { $eq: slug },
       },
-      populate: 'seo',
-      fields: ['id'],
+      populate: "seo",
+      fields: ["id"],
     },
     true
   );
@@ -37,7 +33,7 @@ export async function generateMetadata(
     return {
       title: "Blog not found",
       description: "The blog you are looking for does not exist.",
-    }
+    };
   }
   const seo = blog?.seo;
   const metadata = generateMetadataObject(seo);
@@ -56,8 +52,8 @@ async function getBlogData(slug: string): Promise<Blog | null> {
           subjects: {
             populate: ["images"],
           },
-          'cover': {
-            fields: ['url'],
+          cover: {
+            fields: ["url"],
           },
         },
       },
@@ -70,8 +66,6 @@ async function getBlogData(slug: string): Promise<Blog | null> {
     return null;
   }
 }
-
-
 
 export default async function BlogDetails({
   params,
@@ -101,10 +95,11 @@ export default async function BlogDetails({
           { label: "Blog", href: "/blog" },
           { label: slug },
         ]}
+        className="text-3xl sm:text-4xl lg:text-5xl max-w-11/12 mx-auto text-center line-clamp-3 break-words whitespace-break-spaces leading-10 md:leading-14 lg:leading-16"
       />
       <div className="max-w-5xl mx-auto px-6">
         {/** MAIN IMAGE */}
-        <div className="relative w-full h-[550px]">
+        <div className="relative w-full h-[320px] md:h-[450px] lg:h-[550px]">
           <Image
             src={getImageUrl(blog.cover?.url)}
             alt="main blog image"
