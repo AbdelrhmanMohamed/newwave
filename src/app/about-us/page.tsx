@@ -27,6 +27,7 @@ import {
 } from "lucide-react";
 import BorderCard from "@/components/cards/border-card";
 import OurTeam from "./_components/team";
+import GlobalPresence from "./_components/global-presence";
 
 export const revalidate = 60;
 
@@ -300,11 +301,20 @@ export default async function AboutUsPage() {
         transition={{
           duration: 0.5,
         }}
-        className="px-4 py-20"
+        className="px-16 py-20"
       >
         <OurTeam />
       </motion.div>
-
+      <motion.div
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        transition={{
+          duration: 0.5,
+        }}
+        className="px-16 pr-0 py-20"
+      >
+        <GlobalPresence />
+      </motion.div>
       <section className="py-20">
         <Querries aboutData={aboutUsData} globalData={globalData} />
       </section>
