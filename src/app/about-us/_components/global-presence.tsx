@@ -5,7 +5,7 @@ export default function GlobalPresence() {
   return (
     <div className="flex justify-center items-center h-full flex-nowrap">
       {/** image */}
-      <div className="flex flex-col items-center justify-center w-full basis-[47%] h-[620px] relative">
+      <div className="flex flex-col items-center justify-center w-full basis-[47%] h-[670px] relative">
         <Image
           fill
           src="https://gaaga.wpengine.com/wp-content/uploads/2023/06/team-page-image-1.jpg"

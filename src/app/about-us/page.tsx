@@ -28,6 +28,7 @@ import {
 import BorderCard from "@/components/cards/border-card";
 import OurTeam from "./_components/team";
 import GlobalPresence from "./_components/global-presence";
+import Market from "./_components/market";
 
 export const revalidate = 60;
 
@@ -315,6 +316,16 @@ export default async function AboutUsPage() {
       >
         <GlobalPresence />
       </motion.div>
+      <motion.section
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        transition={{
+          duration: 0.5,
+        }}
+        className="pl-[4rem] pr-[4.5rem] py-20"
+      >
+        <Market />
+      </motion.section>
       <section className="py-20">
         <Querries aboutData={aboutUsData} globalData={globalData} />
       </section>

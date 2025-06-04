@@ -34,29 +34,29 @@ export default function BorderCard({
       <motion.div
         className="absolute top-0 left-0 h-[1px] bg-neutral-600/60"
         initial={{ width: 0 }}
-        animate={{ width: "100%" }}
-        transition={{ duration: 0.7, ease: "easeInOut" }}
+        whileInView ={{ width: "100%" }}
+        transition={{ duration: 1.5, ease: "easeInOut" }}
       />
       {/* Right Border */}
       <motion.div
         className="absolute top-0 right-0 w-[1px] bg-neutral-600/60"
         initial={{ height: 0 }}
-        animate={{ height: "100%" }}
-        transition={{ duration: 0.7, ease: "easeInOut", delay: 0.3 }}
+        whileInView={{ height: "100%" }}
+        transition={{ duration: 1.5, ease: "easeInOut", delay: 0.5 }}
       />
       {/* Bottom Border */}
       <motion.div
         className="absolute bottom-0 right-0 h-[1px] bg-neutral-600/60"
         initial={{ width: 0 }}
-        animate={{ width: "100%" }}
-        transition={{ duration: 0.7, ease: "easeInOut", delay: 0.6 }}
+        whileInView={{ width: "100%" }}
+        transition={{ duration: 1.5, ease: "easeInOut", delay: 1 }}
       />
       {/* Left Border */}
       <motion.div
         className="absolute bottom-0 left-0 w-[1px] bg-neutral-600/60"
         initial={{ height: 0 }}
-        animate={{ height: "100%" }}
-        transition={{ duration: 0.7, ease: "easeInOut", delay: 0.9 }}
+        whileInView={{ height: "100%" }}
+        transition={{ duration: 1.5, ease: "easeInOut", delay: 1.5 }}
       />
     </div>
   );
