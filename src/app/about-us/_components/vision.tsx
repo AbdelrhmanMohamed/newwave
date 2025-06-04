@@ -2,7 +2,7 @@ import SectionHead from "@/components/headings/section-head";
 import React from "react";
 import ProcedureCard from "./proceture-card";
 import * as motion from "motion/react-client";
-import AnimatedText from "@/components/effects/animate-text";
+// import AnimatedText from "@/components/effects/animate-text";
 import { Process } from "@/types/about-us";
 
 type ProcedureProps = {
@@ -11,14 +11,10 @@ type ProcedureProps = {
   proceses: Process[];
 };
 
-export default function ProcedureSection({
-  bgUrl,
-  title,
-  proceses,
-}: ProcedureProps) {
+export default function VisionSection({ bgUrl, proceses }: ProcedureProps) {
   return (
     <div className="relative bg-background">
-      <div className="py-24 px-4 z-10 relative">
+      <div className="py-24 px-8 z-10 relative">
         <div className="text-center flex flex-col items-center justify-center">
           <motion.div
             initial={{ x: 40 }}
@@ -28,7 +24,7 @@ export default function ProcedureSection({
             }}
           >
             <SectionHead
-              title="Procedure"
+              title="Purpose Driven"
               show={{
                 start: true,
                 end: true,
@@ -37,36 +33,23 @@ export default function ProcedureSection({
             />
           </motion.div>
         </div>
-        <div className="break-words w-full text-center flex items-center justify-center">
+        {/* <div className="break-words w-full text-center flex items-center justify-center">
           <AnimatedText
             text={title}
             className="text-4xl md:text-5xl lg:text-4xl xl:text-5xl font-bold text-white my-8 leading-14 flex flex-wrap "
             once={false}
           />
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-2  xl:grid-cols-4">
+        </div> */}
+        <div className="grid grid-cols-1 md:grid-cols-2  xl:grid-cols-3">
           {proceses.map((item) => (
             <ProcedureCard
               key={item.id}
-              IconUrl={item.icon?.url || ""}
+              icon={item.icon || ""}
               title={item.title}
               href={`/#`}
               description={item.description || ""}
             />
           ))}
-          {/** Procedure Cards */}
-          {/* <ProcedureCard icon={
-                        <FindIcon />
-                    } title='Find Solution' />
-                    <ProcedureCard icon={
-                        <LampIcon />
-                    } title='Explore Ideas' />
-                    <ProcedureCard icon={
-                        <IntegrateIcon />
-                    } title='Integrate Solutions' />
-                    <ProcedureCard icon={
-                        <TargetIcon />
-                    } title='Target Outcomes' /> */}
         </div>
       </div>
       <div

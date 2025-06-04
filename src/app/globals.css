@@ -192,3 +192,60 @@
   stroke: var(--primary);
   color: var(--primary);
 }
+
+.border-animation {
+  position: relative;
+  background: linear-gradient(
+        rgba(255, 255, 255, 0.589),
+        rgba(255, 255, 255, 0.589)
+      )
+      left top no-repeat,
+    linear-gradient(rgba(255, 255, 255, 0.589), rgba(255, 255, 255, 0.589))
+      right top no-repeat,
+    linear-gradient(rgba(255, 255, 255, 0.589), rgba(255, 255, 255, 0.589))
+      right bottom no-repeat,
+    linear-gradient(rgba(255, 255, 255, 0.589), rgba(255, 255, 255, 0.589)) left
+      bottom no-repeat;
+  background-size: 0 1px, 1px 0, 0 1px, 1px 0;
+  animation: drawBorderBG 1s forwards;
+}
+
+.fade-in {
+  opacity: 0;
+  animation: fadeIn 0.6s ease forwards;
+  animation-delay: 0.3s;
+}
+
+@keyframes drawBorderBG {
+  0% {
+    background-size: 0 1px, 1px 0, 0 1px, 1px 0;
+  }
+  25% {
+    background-size: 100% 1px, 1px 0, 0 1px, 1px 0;
+  }
+  50% {
+    background-size: 100% 1px, 1px 100%, 0 1px, 1px 0;
+  }
+  75% {
+    background-size: 100% 1px, 1px 100%, 100% 1px, 1px 0;
+  }
+  100% {
+    background-size: 100% 1px, 1px 100%, 100% 1px, 1px 100%;
+  }
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

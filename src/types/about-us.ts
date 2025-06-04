@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Media, PageHeader } from "./common";
 
 export interface AboutUsData {
@@ -24,8 +25,8 @@ export interface AboutUsData {
 export interface Process {
   id: number;
   title: string;
-  icon: Media | null;
-  description: string | null;
+  icon: any | Media | null | any;
+  description: string | null | React.ReactNode;
 }
 
 export interface ImpactHighlight {
