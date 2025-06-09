@@ -84,7 +84,6 @@ export default async function ServiceDetails({
   if (!service) {
     return <div className="text-center">Service not found</div>;
   }
-  console.log("Service data:", service);
 
   return (
     <motion.section
@@ -102,7 +101,7 @@ export default async function ServiceDetails({
         }
         breadcrumbs={[
           { label: "Home", href: "/" },
-          { label: "Blog", href: "/blog" },
+          { label: "Services", href: "/services" },
           { label: slug },
         ]}
         className="text-3xl sm:text-4xl lg:text-5xl max-w-11/12 mx-auto text-center line-clamp-3 break-words whitespace-break-spaces leading-10 md:leading-14 lg:leading-16"

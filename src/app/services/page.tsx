@@ -99,7 +99,7 @@ export default async function ServicesPage() {
         className="px-4 md:px-16 py-14 md:py-20 lg:py-26 flex gap-6 xl:gap-12 flex-col xl:flex-row"
       >
         <div className="flex items-center flex-col md:flex-row text-center xl:text-left gap-8 md:gap-4 lg:gap-10 xl:gap-12 w-full justify-center xl:justify-start ">
-          <Briefcase className="size-20 md:size-26 md:min-w-26  stroke-[1px]" />
+          <Briefcase className="size-16 md:size-20 md:min-w-22  stroke-[1px]" />
           <h2 className="text-4xl md:text-[2.5rem] lg:text-[2.8rem] font-bold text-primary leading-12 md:leading-16">
             {pageData?.header?.title || "We Provide Exceptional Services"}
           </h2>
@@ -118,7 +118,7 @@ export default async function ServicesPage() {
         transition={{
           duration: 1,
         }}
-        className="px-8 lg:px-16 xl:px-16 mb-60"
+        className="px-6 sm:px-8 md:px-12 lg:px-16 xl:px-16 mb-60"
       >
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {(services || [])
