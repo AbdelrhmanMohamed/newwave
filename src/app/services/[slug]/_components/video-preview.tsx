@@ -52,7 +52,7 @@ export default function VideoPreviewSection({
 
           {/* Testimonial Quote */}
           <blockquote className="text-neutral-300 max-w-md">
-            &quot;{description2}&quot;
+            {description2}
           </blockquote>
         </div>
       </div>
