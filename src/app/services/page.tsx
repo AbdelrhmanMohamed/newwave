@@ -122,11 +122,7 @@ export default async function ServicesPage() {
       >
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {(services || [])
-            .sort(
-              (a, b) =>
-                new Date(a?.createdAt).getTime() -
-                new Date(b?.createdAt).getTime()
-            )
+            .sort((a, b) => a.order - b.order)
             .map((service) => (
               <ServiceCard
                 key={service?.id}

@@ -16,6 +16,7 @@ export interface Service {
   description: string;
   image: Media;
   icon: Media;
+  order: number;
 }
 
 export interface Topic {

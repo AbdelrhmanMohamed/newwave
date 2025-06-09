@@ -75,7 +75,7 @@ function StepperItem({
           stiffness: 100,
           damping: 20,
         }}
-        className={cn("relative h-[330px]", reverse ? "mt-20" : "mb-20")}
+        className={cn("relative h-[360px]", reverse ? "mt-20" : "mb-20")}
       >
         <Image
           src={getImageUrl(step.icon?.url)}
@@ -115,7 +115,7 @@ function StepperItem({
           damping: 20,
         }}
         className={cn(
-          "h-[350px] flex flex-col",
+          "h-[360px] flex flex-col",
           reverse ? "flex-col-reverse" : "flex-col"
         )}
       >
