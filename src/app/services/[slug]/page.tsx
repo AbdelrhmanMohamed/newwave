@@ -106,7 +106,7 @@ export default async function ServiceDetails({
         ]}
         className="text-3xl sm:text-4xl lg:text-5xl max-w-11/12 mx-auto text-center line-clamp-3 break-words whitespace-break-spaces leading-10 md:leading-14 lg:leading-16"
       />
-      <div className="px-8">
+      <div className="px-4 md:px-8 lg:px-10 ">
         <div className="relative w-full h-[320px] md:h-[450px] lg:h-[550px]">
           <Image
             src={getImageUrl(service.image?.url) || "/images/blogs-bg.jpg"}

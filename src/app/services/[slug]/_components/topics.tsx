@@ -31,9 +31,9 @@ export default function TopicsSection({
           className="object-cover opacity-10 mix-blend-luminosity"
         />
       </div>
-      <div className="relative px-10 pl-16">
-        <div className="grid md:grid-cols-2 gap-12">
-          <div className="md:col-span-1 flex items-center md:items-start gap-12">
+      <div className="relative px-0 sm:px-4 md:px-8 lg:px-10 lg:pl-16">
+        <div className="grid lg:grid-cols-2 gap-8 md:gap-12">
+          <div className="md:col-span-1 flex items-center md:items-start gap-4 md:gap-8 lg:gap-12">
             <motion.div
               initial={{ translateY: 0 }}
               animate={{ translateY: 50 }}
@@ -50,7 +50,7 @@ export default function TopicsSection({
                 alt="Image 1"
                 width={300}
                 height={400}
-                className="object-contain relative top-5"
+                className="object-contain relative top-5 lg:w-[300px] md:w-[400px]"
               />
             </motion.div>
             <motion.div
@@ -69,13 +69,16 @@ export default function TopicsSection({
                 alt="Image 2"
                 width={300}
                 height={400}
-                className="object-contain relative top-20"
+                className="object-contain relative top-20 lg:w-[300px] md:w-[400px]"
               />
             </motion.div>
           </div>
           <div className="md:col-span-1 space-y-8">
             {topics.map((topic) => (
-              <div key={topic.id} className="flex items-start gap-3 pt-20">
+              <div
+                key={topic.id}
+                className="flex items-start gap-3 xl:pt-12 lg:pt-4 pt-16"
+              >
                 {/* <Image
                   src={
                     getImageUrl(topic?.icon?.url) || "/images/default-icon.png"
@@ -103,11 +106,11 @@ export default function TopicsSection({
         </div>
       </div>
       {/* Bottom Features */}
-      <div className="grid mt-16 justify-center items-center grid-cols-3 gap-4 px-24">
+      <div className="grid grid-cols-1 md:grid-cols-3 mt-16 justify-center items-center gap-4 lg:px-24 md:px-0 px-0">
         {features.map((feature, index) => (
           <div
             key={index}
-            className=" text-neutral-400 flex justify-center gap-2 border-r border-neutral-600 last:border-r-0 px-10"
+            className=" text-neutral-400 flex justify-start lg:justify-center gap-2 md:border-r border-neutral-600 last:border-r-0 px-0 lg:px-10"
           >
             <Asterisk className="w-9 h-9 min-w-9 min-h-9 text-primary" />
             <p className="text-neutral-400 ">{feature}</p>

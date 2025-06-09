@@ -8,7 +8,7 @@ type Props = { message: MessageBlock };
 export default function MessagesSection({ message }: Props) {
   return (
     <div className="mt-20">
-      <h2 className="text-3xl font-bold mb-12">{message.title}</h2>
+      <h2 className="text-3xl font-bold mb-8">{message.title}</h2>
 
       <div className="grid lg:grid-cols-6 gap-12 items-start text-sm">
         <div className="lg:col-span-2 mb-8 lg:mb-0">
@@ -17,7 +17,7 @@ export default function MessagesSection({ message }: Props) {
             alt={message.title || "Message Image"}
             width={620}
             height={500}
-            className="w-full h-[500px] object-cover"
+            className="w-full h-[400px] md:h-[500px] lg:h-[500px] object-cover"
           />
         </div>
 
@@ -29,9 +29,9 @@ export default function MessagesSection({ message }: Props) {
           <div className="grid md:grid-cols-2 gap-6">
             {message.points.map((point, index) => (
               <div className="flex items-start gap-3" key={index}>
-                <Circle className="w-3 h-3 fill-primary text-coral-500 mt-0.5 flex-shrink-0" />
                 <div className="space-y-1">
-                  <h6 className="text-neutral-100 font-medium">
+                  <h6 className="text-neutral-100 font-medium text-base">
+                    <Circle className="w-2.5 h-2.5 fill-primary text-coral-500 inline-block mr-1 mb-1" />
                     {point.title}
                   </h6>
                   <p className="text-neutral-400 text-xs ">

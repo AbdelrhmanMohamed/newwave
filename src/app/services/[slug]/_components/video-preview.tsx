@@ -31,7 +31,7 @@ export default function VideoPreviewSection({
         </div>
 
         {/* Right Content - Video Preview */}
-        <div className="flex items-center gap-8 justify-center ">
+        <div className="flex flex-col items-start md:flex-row md:items-center gap-8 justify-center ">
           <div className="relative">
             <div className="relative w-64 h-26">
               {/* Background Image */}
