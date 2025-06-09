@@ -4,29 +4,85 @@ import { PageBanner } from "@/components/page-banner";
 import { Briefcase } from "lucide-react";
 import ServiceCard from "@/components/cards/service-card";
 import InstagramCard from "@/components/cards/instagram-card";
+import { Metadata } from "next";
+import fetchContentType from "@/lib/strapi/fetchContentType";
+import { generateMetadataObject } from "@/lib/shared/metadata";
+import { Service, ServicePageData } from "@/types/service";
+import { getImageUrl } from "@/lib/utils";
 
-const services = [
-  {
-    title: "Event Management",
-    description: "Comprehensive event planning and execution services.",
-  },
-  {
-    title: "Exhibition Services",
-    description: "Custom exhibition stands and services for trade shows.",
-  },
-  {
-    title: "Virtual Events",
-    description: "Seamless virtual event solutions and platforms.",
-  },
-];
+export const revalidate = 60;
 
-export default function ServicesPage() {
+export async function generateMetadata(): Promise<Metadata> {
+  const pageData = await fetchContentType(
+    "services-page",
+    {
+      populate: {
+        seo: {
+          populate: "*",
+        },
+      },
+    },
+    true
+  );
+  const seo = pageData?.seo;
+  const metadata = generateMetadataObject(seo);
+  return metadata;
+}
+
+async function getServicesPageData() {
+  try {
+    const res = await fetchContentType(
+      "services-page",
+      {
+        populate: {
+          cover: {
+            fields: ["url"],
+          },
+          header: {
+            populate: "*",
+          },
+        },
+      },
+      true
+    );
+    return res as ServicePageData;
+  } catch (error) {
+    console.error("Error fetching base service page data:", error);
+    return {} as ServicePageData;
+  }
+}
+
+async function getServices(): Promise<Service[] | null> {
+  try {
+    const res = await fetchContentType("services", {
+      populate: {
+        image: {
+          fields: ["url"],
+        },
+      },
+    });
+    return res?.data as Service[] | null;
+  } catch (error) {
+    console.error("Error fetching base service data:", error);
+    return null;
+  }
+}
+
+export default async function ServicesPage() {
+  const pageData = await getServicesPageData();
+  const services = await getServices();
+  console.log("services", services);
   return (
     <div className="">
       <PageBanner
-        title="Services"
-        backgroundImage="/images/office.jpg"
-        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Services" }]}
+        title={pageData?.title || "Services"}
+        backgroundImage={
+          getImageUrl(pageData?.cover?.url) || "/images/office.png"
+        }
+        breadcrumbs={[
+          { label: "Home", href: "/" },
+          { label: pageData?.title || "Services" },
+        ]}
       />
       <motion.section
         initial={{ x: 300, opacity: 0 }}
@@ -41,14 +97,13 @@ export default function ServicesPage() {
         <div className="flex items-center flex-col md:flex-row text-center xl:text-left gap-8 md:gap-4 lg:gap-10 xl:gap-12 w-full justify-center xl:justify-start ">
           <Briefcase className="size-20 md:size-26 md:min-w-26  stroke-[1px]" />
           <h2 className="text-4xl md:text-[2.5rem] lg:text-[2.8rem] font-bold text-primary leading-12 md:leading-16">
-            We Provide A Digital Platform
+            {pageData?.header?.title || "We Provide Exceptional Services"}
           </h2>
         </div>
         <div className="text-neutral-400 w-full text-center xl:text-left relative top-2 xl:w-8/12">
           <p>
-            Expert conference and exhibition management in Saudi Arabia by New
-            Wave. End-to-end solutions for impactful summits, trade shows, and
-            MICE events.
+            {pageData?.header?.description ||
+              "We offer a wide range of services to cater to your event needs, from event management to virtual events. Explore our services to find the perfect solution for your next event."}
           </p>
         </div>
       </motion.section>
@@ -59,19 +114,25 @@ export default function ServicesPage() {
         transition={{
           duration: 1,
         }}
-        className="px-8 lg:px-16 xl:px-20 mb-60"
+        className="px-8 lg:px-16 xl:px-16 mb-60"
       >
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {services.map((service) => (
-            <ServiceCard
-              key={service.title}
-              title={service.title}
-              imageUrl="https://gaaga.wpengine.com/wp-content/uploads/2023/06/home-3-service-4.jpg"
-              href={`/services/${service.title
-                .toLowerCase()
-                .replace(/\s+/g, "-")}`}
-            />
-          ))}
+          {(services || [])
+            .sort(
+              (a, b) =>
+                new Date(a?.createdAt).getTime() -
+                new Date(b?.createdAt).getTime()
+            )
+            .map((service) => (
+              <ServiceCard
+                key={service.id}
+                title={service.title}
+                imageUrl={
+                  getImageUrl(service.image?.url) || "/images/service-image.jpg"
+                }
+                href={`/services/${service.slug}`}
+              />
+            ))}
         </div>
       </motion.section>
       <motion.section

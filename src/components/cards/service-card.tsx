@@ -16,9 +16,9 @@ export default function ServiceCard({
   href,
 }: serviceCardProps) {
   return (
-    <div className="group/item">
-      <Link href={href || "#"} className="relative overflow-hidden ">
-        <div className="w-full h-full relative overflow-hidden min-w-40 min-h-52">
+    <div className="group/item flex flex-col items-center justify-between w-full h-full ">
+      <Link href={href || "#"} className="relative overflow-hidden">
+        <div className="w-full h-full relative overflow-hidden min-w-[420px] min-h-60">
           <Image
             src={imageUrl}
             alt={title}
@@ -31,7 +31,7 @@ export default function ServiceCard({
         </div>
       </Link>
       <Link href={href || "#"}>
-        <h3 className="text-2xl font-semibold text-center mt-8 group-hover/item:text-primary transition-colors duration-300">
+        <h3 className="text-[1.3rem] font-semibold text-center mt-8 group-hover/item:text-primary transition-colors duration-300">
           {title}
         </h3>
       </Link>
