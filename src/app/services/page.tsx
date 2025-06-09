@@ -89,13 +89,13 @@ export default async function ServicesPage() {
         ]}
       />
       <motion.section
-        initial={{ x: 300, opacity: 0 }}
-        whileInView={{ x: 0, opacity: 1 }}
-        viewport={{ amount: 0.5, once: true }}
-        transition={{
-          duration: 1,
-        }}
-        layout
+        // initial={{ x: 300, opacity: 0 }}
+        // whileInView={{ x: 0, opacity: 1 }}
+        // viewport={{ amount: 0.5, once: true }}
+        // transition={{
+        //   duration: 1,
+        // }}
+        // layout
         className="px-4 md:px-16 py-14 md:py-20 lg:py-26 flex gap-6 xl:gap-12 flex-col xl:flex-row"
       >
         <div className="flex items-center flex-col md:flex-row text-center xl:text-left gap-8 md:gap-4 lg:gap-10 xl:gap-12 w-full justify-center xl:justify-start ">
