@@ -27,3 +27,15 @@ export const getImageUrl = (url: string | null | undefined): string => {
   }
   return url;
 };
+
+// Extract video ID from YouTube URL if full URL is provided
+export const getVideoIdFromYoutubeUrl = (url: string) => {
+  if (url.includes("youtube.com/watch?v=")) {
+    return url.split("v=")[1]?.split("&")[0];
+  }
+  if (url.includes("youtu.be/")) {
+    return url.split("youtu.be/")[1]?.split("?")[0];
+  }
+  // If it's already just an ID, return as is
+  return url;
+};
