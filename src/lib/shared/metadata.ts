@@ -90,7 +90,7 @@ export function generateMetadataObject(seo: SEO_Response) {
     description: seo?.metaDescription || "Default Description", // Fallback to 'Default Description'
     keywords: seo?.keywords || "Default Keywords", // Fallback to 'Default Keywords'
     robots: seo?.metaRobots || "index, follow", // Fallback to 'index, follow'
-    viewport: seo?.metaViewport || "width=device-width, initial-scale=1", // Fallback to 'width=device-width, initial-scale=1'
+    // viewport: seo?.metaViewport || "width=device-width, initial-scale=1", // Fallback to 'width=device-width, initial-scale=1'
     canonical: seo?.canonicalURL || "https://newwave.com", // Fallback to 'https://newwave.com'
   };
 }

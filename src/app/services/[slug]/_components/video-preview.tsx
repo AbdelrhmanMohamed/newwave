@@ -3,28 +3,31 @@ import { VideoPlayButton } from "@/components/video-play-button";
 import Image from "next/image";
 import { getVideoIdFromYoutubeUrl } from "@/lib/utils";
 
-export default function VideoPreviewSection() {
-  const videoUrl = "https://www.youtube.com/watch?v=VxPRR8SyeUQ";
+type Props = {
+  videoUrl: string;
+  title: string;
+  description1?: string;
+  description2?: string;
+};
+
+export default function VideoPreviewSection({
+  videoUrl,
+  title,
+  description1 = "",
+  description2 = "",
+}: Props) {
   const videoId = getVideoIdFromYoutubeUrl(videoUrl);
   const thumbnailUrl = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
 
   return (
     <div className="mt-20">
-      <h2 className="text-4xl lg:text-5xl font-bold leading-tight mb-2">
-        Tellus cras adipiscing
+      <h2 className="text-2xl lg:text-4xl font-bold leading-tight mb-4 max-w-5xl">
+        {title}
       </h2>
       <div className="grid lg:grid-cols-2 gap-6 items-center justify-center text-sm">
         {/* Left Content */}
         <div className="space-y-6">
-          <p className="text-neutral-300 leading-relaxed">
-            Vestibulum in ipsum velit. Aliquam libero sem, rutrum eu scelerisque
-            ut, vehicula a erat. Phasellus ac sem sed erat posuere semper sed ac
-            nunc. Vestibulum tempus neque sit amet sapien sod ales, et
-            pulvinarquam dignissim. Mauris feugiat, nisi nec dapibus dictum,
-            ligula nulla gravida ante, non aliquet odio elit ac orci. Curabitur
-            tincidunt convallis magna, sit amet porttitor libero feugiat
-            sagittis. Sed eu nibh arcu.Nunc eu rhoncus justo,.
-          </p>
+          <p className="text-neutral-300 leading-relaxed">{description1}</p>
         </div>
 
         {/* Right Content - Video Preview */}
@@ -42,21 +45,14 @@ export default function VideoPreviewSection() {
                 fill
               />
               <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-                <VideoPlayButton
-                  videoUrl={videoUrl}
-                  size="sm"
-                  // onPlay={() => console.log("Video started playing")}
-                  // onClose={() => console.log("Video modal closed")}
-                />
+                <VideoPlayButton videoUrl={videoUrl} size="sm" />
               </div>
             </div>
           </div>
 
           {/* Testimonial Quote */}
           <blockquote className="text-neutral-300 max-w-md">
-            &quot;Aliquam libero sem, rutrum eu scelerisque ut, vehicula a erat.
-            Phasellus ac sem sed erat posuere semper sed ac nunc. Vestibulum in
-            ipsum velit.&quot;
+            &quot;{description2}&quot;
           </blockquote>
         </div>
       </div>

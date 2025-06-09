@@ -71,7 +71,7 @@ async function getServices(): Promise<Service[] | null> {
 export default async function ServicesPage() {
   const pageData = await getServicesPageData();
   const services = await getServices();
-  console.log("services", services);
+
   return (
     <div className="">
       <PageBanner

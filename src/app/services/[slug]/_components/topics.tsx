@@ -1,12 +1,9 @@
 import React from "react";
 import Image from "next/image";
-import { Asterisk } from "lucide-react";
-type Topic = {
-  id: string;
-  title: string;
-  description: string;
-  iconUrl: string;
-};
+import { Asterisk, TargetIcon } from "lucide-react";
+import { Topic } from "@/types/service";
+import BlockRendererClient from "@/components/block-render";
+// import { getImageUrl } from "@/lib/utils";
 
 type TopicsSectionProps = {
   topics: Topic[];
@@ -54,20 +51,26 @@ export default function TopicsSection({
           <div className="md:col-span-1 space-y-8">
             {topics.map((topic) => (
               <div key={topic.id} className="flex items-start gap-3 pt-20">
-                <Image
-                  src={topic.iconUrl}
+                {/* <Image
+                  src={
+                    getImageUrl(topic?.icon?.url) || "/images/default-icon.png"
+                  }
                   alt={topic.title}
                   width={24}
                   height={24}
                   className="flex-shrink-0"
-                />
+                /> */}
+
                 <div className="space-y-6">
-                  <h6 className="text-white font-medium text-2xl">
-                    {topic.title}
-                  </h6>
-                  <p className="text-neutral-400 text-sm">
-                    {topic.description}
-                  </p>
+                  <div className="flex items-center gap-2">
+                    <TargetIcon className="w-4 h-4 text-primary" />
+                    <h5 className="text-white font-medium text-2xl">
+                      {topic.title}
+                    </h5>
+                  </div>
+                  <div className="text-neutral-400 leading-relaxed text-sm">
+                    <BlockRendererClient content={topic.content} />
+                  </div>
                 </div>
               </div>
             ))}

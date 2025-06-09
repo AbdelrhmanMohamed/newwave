@@ -5,7 +5,74 @@ import Image from "next/image";
 import VideoPreviewSection from "./_components/video-preview";
 import MessagesSection from "./_components/messages";
 import TopicsSection from "./_components/topics";
+import { Metadata } from "next";
+import fetchContentType from "@/lib/strapi/fetchContentType";
+import { generateMetadataObject } from "@/lib/shared/metadata";
+import { ServiceDetail } from "@/types/service";
+import { getImageUrl } from "@/lib/utils";
 // import { getImageUrl } from "@/lib/utils";
+
+export const revalidate = 60;
+
+type Props = {
+  params: Promise<{ slug: string }>;
+};
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await params;
+  const service = await fetchContentType(
+    "services",
+    {
+      filters: {
+        slug: { $eq: slug },
+      },
+      populate: "seo",
+      fields: ["id"],
+    },
+    true
+  );
+
+  if (!service) {
+    return {
+      title: "Service not found",
+      description: "The service you are looking for does not exist.",
+    };
+  }
+  const seo = service?.seo;
+  const metadata = generateMetadataObject(seo);
+  return metadata;
+}
+
+async function getServiceData(slug: string): Promise<ServiceDetail | null> {
+  try {
+    const res = await fetchContentType(
+      "services",
+      {
+        filters: {
+          slug: { $eq: slug },
+        },
+        populate: {
+          image: {
+            fields: ["url"],
+          },
+          main_content: "*",
+          topics: {
+            populate: ["icon", "image"],
+          },
+          messages: {
+            populate: ["image", "points"],
+          },
+        },
+      },
+      true // spreadData = true => يرجع أول عنصر بدل array
+    );
+
+    return res as ServiceDetail;
+  } catch (error) {
+    console.error("Error fetching base service page data:", error);
+    return null;
+  }
+}
 
 export default async function ServiceDetails({
   params,
@@ -13,6 +80,12 @@ export default async function ServiceDetails({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
+  const service = await getServiceData(slug);
+  if (!service) {
+    return <div className="text-center">Service not found</div>;
+  }
+  console.log("Service data:", service);
+
   return (
     <motion.section
       initial={{ opacity: 0 }}
@@ -23,8 +96,10 @@ export default async function ServiceDetails({
       className="pb-20"
     >
       <PageBanner
-        title={slug}
-        backgroundImage="/images/blogs-bg.jpg"
+        title={service.title || "Service Details"}
+        backgroundImage={
+          getImageUrl(service.image?.url) || "/images/blogs-bg.jpg"
+        }
         breadcrumbs={[
           { label: "Home", href: "/" },
           { label: "Blog", href: "/blog" },
@@ -35,44 +110,30 @@ export default async function ServiceDetails({
       <div className="px-8">
         <div className="relative w-full h-[320px] md:h-[450px] lg:h-[550px]">
           <Image
-            src="https://gaaga.wpengine.com/wp-content/uploads/2023/06/service-detail-3.jpg"
-            alt="main blog image"
+            src={getImageUrl(service.image?.url) || "/images/blogs-bg.jpg"}
+            alt={service.title || "Service Image"}
             fill
             className="object-cover"
           />
         </div>
-        <VideoPreviewSection />
-        <MessagesSection />
+        {/* Main Content Section */}
+        <VideoPreviewSection
+          videoUrl={service.main_content.youtube_link || ""}
+          title={service.main_content.title || ""}
+          description1={service.main_content.content1 || ""}
+          description2={service.main_content.content2 || ""}
+        />
+        {/* Messages and Topics Sections */}
+        <MessagesSection message={service.messages} />
         <TopicsSection
-          topics={[
-            {
-              id: "1",
-              title: "Benefits of Integrating 360° Experiences:",
-              description: `Increased Guest Engagement: Offer a unique and interactive activity that captivates attendees and encourages participation.
-                  Enhanced Social Media Buzz: Generate a wealth of user-generated content that attendees are excited to share, significantly boosting your event's online visibility.
-            Unique Branded Content: Create visually stunning and memorable content that reinforces your brand message and event aesthetic.
-          Memorable Keepsakes: Give your guests a fun and unique takeaway they will cherish and share long after the event concludes.
-            Data Capture (Optional): Collect valuable marketing data (with consent) through the sharing process.
-`,
-              iconUrl:
-                "https://gaaga.wpengine.com/wp-content/uploads/2023/06/service-detail-two-1.jpg",
-            },
-            {
-              id: "2",
-              title: "Venue Selection and Logistics",
-              description:
-                "Curabitur efficitur qua Etiam eu imperdiet turpis. Etiam a tortor nec magna laoreet iacul. Ut sapien velit, rutrum nec mattis vitae, congue sed tortor. Aliquam scelerisque lorem sit amet tellus ultricies, sit ametcondimentum arcu quis facvilisis volut Nunc auctor posuere tortor. Sed ullamcorper porttitcvor massa at rutrum. Vivacc amet orci tempor, pellentesque aliquam velit gravida.",
-              iconUrl:
-                "https://gaaga.wpengine.com/wp-content/uploads/2023/06/service-detail-two-2.jpg",
-            },
-          ]}
-          image1Url="https://gaaga.wpengine.com/wp-content/uploads/2023/06/service-detail-three-5.jpg"
-          image2Url="https://gaaga.wpengine.com/wp-content/uploads/2023/06/service-detail-three-3.jpg"
+          topics={service.topics || []}
+          image1Url={getImageUrl(service.topics[0]?.image[0]?.url)}
+          image2Url={getImageUrl(service.topics[1]?.image[0]?.url)}
           bgUrl="https://gaaga.wpengine.com/wp-content/uploads/2023/06/service-detail-bg-1.jpg"
           features={[
-            "Porttitor sed id eros vitae posuere. Yoas ornare justo at arcus",
-            "Porttitor sed id eros vitae posuere. Yoas ornare justo at arcus",
-            "Porttitor sed id eros vitae posuere. Yoas ornare justo at arcus",
+            service.feature1 || "Feature 1",
+            service.feature2 || "Feature 2",
+            service.feature3 || "Feature 3",
           ]}
         />
       </div>
