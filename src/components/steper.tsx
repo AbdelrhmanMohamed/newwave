@@ -115,7 +115,7 @@ function StepperItem({
           damping: 20,
         }}
         className={cn(
-          "h-[330px] flex flex-col",
+          "h-[350px] flex flex-col",
           reverse ? "flex-col-reverse" : "flex-col"
         )}
       >
