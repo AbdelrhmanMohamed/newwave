@@ -31,7 +31,7 @@ export default function ServiceCard({
         </div>
       </Link>
       <Link href={href || "#"}>
-        <h3 className="text-[1.5rem] font-semibold text-center mt-8 group-hover/item:text-primary transition-colors duration-300">
+        <h3 className="text-[1.4rem] font-semibold text-center mt-8 group-hover/item:text-primary transition-colors duration-300">
           {title}
         </h3>
       </Link>
