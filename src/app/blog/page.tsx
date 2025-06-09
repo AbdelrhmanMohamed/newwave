@@ -68,7 +68,10 @@ async function fetchBlogs(): Promise<Blog[]> {
 export default async function BlogPage() {
   const blogPageData = await getBlogPageData();
   const blogs = await fetchBlogs();
-  console.log("blogPageData", blogPageData);
+
+  if (!blogPageData) {
+    return <div>Error loading blog page data</div>;
+  }
 
   return (
     <div className="pb-60">
@@ -90,11 +93,11 @@ export default async function BlogPage() {
         <div className="flex items-center flex-col md:flex-row text-center xl:text-left gap-8 md:gap-4 lg:gap-10 xl:gap-12 w-full justify-center xl:justify-start ">
           <ClapperboardIcon className="size-20 md:size-26 md:min-w-26  stroke-[1px]" />
           <h2 className="text-4xl md:text-[2.5rem] lg:text-[3rem] font-bold text-primary leading-12 md:leading-16">
-            {blogPageData.header.title}
+            {blogPageData?.header?.title}
           </h2>
         </div>
         <div className="text-neutral-400 w-full text-center xl:text-left relative top-2 xl:w-8/12">
-          <p>{blogPageData.header.description}</p>
+          <p>{blogPageData?.header?.description}</p>
         </div>
       </motion.section>
       <motion.section
@@ -107,19 +110,19 @@ export default async function BlogPage() {
         className="px-8 lg:px-16 xl:px-20 min-h-40"
       >
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 mb-20 md:mb-30 gap-8">
-          {blogs.map((blog) => (
+          {(blogs || []).map((blog) => (
             <BlogCard
               key={blog.id}
-              imageUrl={getImageUrl(blog.cover?.url)}
-              imageAlt={blog.cover?.alternativeText || ""}
-              date={blog.date}
-              title={blog.title}
+              imageUrl={getImageUrl(blog?.cover?.url)}
+              imageAlt={blog?.cover?.alternativeText || ""}
+              date={blog?.date}
+              title={blog?.title}
               excerpt={
                 blog?.summary
-                  ? blog.summary.split(" ").slice(0, 20).join(" ") + "..."
+                  ? blog?.summary.split(" ").slice(0, 20).join(" ") + "..."
                   : ""
               }
-              slug={blog.slug}
+              slug={blog?.slug}
             />
           ))}
         </div>

@@ -3,6 +3,7 @@ import Image from "next/image";
 import { Asterisk, TargetIcon } from "lucide-react";
 import { Topic } from "@/types/service";
 import BlockRendererClient from "@/components/block-render";
+import * as motion from "motion/react-client";
 // import { getImageUrl } from "@/lib/utils";
 
 type TopicsSectionProps = {
@@ -33,20 +34,44 @@ export default function TopicsSection({
       <div className="relative px-10 pl-16">
         <div className="grid md:grid-cols-2 gap-12">
           <div className="md:col-span-1 flex items-center md:items-start gap-12">
-            <Image
-              src={image1Url}
-              alt="Image 1"
-              width={300}
-              height={400}
-              className="object-contain relative top-5"
-            />
-            <Image
-              src={image2Url}
-              alt="Image 2"
-              width={300}
-              height={400}
-              className="object-contain relative top-20"
-            />
+            <motion.div
+              initial={{ translateY: 0 }}
+              animate={{ translateY: 50 }}
+              transition={{
+                duration: 10,
+                ease: "easeInOut",
+                repeat: Infinity,
+                repeatType: "reverse",
+              }}
+              exit={{ translateY: 0 }}
+            >
+              <Image
+                src={image1Url}
+                alt="Image 1"
+                width={300}
+                height={400}
+                className="object-contain relative top-5"
+              />
+            </motion.div>
+            <motion.div
+              initial={{ translateY: 0 }}
+              animate={{ translateY: -50 }}
+              transition={{
+                duration: 10,
+                ease: "easeInOut",
+                repeat: Infinity,
+                repeatType: "reverse",
+              }}
+              exit={{ translateY: 0 }}
+            >
+              <Image
+                src={image2Url}
+                alt="Image 2"
+                width={300}
+                height={400}
+                className="object-contain relative top-20"
+              />
+            </motion.div>
           </div>
           <div className="md:col-span-1 space-y-8">
             {topics.map((topic) => (

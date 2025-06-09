@@ -72,6 +72,10 @@ export default async function ServicesPage() {
   const pageData = await getServicesPageData();
   const services = await getServices();
 
+  if (!pageData) {
+    return <div>Error loading services page data.</div>;
+  }
+
   return (
     <div className="">
       <PageBanner
@@ -125,12 +129,13 @@ export default async function ServicesPage() {
             )
             .map((service) => (
               <ServiceCard
-                key={service.id}
-                title={service.title}
+                key={service?.id}
+                title={service?.title}
                 imageUrl={
-                  getImageUrl(service.image?.url) || "/images/service-image.jpg"
+                  getImageUrl(service?.image?.url) ||
+                  "/images/service-image.jpg"
                 }
-                href={`/services/${service.slug}`}
+                href={`/services/${service?.slug}`}
               />
             ))}
         </div>
