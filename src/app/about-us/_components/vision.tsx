@@ -14,7 +14,7 @@ type ProcedureProps = {
 export default function VisionSection({ bgUrl, proceses }: ProcedureProps) {
   return (
     <div className="relative bg-background">
-      <div className="py-24 px-8 z-10 relative">
+      <div className="py-24 px-0 md:px-2 lg:px-8 z-10 relative">
         <div className="text-center flex flex-col items-center justify-center">
           <motion.div
             initial={{ x: 40 }}
@@ -40,7 +40,7 @@ export default function VisionSection({ bgUrl, proceses }: ProcedureProps) {
             once={false}
           />
         </div> */}
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 justify-start">
+        <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 justify-start">
           {proceses.map((item) => (
             <ProcedureCard
               key={item.id}

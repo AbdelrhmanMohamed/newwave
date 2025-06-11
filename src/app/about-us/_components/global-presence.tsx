@@ -1,52 +1,37 @@
 import React from "react";
 import Image from "next/image";
+import { BlocksContent } from "@strapi/blocks-react-renderer";
+import { getImageUrl } from "@/lib/utils";
+import BlockRendererClient from "@/components/block-render";
 
-export default function GlobalPresence() {
+type GlobalPresenceProps = {
+  title: string;
+  description: BlocksContent;
+  imageUrl?: string;
+};
+
+export default function GlobalPresence({
+  title,
+  description,
+  imageUrl,
+}: GlobalPresenceProps) {
   return (
-    <div className="flex justify-center items-center h-full flex-nowrap">
+    <div className="flex flex-col gap-4 lg:flex-row justify-start items-center h-full relative w-full">
       {/** image */}
-      <div className="flex flex-col items-center justify-center w-full basis-[47%] h-[670px] relative">
+      <div className="flex flex-col items-center justify-center w-full lg:w-[55%] h-[550px] lg:h-[650px] xl:h-[610px] relative">
         <Image
           fill
-          src="https://gaaga.wpengine.com/wp-content/uploads/2023/06/team-page-image-1.jpg"
+          src={getImageUrl(imageUrl) || "/images/about-us/global-presence.webp"}
           alt="Global Presence"
+          className="object-cover object-center"
         />
       </div>
       {/**content */}
-      <div className="relative z-20 shadow p-12 -translate-x-20 bg-background border border-primary basis-[55%]">
-        <h2 className="text-4xl font-bold mb-4">Global Presence</h2>
-        <p className="text-[15px] leading-6 mb-4 text-neutral-300">
-          New Wave&apos;s commitment to excellence extends beyond the borders of
-          Saudi Arabia. With established offices in key regional and
-          international hubs, including <strong>Cairo, Egypt;</strong>{" "}
-          <strong>Doha, Qatar;</strong> and <strong>the United States</strong>,
-          we offer a truly global service capability. This international
-          footprint is further strengthened by a curated network of strategic
-          partners specializing in advanced event technologies, VR/AR content
-          creation, AI-driven event solutions, and global event logistics.
-        </p>
-        <p className="text-[15px] leading-6">
-          These international connections are vital. They allow us to:
-        </p>
-        <ul className="list-disc pl-5 mt-2 mb-4 text-[15px] leading-6">
-          <li>Leverage global best practices in event management</li>
-          <li>
-            Integrate cutting-edge technologies that enhance attendee
-            experiences
-          </li>
-          <li>
-            Ensure seamless execution of events, no matter where they are held
-          </li>
-          <li>
-            Provide our clients with a comprehensive understanding of global
-            market trends and cultural nuances
-          </li>
-        </ul>
-        <p className="text-[15px] leading-6 text-neutral-300">
-          Our ability to combine this international reach with our deep-rooted
-          Saudi expertise makes New Wave a unique and powerful partner for any
-          organization aiming to make a significant impact.
-        </p>
+      <div className="relative lg:absolute w-full lg:w-[58%] xl:w-[55%] right-0 h-fit z-20 shadow p-6 sm:p-8 lg:p-12 lg:pb-8 sm:pb-4 pb-1 bg-background border border-primary">
+        <h2 className="text-4xl font-bold mb-4">{title}</h2>
+        <div className="text-[15px] leading-6 mb-4 text-neutral-300">
+          <BlockRendererClient content={description || []} />
+        </div>
       </div>
     </div>
   );

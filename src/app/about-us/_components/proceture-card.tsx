@@ -20,7 +20,7 @@ export default function ProcedureCard({
 }: ProcedureCardProps) {
   return (
     <div className="p-8">
-      <div className="bordered bg-transparent hover:bg-primary transition duration-500  py-12 px-2 flex flex-col items-center justify-center group text-primary h-full hover:!text-white">
+      <div className="bordered bg-transparent hover:bg-primary transition duration-500  py-12 px-2 flex flex-col items-center justify-start group text-primary h-full hover:!text-white">
         {IconUrl && (
           <InlineSvg className="size-[5rem]" url={getImageUrl(IconUrl)} />
         )}

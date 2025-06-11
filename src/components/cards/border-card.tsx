@@ -1,17 +1,19 @@
 import React from "react";
-import InlineSvg from "@/components/inline-svg";
 import { getImageUrl } from "@/lib/utils";
 import * as motion from "motion/react-client";
+import { BlocksContent } from "@strapi/blocks-react-renderer";
+import BlockRendererClient from "../block-render";
+import Image from "next/image";
 
 type BorderCardProps = {
-  icon: string | React.ReactNode;
+  iconUrl: string;
   title: string;
-  description: string | React.ReactNode;
+  description: BlocksContent;
   href?: string;
 };
 
 export default function BorderCard({
-  icon,
+  iconUrl,
   title,
   description,
 }: BorderCardProps) {
@@ -20,43 +22,48 @@ export default function BorderCard({
       {/* Content */}
       <div className="relative z-10 flex h-full text-lg  text-neutral-700 flex-col">
         <div className="flex items-center mb-2 gap-2">
-          {typeof icon === "string" ? (
-            <InlineSvg className="size-[2rem] mr-2" url={getImageUrl(icon)} />
-          ) : (
-            icon
-          )}
+          <Image
+            src={getImageUrl(iconUrl)}
+            className="size-[2rem] mr-2"
+            alt="Icon"
+            width={32}
+            height={32}
+            loading="lazy"
+          />
           <h3 className="text-white font-semibold">{title}</h3>
         </div>
-        <p className="text-sm text-neutral-400 px-1.5">{description}</p>
+        <div className="text-sm text-neutral-400 px-1.5">
+          <BlockRendererClient content={description} />
+        </div>
       </div>
 
       {/* Top Border */}
       <motion.div
         className="absolute top-0 left-0 h-[1px] bg-neutral-600/60"
         initial={{ width: 0 }}
-        whileInView ={{ width: "100%" }}
-        transition={{ duration: 1.5, ease: "easeInOut" }}
+        whileInView={{ width: "100%" }}
+        transition={{ duration: 1, ease: "easeInOut" }}
       />
       {/* Right Border */}
       <motion.div
         className="absolute top-0 right-0 w-[1px] bg-neutral-600/60"
         initial={{ height: 0 }}
         whileInView={{ height: "100%" }}
-        transition={{ duration: 1.5, ease: "easeInOut", delay: 0.5 }}
+        transition={{ duration: 1, ease: "easeInOut", delay: 0.5 }}
       />
       {/* Bottom Border */}
       <motion.div
         className="absolute bottom-0 right-0 h-[1px] bg-neutral-600/60"
         initial={{ width: 0 }}
         whileInView={{ width: "100%" }}
-        transition={{ duration: 1.5, ease: "easeInOut", delay: 1 }}
+        transition={{ duration: 1, ease: "easeInOut", delay: 1 }}
       />
       {/* Left Border */}
       <motion.div
         className="absolute bottom-0 left-0 w-[1px] bg-neutral-600/60"
         initial={{ height: 0 }}
         whileInView={{ height: "100%" }}
-        transition={{ duration: 1.5, ease: "easeInOut", delay: 1.5 }}
+        transition={{ duration: 1, ease: "easeInOut", delay: 1.5 }}
       />
     </div>
   );

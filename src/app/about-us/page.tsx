@@ -16,14 +16,6 @@ import { AboutUsData } from "@/types/about-us";
 import { getGlobalData } from "@/lib/shared/globalData";
 import { getImageUrl } from "@/lib/utils";
 import VisionSection from "./_components/vision";
-import {
-  Award,
-  Handshake,
-  Lightbulb,
-  Shield,
-  TrendingUp,
-  Zap,
-} from "lucide-react";
 import BorderCard from "@/components/cards/border-card";
 import OurTeam from "./_components/team";
 import GlobalPresence from "./_components/global-presence";
@@ -69,6 +61,7 @@ async function getAboutUsData() {
           process: {
             populate: "*",
           },
+
           impact_highlights: {
             populate: "*",
           },
@@ -98,44 +91,44 @@ async function getAboutUsData() {
   }
 }
 
-const coreValues = [
-  {
-    icon: Lightbulb,
-    title: "Innovation",
-    description:
-      "We relentlessly push boundaries, integrating creative solutions and pioneering technologies (VR, AR, AI, 360°) to deliver experiences that captivate and inspire.",
-  },
-  {
-    icon: Award,
-    title: "Excellence",
-    description:
-      "Our commitment to the highest standards ensures that every project, from conception to execution, stands out for its quality, precision, and lasting impact.",
-  },
-  {
-    icon: Handshake,
-    title: "Collaboration",
-    description:
-      "We believe in the power of partnership – with our clients, our international associates, and within our diverse team – fostering open communication and shared success.",
-  },
-  {
-    icon: Shield,
-    title: "Integrity & Transparency",
-    description:
-      "We build trust through honest, clear communication and complete operational transparency, ensuring our clients are informed and confident at every stage.",
-  },
-  {
-    icon: TrendingUp,
-    title: "Strategic Impact",
-    description:
-      "Beyond flawless execution, we focus on delivering measurable value, ensuring our PR and event solutions achieve tangible business objectives and contribute to our clients' growth.",
-  },
-  {
-    icon: Zap,
-    title: "Agility",
-    description:
-      "In a fast-paced industry, we adapt quickly to evolving trends and client needs, delivering timely and effective solutions without compromising quality.",
-  },
-];
+// const coreValues = [
+//   {
+//     icon: Lightbulb,
+//     title: "Innovation",
+//     description:
+//       "We relentlessly push boundaries, integrating creative solutions and pioneering technologies (VR, AR, AI, 360°) to deliver experiences that captivate and inspire.",
+//   },
+//   {
+//     icon: Award,
+//     title: "Excellence",
+//     description:
+//       "Our commitment to the highest standards ensures that every project, from conception to execution, stands out for its quality, precision, and lasting impact.",
+//   },
+//   {
+//     icon: Handshake,
+//     title: "Collaboration",
+//     description:
+//       "We believe in the power of partnership – with our clients, our international associates, and within our diverse team – fostering open communication and shared success.",
+//   },
+//   {
+//     icon: Shield,
+//     title: "Integrity & Transparency",
+//     description:
+//       "We build trust through honest, clear communication and complete operational transparency, ensuring our clients are informed and confident at every stage.",
+//   },
+//   {
+//     icon: TrendingUp,
+//     title: "Strategic Impact",
+//     description:
+//       "Beyond flawless execution, we focus on delivering measurable value, ensuring our PR and event solutions achieve tangible business objectives and contribute to our clients' growth.",
+//   },
+//   {
+//     icon: Zap,
+//     title: "Agility",
+//     description:
+//       "In a fast-paced industry, we adapt quickly to evolving trends and client needs, delivering timely and effective solutions without compromising quality.",
+//   },
+// ];
 
 export default async function AboutUsPage() {
   const aboutUsData = await getAboutUsData();
@@ -168,10 +161,10 @@ export default async function AboutUsPage() {
       >
         <SkillCard
           section="About Us"
-          title={aboutUsData.about_title || "About New Wave"}
-          description={aboutUsData.about_summary || []}
+          title={aboutUsData?.about_title || "About New Wave"}
+          description={aboutUsData?.about_summary || []}
           imageUrl={
-            getImageUrl(aboutUsData.about_image?.url) ||
+            getImageUrl(aboutUsData?.about_image?.url) ||
             "https://gaaga.wpengine.com/wp-content/uploads/2023/06/gaaga-Process-Content-Img-1-1.png"
           }
         />
@@ -185,31 +178,31 @@ export default async function AboutUsPage() {
         className="py-20"
       >
         <VisionSection
-          title={aboutUsData.proceture_title || "Purpose Driven"}
+          title={aboutUsData?.proceture_title || "Purpose Driven"}
           bgUrl="https://gaaga.wpengine.com/wp-content/uploads/2023/06/Gaaga-Process-Icon-Box-Bg-Img-1-scaled.jpg"
           proceses={[
             {
               id: 1,
-              title: aboutUsData.vision.title || "Our Vision",
-              description: aboutUsData.vision.description || [],
-              iconUrl: aboutUsData.vision.icon?.url || "",
+              title: aboutUsData?.vision.title || "Our Vision",
+              description: aboutUsData?.vision.description || [],
+              iconUrl: aboutUsData?.vision.icon?.url || "",
             },
             {
               id: 2,
               title: "Our Mission",
-              description: aboutUsData.mission.description || [],
-              iconUrl: aboutUsData.mission.icon?.url || "",
+              description: aboutUsData?.mission.description || [],
+              iconUrl: aboutUsData?.mission.icon?.url || "",
             },
             {
               id: 3,
               title: "Our Strategy",
-              description: aboutUsData.strategy.description || [],
-              iconUrl: aboutUsData.strategy.icon?.url || "",
+              description: aboutUsData?.strategy.description || [],
+              iconUrl: aboutUsData?.strategy.icon?.url || "",
             },
           ]}
         />
       </motion.section>
-      <div className="px-20 py-20 pb-28">
+      <div className="px-4 md:px-8 lg:px-16 xl:px-20 py-20 pb-28">
         <div className="text-center flex flex-col items-center justify-center">
           <motion.div
             initial={{ x: 40 }}
@@ -228,14 +221,14 @@ export default async function AboutUsPage() {
             />
           </motion.div>
           <AnimatedText
-            text={"Our Core Values"}
+            text={aboutUsData?.core_value_title || "Our Core Values"}
             className="text-3xl md:text-4xl xl:text-5xl font-bold mt-6 mb-16 tracking-wide text-center justify-center"
           />
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {coreValues.map((value, index) => (
+          {(aboutUsData?.core_values || []).map((value, index) => (
             <BorderCard
-              icon={<value.icon className="size-8 text-primary" />}
+              iconUrl={value.icon?.url || ""}
               title={value.title}
               description={value.description}
               key={index}
@@ -243,13 +236,6 @@ export default async function AboutUsPage() {
           ))}
         </div>
       </div>
-      {/* <div className="my-20">
-        <ProcedureSection
-          title={aboutUsData.proceture_title || "Our Procedure"}
-          bgUrl="https://gaaga.wpengine.com/wp-content/uploads/2023/06/Gaaga-Process-Icon-Box-Bg-Img-1-scaled.jpg"
-          proceses={aboutUsData.proceture || []}
-        />
-      </div> */}
 
       <div className="px-4 py-20">
         <motion.div
@@ -298,9 +284,13 @@ export default async function AboutUsPage() {
         transition={{
           duration: 0.5,
         }}
-        className="px-16 py-20"
+        className="px-4 md:px-6 lg:px-10 xl:px-20 py-20"
       >
-        <OurTeam />
+        <OurTeam
+          title={aboutUsData?.our_team_title || "Our Team"}
+          description={aboutUsData?.our_team_description || []}
+          imageUrl={aboutUsData?.our_team_image?.url || ""}
+        />
       </motion.div>
       <motion.div
         initial={{ opacity: 0 }}
@@ -308,9 +298,13 @@ export default async function AboutUsPage() {
         transition={{
           duration: 0.5,
         }}
-        className="px-16 pr-0 py-20"
+        className="px-4 md:px-6 lg:px-10 xl:px-20 py-20"
       >
-        <GlobalPresence />
+        <GlobalPresence
+          title={aboutUsData?.global_presence_title || "Global Presence"}
+          description={aboutUsData?.global_presence_description || []}
+          imageUrl={aboutUsData?.global_presence_image?.url || ""}
+        />
       </motion.div>
       <motion.section
         initial={{ opacity: 0 }}
@@ -318,9 +312,12 @@ export default async function AboutUsPage() {
         transition={{
           duration: 0.5,
         }}
-        className="pl-[4rem] pr-[4.5rem] py-20"
+        className="px-4 md:px-6 lg:px-10 xl:px-20 py-20"
       >
-        <Market />
+        <Market
+          title={aboutUsData?.market_title || "Our Market"}
+          description={aboutUsData?.market_description || []}
+        />
       </motion.section>
       <section className="py-20">
         <Querries aboutData={aboutUsData} globalData={globalData} />

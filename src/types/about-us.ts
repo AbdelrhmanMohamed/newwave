@@ -28,6 +28,7 @@ export interface AboutUsData {
   mission: RichTextWithMedia;
   strategy: RichTextWithMedia;
   core_value_title: string;
+  core_value_headline: string;
   core_values: RichTextWithMedia[];
   our_team_title: string;
   our_team_description: BlocksContent;
@@ -35,6 +36,8 @@ export interface AboutUsData {
   global_presence_image: Media | null;
   global_presence_title: string;
   global_presence_description: BlocksContent;
+  market_title: string;
+  market_description: BlocksContent;
 }
 
 export interface Process {
