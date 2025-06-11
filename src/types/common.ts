@@ -1,3 +1,5 @@
+import { BlocksContent } from "@strapi/blocks-react-renderer";
+
 export type SearchParams = Promise<{
   [key: string]: string | string[] | undefined;
 }>;
@@ -46,4 +48,11 @@ export interface PageHeader {
   title: string;
   icon?: Media;
   description: string;
+}
+
+export interface RichTextWithMedia {
+  id: number;
+  title: string;
+  description: BlocksContent;
+  icon?: Media;
 }

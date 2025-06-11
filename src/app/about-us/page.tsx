@@ -15,7 +15,6 @@ import { Metadata } from "next";
 import { AboutUsData } from "@/types/about-us";
 import { getGlobalData } from "@/lib/shared/globalData";
 import { getImageUrl } from "@/lib/utils";
-import { FindIcon, IntegrateIcon, LampIcon } from "@/components/icons";
 import VisionSection from "./_components/vision";
 import {
   Award,
@@ -30,7 +29,7 @@ import OurTeam from "./_components/team";
 import GlobalPresence from "./_components/global-presence";
 import Market from "./_components/market";
 
-export const revalidate = 60;
+export const revalidate = 120;
 
 export async function generateMetadata(): Promise<Metadata> {
   const pageData = await fetchContentType(
@@ -55,13 +54,16 @@ async function getAboutUsData() {
       "about-us-page",
       {
         populate: {
-          cover: {
-            fields: ["url"],
-          },
-          header: {
+          core_values: {
             populate: "*",
           },
-          proceture: {
+          vision: {
+            populate: "*",
+          },
+          mission: {
+            populate: "*",
+          },
+          strategy: {
             populate: "*",
           },
           process: {
@@ -70,8 +72,20 @@ async function getAboutUsData() {
           impact_highlights: {
             populate: "*",
           },
+          cover: {
+            populate: "*",
+          },
+          about_image: {
+            populate: "*",
+          },
           contact_support_image: {
-            fields: ["url"],
+            populate: "*",
+          },
+          global_presence_image: {
+            populate: "*",
+          },
+          our_team_image: {
+            populate: "*",
           },
         },
       },
@@ -154,9 +168,12 @@ export default async function AboutUsPage() {
       >
         <SkillCard
           section="About Us"
-          title="Your Strategic Partner in a Transforming Kingdom"
-          description="New Wave a dynamic Saudi Arabian Public Relations and Event Management powerhouse, born from a vision to redefine engagement in an era of unprecedented transformation. We are more than an agency; we are architects of experience, storytellers, and technological pioneers, deeply committed to the ambitious spirit of Saudi Vision 2030. Our roots are firmly planted in the Kingdom, yet our reach is global, with strategic offices in Egypt, Qatar, and the United States, complemented by robust international partnerships. This global footprint ensures we deliver world-class solutions with a nuanced understanding of local and international markets."
-          imageUrl="https://gaaga.wpengine.com/wp-content/uploads/2023/06/gaaga-Process-Content-Img-1-1.png"
+          title={aboutUsData.about_title || "About New Wave"}
+          description={aboutUsData.about_summary || []}
+          imageUrl={
+            getImageUrl(aboutUsData.about_image?.url) ||
+            "https://gaaga.wpengine.com/wp-content/uploads/2023/06/gaaga-Process-Content-Img-1-1.png"
+          }
         />
       </motion.section>
       <motion.section
@@ -173,42 +190,21 @@ export default async function AboutUsPage() {
           proceses={[
             {
               id: 1,
-              title: "Our Vision",
-              description:
-                "To be the undisputed leader in innovative public relations and technology-driven event management in Saudi Arabia and the MENA region, recognized for creating transformative experiences that connect cultures, drive economic growth, and contribute to the ambitious goals. We aspire to set new global benchmarks for creativity, strategic impact, and technological integration in every project we undertake.",
-              icon: <FindIcon />,
+              title: aboutUsData.vision.title || "Our Vision",
+              description: aboutUsData.vision.description || [],
+              iconUrl: aboutUsData.vision.icon?.url || "",
             },
             {
               id: 2,
               title: "Our Mission",
-              description:
-                "To empower our clients with cutting-edge PR strategies and flawlessly executed events by leveraging a dynamic blend of local expertise, international best practices, and pioneering technologies like VR, AR, and AI. We are committed to fostering Saudi talent, championing national initiatives, building lasting partnerships, and delivering measurable results that exceed expectations and amplify our clients' success on both local and global stages.",
-              icon: <IntegrateIcon />,
+              description: aboutUsData.mission.description || [],
+              iconUrl: aboutUsData.mission.icon?.url || "",
             },
             {
               id: 3,
               title: "Our Strategy",
-              description: (
-                <div>
-                  New Wave&apos;s strategy is anchored on core pillars:
-                  <ul className="list-decimal pl-5">
-                    <li>
-                      Technological Supremacy: Continuously investing in and
-                      mastering the latest event and communication technologies
-                      to offer unparalleled immersive and intelligent solutions.
-                    </li>
-                    <li>
-                      Global Network, Local Impact: Expanding our international
-                      presence and partnerships (currently in KSA, Egypt, Qatar,
-                      USA) to bring global best practices and innovations to the
-                      Saudi market, while ensuring culturally resonant and
-                      impactful delivery through our deep local expertise and
-                      strong national workforce.
-                    </li>
-                  </ul>
-                </div>
-              ),
-              icon: <LampIcon />,
+              description: aboutUsData.strategy.description || [],
+              iconUrl: aboutUsData.strategy.icon?.url || "",
             },
           ]}
         />

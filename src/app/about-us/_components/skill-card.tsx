@@ -4,10 +4,12 @@ import SectionHead from "@/components/headings/section-head";
 // import ButtonLine from "@/components/headings/button-line";
 import AnimatedText from "@/components/effects/animate-text";
 import * as motion from "motion/react-client";
+import { BlocksContent } from "@strapi/blocks-react-renderer";
+import BlockRendererClient from "@/components/block-render";
 
 type CardProps = {
   title: string;
-  description: string;
+  description: BlocksContent;
   imageUrl: string;
   section: string;
 };
@@ -44,20 +46,10 @@ export default function Card({
             className="text-4xl md:text-5xl lg:text-4xl xl:text-5xl font-bold text-white md:my-6 my-4 xl:my-8 md:leading-12 leading-10 xl:leading-14 flex flex-wrap "
           />
         </div>
-        <p className="text-[15px] text-neutral-400">{description}</p>
-        <p className="text-[15px] text-neutral-400 mt-4">
-          Our experience in the Saudi market for more than ten years in the name
-          of the Art فن الحركة and a Highlight companies, At New Wave, we
-          harness the transformative power of technologys from immersive 360°
-          event capture and groundbreaking Virtual Reality (VR) and Augmented
-          Reality (AR) experiences to intelligent AI-driven marketing and
-          sophisticated media consultations. Our in-house Production House and
-          comprehensive marketing solutions ensure seamless execution and
-          impactful results. We are proud to be staffed by a blend of passionate
-          Saudi national talent and seasoned international experts, all
-          dedicated to elevating your brand and achieving your strategic
-          objectives.
-        </p>
+        <div className="text-[15px] text-neutral-400 [&>*]:mb-2">
+          <BlockRendererClient content={description} />
+        </div>
+
         {/* <ButtonLine title="Read More" /> */}
       </div>
       {/** right Image */}

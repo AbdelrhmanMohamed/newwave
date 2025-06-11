@@ -40,11 +40,11 @@ export default function VisionSection({ bgUrl, proceses }: ProcedureProps) {
             once={false}
           />
         </div> */}
-        <div className="grid grid-cols-1 md:grid-cols-2  xl:grid-cols-3">
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 justify-start">
           {proceses.map((item) => (
             <ProcedureCard
               key={item.id}
-              icon={item.icon || ""}
+              IconUrl={item.iconUrl || ""}
               title={item.title}
               href={`/#`}
               description={item.description || ""}
