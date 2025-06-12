@@ -275,7 +275,7 @@ export default async function AboutUsPage() {
         <MarketingSection
           bgUrl="https://gaaga.wpengine.com/wp-content/uploads/2023/06/Gaaga-Process-Counter-Bg-Img-1-scaled.jpg"
           title="Our Marketing Approach"
-          highlights={aboutUsData.impact_highlights || []}
+          highlights={aboutUsData?.impact_highlights || []}
         />
       </motion.section>
       <motion.div

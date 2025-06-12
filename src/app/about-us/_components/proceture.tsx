@@ -48,7 +48,7 @@ export default function ProcedureSection({
           {proceses.map((item) => (
             <ProcedureCard
               key={item.id}
-              IconUrl={item.icon?.url || ""}
+              IconUrl={item.iconUrl || ""}
               title={item.title}
               href={`/#`}
               description={item.description || ""}
