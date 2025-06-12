@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import React from "react";
 import Image from "next/image";
@@ -45,7 +46,7 @@ export default function Stepper({ steps }: StepperProps) {
 }
 
 type StepperItemProps = {
-  step: Process;
+  step: any;
   reverse?: boolean;
   index: number;
   isLast?: boolean;
@@ -78,7 +79,7 @@ function StepperItem({
         className={cn("relative h-[360px]", reverse ? "mt-20" : "mb-20")}
       >
         <Image
-          src={getImageUrl(step.icon?.url)}
+          src={getImageUrl(step.iconUrl)}
           alt={step.title}
           fill
           className="object-cover"
@@ -132,7 +133,7 @@ function StepperItem({
         >
           {step.title}
         </h3>
-        <p className="text-neutral-400">{step.description}</p>
+        <div className="text-neutral-400">{step.description}</div>
       </motion.div>
     </div>
   );
