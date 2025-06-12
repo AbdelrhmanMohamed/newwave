@@ -89,45 +89,53 @@ export function generateMetadataObject(seo: SEO_Response) {
   //   {}
   // );
 
+  let openGraphData = {};
+
+  if (seo?.metaImage) {
+    openGraphData = {
+      openGraph: {
+        title: seo?.metaTitle,
+        description: seo?.metaDescription,
+        url: seo?.canonicalURL || "https://newwave.com",
+        siteName: "NewWave",
+        type: "article",
+        images: [
+          {
+            url: getImageUrl(seo?.metaImage?.url) || "",
+            width: seo?.metaImage?.width || 1200,
+            height: seo?.metaImage?.height || 630,
+            alt:
+              seo?.metaImage?.alternativeText ||
+              seo?.metaTitle ||
+              "Default Alt Text",
+          },
+        ],
+      },
+      twitter: {
+        card: "summary_large_image",
+        title: seo?.metaTitle,
+        description: seo?.metaDescription,
+        images: [
+          {
+            url: getImageUrl(seo?.metaImage?.url) || "",
+            width: seo?.metaImage?.width || 1200,
+            height: seo?.metaImage?.height || 630,
+            alt:
+              seo?.metaImage?.alternativeText ||
+              seo?.metaTitle ||
+              "Default Alt Text",
+          },
+        ],
+      },
+    };
+  }
+
   return {
     title: seo?.metaTitle || "Default Title", // Fallback to 'Default Title' if title is not provided
     description: seo?.metaDescription || "Default Description", // Fallback to 'Default Description'
     keywords: seo?.keywords,
     robots: seo?.metaRobots || "index, follow", // Fallback to 'index, follow'
     canonical: seo?.canonicalURL || "https://newwave.com", // Fallback to 'https://newwave.com'
-    openGraph: {
-      title: seo?.metaTitle,
-      description: seo?.metaDescription,
-      url: seo?.canonicalURL || "https://newwave.com",
-      siteName: "NewWave",
-      type: "article",
-      images: [
-        {
-          url: getImageUrl(seo?.metaImage?.url) || "",
-          width: seo?.metaImage?.width || 1200,
-          height: seo?.metaImage?.height || 630,
-          alt:
-            seo?.metaImage?.alternativeText ||
-            seo?.metaTitle ||
-            "Default Alt Text",
-        },
-      ],
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: seo?.metaTitle,
-      description: seo?.metaDescription,
-      images: [
-        {
-          url: getImageUrl(seo?.metaImage.url) || "",
-          width: seo?.metaImage?.width || 1200,
-          height: seo?.metaImage?.height || 630,
-          alt:
-            seo?.metaImage?.alternativeText ||
-            seo?.metaTitle ||
-            "Default Alt Text",
-        },
-      ],
-    },
+    ...openGraphData,
   };
 }
