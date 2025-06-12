@@ -1,10 +1,10 @@
 import Link from "next/link";
 import Image from "next/image";
-import { Twitter, Facebook, Linkedin } from "lucide-react";
 import SubscriptionForm from "./susbscripe";
 import { Service } from "@/types/service";
 import fetchContentType from "@/lib/strapi/fetchContentType";
 import { getGlobalData } from "@/lib/shared/globalData";
+import { FacebookIcon, LinkedinIcon, TwitterIcon } from "../icons";
 
 async function getServices(): Promise<Service[] | null> {
   try {
@@ -60,7 +60,7 @@ export default async function Footer() {
                 Mail : {globalData?.email1 || ""}
               </p>
               <p className="text-neutral-400">
-                Working Hours : {globalData?.working_hours || ""}
+                {globalData?.working_hours || ""}
               </p>
             </div>
           </div>
@@ -122,23 +122,23 @@ export default async function Footer() {
               href={globalData?.twitter_link || "#"}
               className="p-2 border rounded-full hover:border-neutral-500"
             >
-              <Twitter className="h-4 w-4 text-neutral-400" />
+              <TwitterIcon className="h-4 w-4 text-neutral-400" />
             </Link>
             <Link
               href={globalData?.facebook_link || "#"}
               className="p-2 border rounded-full hover:border-neutral-500"
             >
-              <Facebook className="h-4 w-4 text-neutral-400" />
+              <FacebookIcon className="h-4 w-4 text-neutral-400" />
             </Link>
             <Link
               href={globalData?.linkedin_link || "#"}
               className="p-2 border rounded-full hover:border-neutral-500"
             >
-              <Linkedin className="h-4 w-4 text-neutral-400" />
+              <LinkedinIcon className="h-4 w-4 text-neutral-400" />
             </Link>
           </div>
           <div className="text-center md:text-right text-neutral-400 text-sm w-full md:w-4/12">
-            Copyright © NEWWAVE 2025. Developed by AMA
+            Copyright © NEWWAVE 2025. Developed by NEWWAVE. All rights reserved.
           </div>
         </div>
       </div>
