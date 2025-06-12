@@ -1,6 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 // import { strapiImage } from "../strapi/strapiImage";
 
+import { getImageUrl } from "../utils";
+
 export interface SEO_Response {
   id: number;
   metaTitle: string;
@@ -88,9 +90,46 @@ export function generateMetadataObject(seo: SEO_Response) {
   return {
     title: seo?.metaTitle || "Default Title", // Fallback to 'Default Title' if title is not provided
     description: seo?.metaDescription || "Default Description", // Fallback to 'Default Description'
-    keywords: seo?.keywords || "Default Keywords", // Fallback to 'Default Keywords'
+    keywords: seo?.keywords?.split(",") || ["default", "keywords"],
     robots: seo?.metaRobots || "index, follow", // Fallback to 'index, follow'
     canonical: seo?.canonicalURL || "https://newwave.com", // Fallback to 'https://newwave.com'
-    // openGraph: socialOpenGraphNetworks,
+    openGraph: {
+      title: seo?.metaTitle,
+      description: seo?.metaDescription,
+      url: seo?.canonicalURL || "https://newwave.com",
+      siteName: "NewWave",
+      type: "article",
+      images: [
+        {
+          url:
+            getImageUrl(seo?.metaImage.url) ||
+            "https://newwave.com/default-image.jpg",
+          width: seo.metaImage?.width || 1200,
+          height: seo.metaImage?.height || 630,
+          alt:
+            seo.metaImage?.alternativeText ||
+            seo?.metaTitle ||
+            "Default Alt Text",
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: seo?.metaTitle,
+      description: seo?.metaDescription,
+      images: [
+        {
+          url:
+            getImageUrl(seo?.metaImage.url) ||
+            "https://newwave.com/default-image.jpg",
+          width: seo.metaImage?.width || 1200,
+          height: seo.metaImage?.height || 630,
+          alt:
+            seo.metaImage?.alternativeText ||
+            seo?.metaTitle ||
+            "Default Alt Text",
+        },
+      ],
+    },
   };
 }

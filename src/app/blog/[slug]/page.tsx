@@ -27,11 +27,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       filters: {
         slug: { $eq: slug },
       },
-      populate: "seo",
+      populate: {
+        seo: {
+          populate: "*",
+        },
+      },
       fields: ["id"],
     },
     true
   );
+  console.log("Blog metadata:", blog);
   if (!blog) {
     return {
       title: "Blog not found",
