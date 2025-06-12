@@ -7,7 +7,6 @@ type Props = {
 };
 
 export default function RenderSubject({ subject }: Props) {
-  console.log(subject, "subject");
   return (
     <div key={subject.id} className="mt-6">
       <div className="grid grid-cols-6 gap-8 my-6">
@@ -24,7 +23,9 @@ export default function RenderSubject({ subject }: Props) {
         ))}
       </div>
 
-      <h1 className="text-2xl lg:text-3xl font-bold mb-4">{subject.title}</h1>
+      <h1 className="text-2xl lg:text-3xl font-bold mb-4 text-neutral-100">
+        {subject.title}
+      </h1>
       <div className="text-neutral-400 [&_p]:mt-4 mb-1">
         <BlockRendererClient content={subject.content} />
       </div>

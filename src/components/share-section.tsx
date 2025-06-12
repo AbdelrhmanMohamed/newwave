@@ -78,7 +78,7 @@ const ShareSection = ({ url, title, className }: ShareSectionProps) => {
           Share our blog:
         </h3>
 
-        <div className="flex flex-wrap justify-center gap-4">
+        <div className="flex flex-wrap justify-center gap-4 px-10">
           {shareButtons.map((button) => {
             const ButtonComponent = button.onClick ? "button" : "a";
 
@@ -90,7 +90,7 @@ const ShareSection = ({ url, title, className }: ShareSectionProps) => {
                 target={button.url ? "_blank" : undefined}
                 rel={button.url ? "noopener noreferrer" : undefined}
                 className={cn(
-                  "flex items-center cursor-pointer gap-3 px-6 py-3 shadow-sm transition-all duration-200 transform  hover:border-primary/50 border border-neutral-700/50"
+                  "flex  items-center cursor-pointer gap-3 min-w-36 px-6 py-3 shadow-sm transition-all duration-200 transform  hover:border-primary/50 border border-neutral-700/50"
                 )}
               >
                 <button.icon className={cn("h-4 w-4 text-neutral-200")} />
