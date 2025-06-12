@@ -140,8 +140,7 @@ export default async function AboutUsPage() {
   const aboutUsData = await getAboutUsData();
   const globalData = await getGlobalData();
 
-  console.log("About Us Data:", aboutUsData);
-  if (!aboutUsData) {
+  if (!aboutUsData || Object.keys(aboutUsData || {}).length === 0) {
     return <div className="text-center py-20">No data found</div>;
   }
 
