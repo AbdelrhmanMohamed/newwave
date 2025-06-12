@@ -31,10 +31,10 @@ export default function MessagesSection({ message }: Props) {
               <div className="flex items-start gap-3" key={index}>
                 <div className="space-y-1">
                   <h6 className="text-neutral-100 font-medium text-base">
-                    <Circle className="w-2.5 h-2.5 fill-primary text-coral-500 inline-block mr-1 mb-1" />
+                    <Circle className="w-2.5 h-2.5 fill-primary stroke-none inline-block mr-1 mb-1" />
                     {point.title}
                   </h6>
-                  <p className="text-neutral-400 text-xs ">
+                  <p className="text-neutral-300 text-sm">
                     {point.description}
                   </p>
                 </div>

@@ -63,4 +63,7 @@ export interface ServiceDetail {
   main_content: MainContent;
   topics: Topic[];
   messages: MessageBlock;
+  final_message: string;
+  call_action_url: string;
+  call_action_text: string;
 }

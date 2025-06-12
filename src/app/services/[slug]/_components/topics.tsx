@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import { Asterisk, TargetIcon } from "lucide-react";
+import { Asterisk, Lightbulb, Megaphone } from "lucide-react";
 import { Topic } from "@/types/service";
 import BlockRendererClient from "@/components/block-render";
 import * as motion from "motion/react-client";
@@ -23,7 +23,7 @@ export default function TopicsSection({
 }: TopicsSectionProps) {
   return (
     <div className="pt-16 pb-10 relative mt-40">
-      <div className="absolute inset-0 h-[55%] w-full">
+      <div className="absolute inset-0 h-[40%] w-full">
         <Image
           src={bgUrl}
           alt="Background Image"
@@ -74,7 +74,7 @@ export default function TopicsSection({
             </motion.div>
           </div>
           <div className="md:col-span-1 space-y-8">
-            {topics.map((topic) => (
+            {topics.map((topic, index) => (
               <div
                 key={topic.id}
                 className="flex items-start gap-3 xl:pt-12 lg:pt-4 pt-16"
@@ -91,12 +91,16 @@ export default function TopicsSection({
 
                 <div className="space-y-6">
                   <div className="flex items-center gap-2">
-                    <TargetIcon className="w-4 h-4 text-primary" />
+                    {index === 0 ? (
+                      <Megaphone className="w-6 h-6 min-w-6 min-h-6 text-primary" />
+                    ) : (
+                      <Lightbulb className="w-6 h-6 min-w-6 min-h-6 text-primary" />
+                    )}
                     <h5 className="text-white font-medium text-2xl">
                       {topic.title}
                     </h5>
                   </div>
-                  <div className="text-neutral-400 leading-relaxed text-sm">
+                  <div className="text-neutral-300 leading-relaxed text-sm">
                     <BlockRendererClient content={topic.content} />
                   </div>
                 </div>

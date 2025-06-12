@@ -20,7 +20,7 @@ export default function VideoPreviewSection({
   const thumbnailUrl = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
 
   return (
-    <div className="mt-20">
+    <div className="mt-16">
       <h2 className="text-2xl lg:text-4xl font-bold leading-tight mb-4 max-w-5xl">
         {title}
       </h2>

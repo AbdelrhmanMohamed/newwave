@@ -28,7 +28,7 @@ export const PageBanner: React.FC<HeroBannerProps> = ({
         src={backgroundImage}
         alt={title}
         fill
-        className="mix-blend-luminosity opacity-15 object-cover bg-size-[100%] bg-repeat-no-repeat"
+        className="mix-blend-luminosity pointer-events-none opacity-15 object-cover bg-size-[100%] bg-repeat-no-repeat"
         loading="lazy"
       />
       <motion.div

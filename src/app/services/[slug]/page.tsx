@@ -10,6 +10,11 @@ import fetchContentType from "@/lib/strapi/fetchContentType";
 import { generateMetadataObject } from "@/lib/shared/metadata";
 import { ServiceDetail } from "@/types/service";
 import { getImageUrl } from "@/lib/utils";
+import ShareSection from "@/components/share-section";
+import { headers } from "next/headers";
+import FloatingShare from "@/components/floating-share";
+import ButtonLine from "@/components/headings/button-line";
+import Link from "next/link";
 // import { getImageUrl } from "@/lib/utils";
 
 export const revalidate = 60;
@@ -26,7 +31,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       filters: {
         slug: { $eq: slug },
       },
-      populate: "seo",
+      populate: {
+        seo: {
+          populate: "*",
+        },
+      },
       fields: ["id"],
     },
     true
@@ -81,6 +90,16 @@ export default async function ServiceDetails({
 }) {
   const { slug } = await params;
   const service = await getServiceData(slug);
+  const headersList = await headers();
+  const protocol = headersList.get("x-forwarded-proto") || "http";
+  const host = headersList.get("x-forwarded-host") || headersList.get("host");
+
+  const origin = `${protocol}://${host}`;
+  const serviceUrl = `${origin}/services/${slug}`;
+
+  console.log("Service URL:", serviceUrl);
+  console.log("Service Data:", service);
+
   if (!service) {
     return <div className="text-center">Service not found</div>;
   }
@@ -92,7 +111,7 @@ export default async function ServiceDetails({
       transition={{
         duration: 1,
       }}
-      className="pb-20"
+      className="pb-40"
     >
       <PageBanner
         title={service.title || "Service Details"}
@@ -115,6 +134,9 @@ export default async function ServiceDetails({
             className="object-cover"
           />
         </div>
+        <div className="flex justify-end p-2">
+          <FloatingShare url={serviceUrl} title={service?.title} />
+        </div>
         {/* Main Content Section */}
         <VideoPreviewSection
           videoUrl={service.main_content.youtube_link || ""}
@@ -136,6 +158,26 @@ export default async function ServiceDetails({
           ]}
         />
       </div>
+      <div className="mt-8 border border-primary/50 text-center p-6 text-neutral-300 mx-4 md:mx-8 lg:mx-16">
+        <q>
+          {service.final_message ||
+            "Partner with New Wave to transform your entertainment vision into a legendary spectacle that resonates deeply and leaves a lasting legacy."}
+        </q>
+        <div className="mt-6 flex justify-center">
+          <Link href={service.call_action_url || "/projects"}>
+            <ButtonLine
+              title={service.call_action_text || "Discover Our Projects"}
+              className="text-primary hover:text-white"
+            />
+          </Link>
+        </div>
+      </div>
+      <ShareSection
+        url={serviceUrl}
+        title={service?.title}
+        shareTitle="Share"
+        className="mt-12"
+      />
     </motion.section>
   );
 }

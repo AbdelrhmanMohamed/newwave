@@ -10,9 +10,15 @@ interface ShareSectionProps {
   url: string;
   title: string;
   className?: string;
+  shareTitle?: string;
 }
 
-const ShareSection = ({ url, title, className }: ShareSectionProps) => {
+const ShareSection = ({
+  url,
+  title,
+  className,
+  shareTitle = "Share our blog",
+}: ShareSectionProps) => {
   const encodedUrl = encodeURIComponent(url);
   const encodedTitle = encodeURIComponent(title);
 
@@ -75,7 +81,7 @@ const ShareSection = ({ url, title, className }: ShareSectionProps) => {
       <div className="text-center">
         <h3 className="text-sm font-medium text-muted-foreground mb-6">
           <Share2Icon className="inline-block mr-2 h-4 w-4" />
-          Share our blog:
+          {shareTitle}
         </h3>
 
         <div className="flex flex-wrap justify-center gap-4 px-10">

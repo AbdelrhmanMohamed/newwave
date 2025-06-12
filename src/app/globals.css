@@ -38,6 +38,7 @@
   --radius-xl: calc(var(--radius) + 4px);
   --font-main: var(--font-prompt);
   --font-sans: var(--font-prompt);
+  --color-neutral-300: oklch(0.769 0 0); /* #b5b5b5 */
 }
 
 :root {
