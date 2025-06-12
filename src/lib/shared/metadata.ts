@@ -73,24 +73,24 @@ export interface ImageFormat {
 }
 
 export function generateMetadataObject(seo: SEO_Response) {
-  // const socialOpenGraphNetworks = seo?.metaSocial?.reduce(
-  //   (acc: any, social: MetaSocial) => {
-  //     acc[social.socialNetwork] = {
-  //       url: social.url,
-  //       title: social.title,
-  //       description: social.description,
-  //     };
-  //     return acc;
-  //   },
-  //   {}
-  // );
+  const socialOpenGraphNetworks = seo?.metaSocial?.reduce(
+    (acc: any, social: MetaSocial) => {
+      acc[social.socialNetwork] = {
+        url: social.url,
+        title: social.title,
+        description: social.description,
+      };
+      return acc;
+    },
+    {}
+  );
 
   return {
     title: seo?.metaTitle || "Default Title", // Fallback to 'Default Title' if title is not provided
     description: seo?.metaDescription || "Default Description", // Fallback to 'Default Description'
     keywords: seo?.keywords || "Default Keywords", // Fallback to 'Default Keywords'
     robots: seo?.metaRobots || "index, follow", // Fallback to 'index, follow'
-    // viewport: seo?.metaViewport || "width=device-width, initial-scale=1", // Fallback to 'width=device-width, initial-scale=1'
     canonical: seo?.canonicalURL || "https://newwave.com", // Fallback to 'https://newwave.com'
+    openGraph: socialOpenGraphNetworks,
   };
 }

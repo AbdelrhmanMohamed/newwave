@@ -14,4 +14,6 @@ export interface GlobalData {
   twitter_link: string;
   email_career: string;
   working_hours: string;
+  main_address: string;
+  main_phone: string;
 }

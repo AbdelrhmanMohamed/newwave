@@ -8,6 +8,9 @@ import { Blog, BlogSubject } from "@/types/blog";
 import fetchContentType from "@/lib/strapi/fetchContentType";
 import RenderSubject from "@/components/subject";
 import { getImageUrl } from "@/lib/utils";
+import ShareSection from "@/components/share-section";
+import FloatingShare from "@/components/floating-share";
+import { headers } from "next/headers";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -74,6 +77,13 @@ export default async function BlogDetails({
 }) {
   const { slug } = await params;
   const blog = await getBlogData(slug);
+  const headersList = await headers();
+  const protocol = headersList.get("x-forwarded-proto") || "http";
+  const host = headersList.get("x-forwarded-host") || headersList.get("host");
+
+  const origin = `${protocol}://${host}`;
+  const articleUrl = `${origin}/blog/${slug}`;
+
   if (!blog) {
     return <div>Blog not found</div>;
   }
@@ -85,7 +95,7 @@ export default async function BlogDetails({
       transition={{
         duration: 1,
       }}
-      className="pb-60"
+      className="pb-60 relative"
     >
       <PageBanner
         title={blog?.title}
@@ -107,13 +117,14 @@ export default async function BlogDetails({
             className="object-cover"
           />
         </div>
-        <div className="flex justify-between">
+        <div className="flex justify-between py-2">
           <p className="text-neutral-300 mt-4 tracking-wide uppercase text-sm">
             {new Date(blog.date).toLocaleDateString()}
           </p>
           <p className="text-primary text-sm font-semibold mt-4 tracking-wide uppercase">
             By {blog.author}
           </p>
+          <FloatingShare url={articleUrl} title={blog?.title} />
         </div>
         <div>
           {(blog?.subjects || [])?.map((subject: BlogSubject) => (
@@ -121,6 +132,9 @@ export default async function BlogDetails({
           ))}
         </div>
       </div>
+      {/* Bottom Share Section */}
+      <ShareSection url={articleUrl} title={blog?.title} className="mt-16" />
+      {/* Floating Share Section */}
     </motion.section>
   );
 }

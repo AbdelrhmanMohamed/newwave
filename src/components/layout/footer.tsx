@@ -2,9 +2,25 @@ import Link from "next/link";
 import Image from "next/image";
 import { Twitter, Facebook, Linkedin } from "lucide-react";
 import SubscriptionForm from "./susbscripe";
+import { Service } from "@/types/service";
+import fetchContentType from "@/lib/strapi/fetchContentType";
+import { getGlobalData } from "@/lib/shared/globalData";
 
-export default function Footer() {
+async function getServices(): Promise<Service[] | null> {
+  try {
+    const res = await fetchContentType("services", {
+      populate: "*",
+    });
+    return res?.data as Service[] | null;
+  } catch (error) {
+    console.error("Error fetching base service data:", error);
+    return null;
+  }
+}
 
+export default async function Footer() {
+  const services = await getServices();
+  const globalData = await getGlobalData();
 
   return (
     <footer className="text-white">
@@ -21,10 +37,8 @@ export default function Footer() {
             />
           </div>
           <p className="text-neutral-400 text-sm leading-relaxed">
-            Sodales ut etiam sit amet. Eget nulla facilisi etiam dignissim.
-            Aliquam vestibulum morbi blandit cursus risus. Ultrices vitae auctor
-            eu augue ut lectus. Ultricies integer quis auctor elit sed vulputate
-            mi sit amet.
+            {globalData?.siteDescription ||
+              "We are a leading digital agency specializing in innovative solutions for your business. Our team is dedicated to delivering exceptional results through creativity and technology."}
           </p>
           <div className="flex items-center space-x-2 pt-4 w-full">
             <SubscriptionForm />
@@ -37,11 +51,17 @@ export default function Footer() {
             <h3 className="text-2xl font-bold">Contact Us</h3>
             <div className="space-y-4">
               <p className="text-neutral-400">
-                No: 58 A, East Madison Street, Baltimore, MD, USA 4508
+                {globalData?.main_address || ""}
               </p>
-              <p className="text-neutral-400">Phone : +974 - 411 - 3687</p>
-              <p className="text-neutral-400">Mail : info@example.com</p>
-              <p className="text-neutral-400">Working Hours : 8hrs</p>
+              <p className="text-neutral-400">
+                Phone : {globalData?.main_phone || ""}
+              </p>
+              <p className="text-neutral-400">
+                Mail : {globalData?.email1 || ""}
+              </p>
+              <p className="text-neutral-400">
+                Working Hours : {globalData?.working_hours || ""}
+              </p>
             </div>
           </div>
 
@@ -49,23 +69,19 @@ export default function Footer() {
           <div className="space-y-6 w-full md:w-1/2 mt-8 md:mt-0">
             <h3 className="text-2xl font-bold">Services</h3>
             <ul className="space-y-3 list-none">
-              <li className="flex items-center ">
-                <span className="text-neutral-400">Branding & Identity</span>
-              </li>
-              <li className="flex items-center">
-                <span className="text-neutral-400">
-                  Web Design & Development
-                </span>
-              </li>
-              <li className="flex items-center">
-                <span className="text-neutral-400">Mobile App Development</span>
-              </li>
-              <li className="flex items-center">
-                <span className="text-neutral-400">UI & UX Designing</span>
-              </li>
-              <li className="flex items-center">
-                <span className="text-neutral-400">Digital Marketing</span>
-              </li>
+              {(services || [])?.map((service) => (
+                <li
+                  key={service.id}
+                  className="flex items-center text-neutral-400 hover:text-primary transition-colors duration-500 group"
+                >
+                  <Link href={`/services/${service.slug}`}>
+                    <div className="block group-hover:translate-x-3 transition-transform duration-500">
+                      <span className="opacity-0 min-w-[8px] min-h-[8px] bg-neutral-200 mr-1 inline-block rounded-full group-hover:bg-primary group-hover:opacity-100 transition-all duration-500" />
+                      {service?.title}
+                    </div>
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
         </div>
@@ -78,17 +94,23 @@ export default function Footer() {
             <nav>
               <ul className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-8">
                 <li>
-                  <Link href="#" className="text-neutral-400 hover:text-white">
+                  <Link href="/" className="text-neutral-400 hover:text-white">
                     Home
                   </Link>
                 </li>
                 <li>
-                  <Link href="#" className="text-neutral-400 hover:text-white">
+                  <Link
+                    href="/projects"
+                    className="text-neutral-400 hover:text-white"
+                  >
                     Projects
                   </Link>
                 </li>
                 <li>
-                  <Link href="#" className="text-neutral-400 hover:text-white">
+                  <Link
+                    href="/services"
+                    className="text-neutral-400 hover:text-white"
+                  >
                     Services
                   </Link>
                 </li>
@@ -97,26 +119,26 @@ export default function Footer() {
           </div>
           <div className="flex justify-center items-center gap-4 w-full md:w-4/12 mb-4 md:mb-0">
             <Link
-              href="#"
+              href={globalData?.twitter_link || "#"}
               className="p-2 border rounded-full hover:border-neutral-500"
             >
               <Twitter className="h-4 w-4 text-neutral-400" />
             </Link>
             <Link
-              href="#"
+              href={globalData?.facebook_link || "#"}
               className="p-2 border rounded-full hover:border-neutral-500"
             >
               <Facebook className="h-4 w-4 text-neutral-400" />
             </Link>
             <Link
-              href="#"
+              href={globalData?.linkedin_link || "#"}
               className="p-2 border rounded-full hover:border-neutral-500"
             >
               <Linkedin className="h-4 w-4 text-neutral-400" />
             </Link>
           </div>
           <div className="text-center md:text-right text-neutral-400 text-sm w-full md:w-4/12">
-            Copyright © NEWWAVE 2025. Developed by Minaret A
+            Copyright © NEWWAVE 2025. Developed by AMA
           </div>
         </div>
       </div>
