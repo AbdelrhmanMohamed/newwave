@@ -46,7 +46,7 @@ export const PageBanner: React.FC<HeroBannerProps> = ({
         >
           {title}
         </h1>
-        <div className="mt-6 space-x-2 max-w-11/12 mx-auto truncate">
+        <div className="mt-8 space-x-2 max-w-11/12 mx-auto truncate">
           {breadcrumbs.map((item, index) => (
             <span key={index} className="text-neutral-400 ">
               {item.href ? (

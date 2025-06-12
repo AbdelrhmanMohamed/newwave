@@ -102,12 +102,12 @@ export function generateMetadataObject(seo: SEO_Response) {
       images: [
         {
           url:
-            getImageUrl(seo?.metaImage.url) ||
+            getImageUrl(seo?.metaImage?.url) ||
             "https://newwave.com/default-image.jpg",
-          width: seo.metaImage?.width || 1200,
-          height: seo.metaImage?.height || 630,
+          width: seo?.metaImage?.width || 1200,
+          height: seo?.metaImage?.height || 630,
           alt:
-            seo.metaImage?.alternativeText ||
+            seo?.metaImage?.alternativeText ||
             seo?.metaTitle ||
             "Default Alt Text",
         },
@@ -122,10 +122,10 @@ export function generateMetadataObject(seo: SEO_Response) {
           url:
             getImageUrl(seo?.metaImage.url) ||
             "https://newwave.com/default-image.jpg",
-          width: seo.metaImage?.width || 1200,
-          height: seo.metaImage?.height || 630,
+          width: seo?.metaImage?.width || 1200,
+          height: seo?.metaImage?.height || 630,
           alt:
-            seo.metaImage?.alternativeText ||
+            seo?.metaImage?.alternativeText ||
             seo?.metaTitle ||
             "Default Alt Text",
         },

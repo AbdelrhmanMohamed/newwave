@@ -110,7 +110,7 @@ export default async function BlogDetails({
           { label: "Blog", href: "/blog" },
           { label: slug },
         ]}
-        className="text-3xl sm:text-4xl lg:text-5xl max-w-11/12 mx-auto text-center line-clamp-3 break-words whitespace-break-spaces leading-10 md:leading-14 lg:leading-16"
+        className="text-[1.5rem] sm:text-4xl lg:text-5xl max-w-11/12 mx-auto text-center line-clamp-3 break-words whitespace-break-spaces leading-8 md:leading-14 lg:leading-16"
       />
       <div className="max-w-5xl mx-auto px-6">
         {/** MAIN IMAGE */}
