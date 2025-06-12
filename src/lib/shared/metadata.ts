@@ -101,9 +101,7 @@ export function generateMetadataObject(seo: SEO_Response) {
       type: "article",
       images: [
         {
-          url:
-            getImageUrl(seo?.metaImage?.url) ||
-            "https://newwave.com/default-image.jpg",
+          url: getImageUrl(seo?.metaImage?.url) || "",
           width: seo?.metaImage?.width || 1200,
           height: seo?.metaImage?.height || 630,
           alt:
@@ -119,9 +117,7 @@ export function generateMetadataObject(seo: SEO_Response) {
       description: seo?.metaDescription,
       images: [
         {
-          url:
-            getImageUrl(seo?.metaImage.url) ||
-            "https://newwave.com/default-image.jpg",
+          url: getImageUrl(seo?.metaImage.url) || "",
           width: seo?.metaImage?.width || 1200,
           height: seo?.metaImage?.height || 630,
           alt:

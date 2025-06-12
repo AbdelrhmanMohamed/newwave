@@ -36,7 +36,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     },
     true
   );
-  console.log("Blog metadata:", blog);
   if (!blog) {
     return {
       title: "Blog not found",
