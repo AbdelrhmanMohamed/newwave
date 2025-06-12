@@ -35,6 +35,12 @@ export async function generateMetadata(): Promise<Metadata> {
     },
     true
   );
+  if (!pageData) {
+    return {
+      title: "About Us",
+      description: "Learn more about our company and values.",
+    };
+  }
   const seo = pageData?.seo;
   const metadata = generateMetadataObject(seo);
   return metadata;
