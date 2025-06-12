@@ -138,7 +138,7 @@ export default async function Footer() {
             </Link>
           </div>
           <div className="text-center md:text-right text-neutral-400 text-sm w-full md:w-4/12">
-            Copyright © NEWWAVE 2025. Developed by NEWWAVE. All rights reserved.
+            Copyright © NEWWAVE 2025. Developed by NEWWAVE.
           </div>
         </div>
       </div>

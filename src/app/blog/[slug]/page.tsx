@@ -121,11 +121,11 @@ export default async function BlogDetails({
             className="object-cover"
           />
         </div>
-        <div className="flex justify-between py-2">
-          <p className="text-neutral-300 mt-4 tracking-wide uppercase text-sm">
+        <div className="flex justify-between py-2 mt-4 items-center">
+          <p className="text-neutral-300 tracking-wide uppercase text-sm">
             {new Date(blog.date).toLocaleDateString()}
           </p>
-          <p className="text-primary text-sm font-semibold mt-4 tracking-wide uppercase">
+          <p className="text-primary text-sm font-semibold tracking-wide uppercase">
             By {blog.author}
           </p>
           <FloatingShare url={articleUrl} title={blog?.title} />

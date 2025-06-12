@@ -114,7 +114,7 @@ export default function TopicsSection({
         {features.map((feature, index) => (
           <div
             key={index}
-            className=" text-neutral-400 flex justify-start lg:justify-center gap-2 md:border-r border-neutral-600 last:border-r-0 px-0 lg:px-10"
+            className=" text-neutral-400 flex items-center justify-start lg:justify-center gap-2 md:border-r border-neutral-600 last:border-r-0 px-0 lg:px-10"
           >
             <Asterisk className="w-9 h-9 min-w-9 min-h-9 text-primary" />
             <p className="text-neutral-400 ">{feature}</p>
