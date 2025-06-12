@@ -76,9 +76,9 @@ export function generateMetadataObject(seo: SEO_Response) {
   const socialOpenGraphNetworks = seo?.metaSocial?.reduce(
     (acc: any, social: MetaSocial) => {
       acc[social.socialNetwork] = {
-        url: social.url,
-        title: social.title,
-        description: social.description,
+        url: social?.url,
+        title: social?.title,
+        description: social?.description,
       };
       return acc;
     },
