@@ -21,7 +21,9 @@ import OurTeam from "./_components/team";
 import GlobalPresence from "./_components/global-presence";
 import Market from "./_components/market";
 
-export const revalidate = 120;
+// export const revalidate = 120;
+
+export const dynamic = "force-dynamic";
 
 export async function generateMetadata(): Promise<Metadata> {
   const pageData = await fetchContentType(
