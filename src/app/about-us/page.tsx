@@ -35,7 +35,7 @@ export async function generateMetadata(): Promise<Metadata> {
     },
     true
   );
-  if (!pageData) {
+  if (!pageData?.seo) {
     return {
       title: "About Us",
       description: "Learn more about our company and values.",
@@ -148,13 +148,13 @@ export default async function AboutUsPage() {
   return (
     <div>
       <PageBanner
-        title={aboutUsData.title || "About Us"}
+        title={aboutUsData?.title || "About Us"}
         backgroundImage={
-          getImageUrl(aboutUsData.cover?.url) || "/images/office.png"
+          getImageUrl(aboutUsData?.cover?.url) || "/images/office.png"
         }
         breadcrumbs={[
           { label: "Home", href: "/" },
-          { label: aboutUsData.title || "About Us" },
+          { label: aboutUsData?.title || "About Us" },
         ]}
       />
       <motion.section
@@ -234,9 +234,9 @@ export default async function AboutUsPage() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {(aboutUsData?.core_values || []).map((value, index) => (
             <BorderCard
-              iconUrl={value.icon?.url || ""}
-              title={value.title}
-              description={value.description}
+              iconUrl={value?.icon?.url || ""}
+              title={value?.title}
+              description={value?.description}
               key={index}
             />
           ))}
