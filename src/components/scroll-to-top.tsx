@@ -39,7 +39,7 @@ export default function ScrollToTop() {
       animate={{ opacity: isVisible ? 1 : 0 }}
       transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
     >
-      <ChevronUp className="w-6 h-6" />
+      <ChevronUp className="w-5 h-5" />
     </motion.button>
   );
 }
