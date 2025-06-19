@@ -122,7 +122,7 @@ export default async function CareerDetailsPage({
               alt={careerData.title || "Job Image"}
               width={800}
               height={500}
-              className="w-full h-[28rem] object-cover"
+              className="w-full h-[33rem] object-cover"
             />
             <div className="mt-4 flex items-center text-sm justify-between">
               <div className="flex items-center space-x-2">

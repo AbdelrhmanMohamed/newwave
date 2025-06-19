@@ -1,11 +1,12 @@
 "use client";
 import type React from "react";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { MessageSquare, X, Mail } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { WhatsAppIcon, TelegramIcon } from "./icons";
 import { motion } from "motion/react";
 import { GlobalData } from "@/types/global";
+import { usePathname } from "next/navigation";
 
 type SocialIcon = {
   icon: React.ReactNode;
@@ -48,6 +49,7 @@ type FloatingActionButtonProps = {
 export default function FloatingActionButton({
   data,
 }: FloatingActionButtonProps) {
+  const pathName = usePathname();
   const [isOpen, setIsOpen] = useState(false);
   const [hoveredIcon, setHoveredIcon] = useState<string | null>(null);
   const [isMainHovered, setIsMainHovered] = useState(false);
@@ -79,27 +81,35 @@ export default function FloatingActionButton({
 
   useEffect(() => {
     const handleScroll = () => {
-      const scrollTop = window.scrollY;
+      // const scrollTop = window.scrollY;
       // const windowHeight = window.innerHeight;
       // const fullHeight = document.body.scrollHeight;
-
       // Show only when near the bottom of the page
-      if (scrollTop) {
-        setIsVisible(true);
-      } else {
-        setIsVisible(false);
-      }
+      // if (scrollTop) {
+      //   setIsVisible(true);
+      // } else {
+      //   setIsVisible(false);
+      // }
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const notAllowedPaths = useRef(["/blog", "/blog/[slug]"]);
+  useEffect(() => {
+    if (notAllowedPaths.current.includes(pathName)) {
+      setIsVisible(false);
+    } else {
+      setIsVisible(true);
+    }
+  }, [pathName]);
+
   return (
     <motion.div
       className="fixed bottom-6 left-6 z-50 flex flex-col items-end gap-2"
       initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: isVisible ? 1 : 1, y: 0 }}
+      animate={{ opacity: isVisible ? 1 : 0, y: 0 }}
       transition={{
         duration: 0.5,
         ease: [0.16, 1, 0.3, 1],
