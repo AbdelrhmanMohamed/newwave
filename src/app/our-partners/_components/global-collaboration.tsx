@@ -1,18 +1,16 @@
 import React from "react";
-import { Asterisk, Lightbulb, Megaphone } from "lucide-react";
+import { Asterisk, CalendarDays, Presentation } from "lucide-react";
 import Image from "next/image";
+import { DataWithMedia } from "@/types/common";
 // import * as motion from "motion/react-client";
 
 type GlobalCollaborationProps = {
   title: string;
   description: string;
-  topics: {
-    id: number;
-    title: string;
-    content: string;
-  }[];
+  topics: DataWithMedia[];
   imageUrl: string;
   features: string[];
+  benefitsTitle: string;
 };
 
 export default function GlobalCollaboration({
@@ -21,6 +19,7 @@ export default function GlobalCollaboration({
   topics,
   imageUrl,
   features,
+  benefitsTitle,
 }: GlobalCollaborationProps) {
   return (
     <div className="text-center">
@@ -30,7 +29,7 @@ export default function GlobalCollaboration({
       <p className="text-neutral-300 max-w-5xl mx-auto mt-2">{description}</p>
       <div className="relative mt-12">
         <div className="grid lg:grid-cols-12 gap-12 items-start text-sm">
-          <div className="col-span-5 ">
+          <div className="col-span-12 lg:col-span-5 ">
             <Image
               src={imageUrl}
               alt="Image 1"
@@ -40,29 +39,29 @@ export default function GlobalCollaboration({
             />
           </div>
 
-          <div className="col-span-7 space-y-4">
+          <div className="col-span-12 lg:col-span-7 space-y-4">
             {topics.map((topic, index) => (
               <div key={topic.id} className="flex items-start gap-3">
                 <div className="space-y-2">
                   <div className="flex items-center gap-3">
                     {index === 0 ? (
-                      <Megaphone className="w-6 h-6 min-w-6 min-h-6 text-primary" />
+                      <CalendarDays className="w-6 h-6 min-w-6 min-h-6 text-primary" />
                     ) : (
-                      <Lightbulb className="w-6 h-6 min-w-6 min-h-6 text-primary" />
+                      <Presentation className="w-6 h-6 min-w-6 min-h-6 text-primary" />
                     )}
                     <h5 className="text-white font-medium text-2xl">
                       {topic.title}
                     </h5>
                   </div>
                   <div className="text-neutral-300 leading-relaxed text-sm text-left max-w-4xl px-8">
-                    {topic.content}
+                    {topic.description}
                   </div>
                 </div>
               </div>
             ))}
             {/* Bottom Features */}
-            <p className="text-neutral-300 font-medium text-sm mt-16 text-left px-2">
-              Benefits for Our Clients:
+            <p className="text-white text-base font-medium mt-16 text-left px-2">
+              {benefitsTitle}
             </p>
             <div className="grid grid-cols-1 md:grid-cols-2 mt-4 justify-start  items-center gap-4 px-2">
               {features.map((feature, index) => (

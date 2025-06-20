@@ -47,19 +47,6 @@ export default function Card({
           />
         </div>
         <div className="text-[15px] text-neutral-400 [&>*]:mb-2">
-          <p className="mb-6 leading-relaxed">
-            These alliances span specialists in pioneering event technologies,
-            virtual and augmented reality development, artificial intelligence
-            for events, and global event execution experts. This network is a
-            cornerstone of our ability to blend global innovation with deep
-            local market understanding.
-          </p>
-          <p className="leading-relaxed">
-            The rapid technological advancements showcased at global forums like
-            LEAP in Riyadh underscore the importance of international
-            collaboration in bringing state-of-the-art solutions to the Kingdom.
-            New Wave is committed to being a conduit for such expertise.
-          </p>
           <BlockRendererClient content={description as BlocksContent} />
         </div>
 

@@ -56,3 +56,10 @@ export interface RichTextWithMedia {
   description: BlocksContent;
   icon?: Media;
 }
+
+export interface DataWithMedia {
+  id: number;
+  title: string;
+  description: string;
+  icon?: Media;
+}
