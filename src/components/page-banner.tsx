@@ -40,7 +40,7 @@ export const PageBanner: React.FC<HeroBannerProps> = ({
       >
         <h1
           className={cn(
-            "text-4xl sm:text-5xl lg:text-6xl font-bold mx-auto max-w-10/12 break-words whitespace-break-spaces leading-10 md:leading-16 lg:leading-18",
+            "text-4xl sm:text-5xl lg:text-6xl font-bold mx-auto max-w-10/12 break-words whitespace-break-spaces leading-10 md:leading-16 lg:leading-16",
             className
           )}
         >

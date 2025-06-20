@@ -16,7 +16,7 @@ export const menuItems: Link_Item[] = [
       { name: "ABOUT US", href: "/about-us" },
       { name: "OUR PARTNERS", href: "/our-partners" },
       { name: "FAQ", href: "/faq" },
-      { name: "OUR TEAM", href: "/team" },
+      // { name: "OUR TEAM", href: "/team" },
       { name: "CAREERS", href: "/careers" },
     ],
   },

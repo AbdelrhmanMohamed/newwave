@@ -50,6 +50,7 @@ export default function PartnersPage() {
         }
         backgroundImage={"/images/office.png"}
         breadcrumbs={[{ label: "Home", href: "/" }, { label: "Our Partners" }]}
+        className="text-4xl md:text-5xl lg:text-5xl lg:leading-16"
       />
       {/*  Section */}
       <motion.section
@@ -114,7 +115,7 @@ export default function PartnersPage() {
       <section className="py-16 px-4 sm:px-6 lg:px-8 ">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
-            <h2 className="text-4xl md:text-5xl lg:text-4xl xl:text-5xl font-bold text-white mb-6 leading-14 flex">
+            <h2 className="text-4xl md:text-5xl lg:text-4xl xl:text-5xl font-bold text-white mb-4 leading-14">
               Our Trusted Partners
             </h2>
             <p className="text-neutral-300 max-w-5xl mx-auto">

@@ -47,7 +47,7 @@ const images = [
 
 export function PartnerSection() {
   return (
-    <div className="mb-16">
+    <div className="mb-16 mt-8">
       <div className="grid grid-cols-5 gap-5 space-y-5">
         {images.map((img, index) => (
           <motion.div
