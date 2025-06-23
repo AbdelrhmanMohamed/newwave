@@ -3,7 +3,6 @@ import { PartnerSection } from "./_components/partner-section";
 import { CTASection } from "./_components/cta-section";
 import { PageBanner } from "@/components/page-banner";
 import * as motion from "motion/react-client";
-import { LampIcon } from "@/components/icons";
 import SkillCard from "./_components/skill-card";
 import GlobalCollaboration from "./_components/global-collaboration";
 import AnimatedText from "@/components/effects/animate-text";
@@ -15,6 +14,7 @@ import { generateMetadataObject } from "@/lib/shared/metadata";
 import { console } from "inspector";
 import { PartnersPageData } from "@/types/our-parterner";
 import { getImageUrl } from "@/lib/utils";
+import PageHeader from "@/components/page-header";
 
 export const revalidate = 1;
 
@@ -106,15 +106,12 @@ export default async function PartnersPage() {
         }}
         className="xl:pl-12 px-6 py-20 lg:py-26 flex gap-8 flex-col lg:flex-row"
       >
-        <div className="flex items-start md:items-center lg:items-start flex-col md:flex-row text-left gap-6 md:gap-12 xl:gap-12 w-full justify-start -mt-1 min-w-[60%]">
-          <LampIcon className="text-primary w-16 h-16 md:w-20 md:h-20 lg:w-22 lg:h-22 lg:min-w-22 lg:min-h-22 md:min-h-20 md:min-w-20 min-w-16 min-h-16" />
-          <h2 className="text-4xl md:text-[2.5rem] xl:text-[3rem] font-bold text-primary leading-12 md:leading-16">
-            {pageData?.header?.title}
-          </h2>
-        </div>
-        <div className="text-neutral-400 w-full text-[1rem] text-left ">
-          <p>{pageData?.header?.description}</p>
-        </div>
+        <PageHeader
+          iconUrl={pageData?.header?.icon?.url || ""}
+          title={pageData?.header?.title || ""}
+          description={pageData?.header?.description || ""}
+          titleClassName="xl:text-[3rem] "
+        />
       </motion.section>
       <motion.section
         initial={{ opacity: 0 }}

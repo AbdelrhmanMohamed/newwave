@@ -16,4 +16,5 @@ export interface GlobalData {
   working_hours: string;
   main_address: string;
   main_phone: string;
+  support_title: string;
 }

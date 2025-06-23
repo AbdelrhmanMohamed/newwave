@@ -1,4 +1,4 @@
-import { Media } from "./common";
+import { Media, PageHeader } from "./common";
 
 export type Contact = {
   firstName: string;
@@ -20,14 +20,13 @@ export interface Contact_Page {
   enquiries_title: string;
   id: number;
   publishedAt: string;
-  response_time_description: string;
-  response_time_title: string;
   say_hello_title: string | null;
   say_hello_title_description: string | null;
   updatedAt: string;
   working_hours: string;
   header_cover: Media;
   say_hello_image: Media | null;
+  header: PageHeader;
 }
 
 export interface BranchLocation {

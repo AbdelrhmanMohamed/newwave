@@ -71,8 +71,9 @@ export function VideoPlayButton({
   return (
     <Dialog open={isModalOpen} onOpenChange={handleOpenChange}>
       <DialogTrigger asChild>
-        <button
-          className={`
+        {children || (
+          <button
+            className={`
             ${sizeClasses[size]} 
             rounded-full 
             bg-black 
@@ -86,14 +87,13 @@ export function VideoPlayButton({
             cursor-pointer 
             ${className}
           `}
-        >
-          {children || (
+          >
             <Play
               className={`${iconSizes[size]} text-white ml-1 rounded-2xl`}
               fill="currentColor"
             />
-          )}
-        </button>
+          </button>
+        )}
       </DialogTrigger>
       <DialogContent
         closeIcon={false}

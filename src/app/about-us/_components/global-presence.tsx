@@ -3,6 +3,8 @@ import Image from "next/image";
 import { BlocksContent } from "@strapi/blocks-react-renderer";
 import { getImageUrl } from "@/lib/utils";
 import BlockRendererClient from "@/components/block-render";
+import ButtonLine from "@/components/headings/button-line";
+import Link from "next/link";
 
 type GlobalPresenceProps = {
   title: string;
@@ -32,6 +34,9 @@ export default function GlobalPresence({
         <div className="text-[15px] leading-6 mb-4 text-neutral-300">
           <BlockRendererClient content={description || []} />
         </div>
+        <Link href="/our-partners" className="mt-4">
+          <ButtonLine title="Read More" />
+        </Link>
       </div>
     </div>
   );

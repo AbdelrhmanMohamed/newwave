@@ -12,6 +12,8 @@ export interface FAQPageData {
   title: string;
   cover: Media;
   header?: PageHeader;
+  contact_form_title?: string;
+  contact_form_image?: Media;
 }
 
 export interface FAQGroup {
@@ -19,4 +21,5 @@ export interface FAQGroup {
   title: string;
   image: Media;
   faqs: FAQ[];
+  order: number;
 }

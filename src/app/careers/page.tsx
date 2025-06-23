@@ -6,7 +6,6 @@ import * as motion from "motion/react-client";
 import CareerCard from "@/components/cards/career-card";
 import ContactSide from "@/components/contact-side";
 import InstagramCard from "@/components/cards/instagram-card";
-import { LampIcon } from "@/components/icons";
 import { Metadata } from "next";
 import fetchContentType from "@/lib/strapi/fetchContentType";
 import { generateMetadataObject } from "@/lib/shared/metadata";
@@ -17,6 +16,7 @@ import { getGlobalData } from "@/lib/shared/globalData";
 import AnimatedText from "@/components/effects/animate-text";
 import CareerForm from "./_components/form";
 import { getImageUrl } from "@/lib/utils";
+import PageHeader from "@/components/page-header";
 
 export const revalidate = 60;
 
@@ -99,34 +99,21 @@ export default async function CareerPage() {
       <motion.section
         initial={{ x: 300, opacity: 0 }}
         whileInView={{ x: 0, opacity: 1 }}
-        viewport={{ once: true }}
+        viewport={{ once: true, amount: 0.2 }}
         transition={{
           duration: 1,
         }}
-        className="xl:pl-12 px-6 py-20 lg:py-26 flex gap-8 flex-col lg:flex-row"
+        layout
+        className="px-4 lg:pl-12 lg:pr-6 py-14 md:py-20 lg:py-26 flex gap-6 md:gap-8 flex-col lg:flex-row"
       >
-        <div className="flex items-start md:items-center lg:items-start flex-col md:flex-row text-left gap-6 md:gap-12 xl:gap-12 w-full justify-start -mt-1 min-w-[60%]">
-          {/* {pageData?.header?.icon ? (
-                        <Image
-                            width={100}
-                            height={100}
-                            loading="lazy"
-                            src={pageData?.header?.icon?.url ? `${process.env.NEXT_PUBLIC_API_URL}${pageData?.header?.icon?.url}` : "/images/office.png"}
-                            alt="Career Icon"
-                            className='object-cover min-w-16 min-h-16 w-16 h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 xl:w-28 xl:h-28 text-primary'
-                        />
-                    ) : (
-                        <LampIcon className="w-16 h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 xl:w-28 xl:h-28 text-primary" />
-                    )} */}
-          <LampIcon className="text-primary w-16 h-16 md:w-20 md:h-20 lg:w-22 lg:h-22 lg:min-w-22 lg:min-h-22 md:min-h-20 md:min-w-20 min-w-16 min-h-16" />
-
-          <h2 className="text-4xl md:text-[2.5rem] xl:text-[3rem] font-bold text-primary leading-12 md:leading-16">
-            {pageData?.header?.title || "Begin Your Career With Us"}
-          </h2>
-        </div>
-        <div className="text-neutral-400 w-full text-[1rem] text-left ">
-          <p>{pageData?.header?.description}</p>
-        </div>
+        <PageHeader
+          iconUrl={pageData?.header?.icon?.url || ""}
+          title={pageData?.header?.title || "Career"}
+          description={
+            pageData?.header?.description ||
+            "We are here to help you with your queries and concerns."
+          }
+        />
       </motion.section>
       {/** Reach Us Section */}
       <div className="grid grid-cols-12 px-4 gap-4 lg:gap-12">

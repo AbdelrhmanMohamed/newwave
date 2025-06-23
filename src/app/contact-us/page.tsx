@@ -13,6 +13,7 @@ import { Metadata } from "next";
 import { ContactPageWithBranchesAndSocialLinks } from "@/types/contact";
 import { getImageUrl } from "@/lib/utils";
 import { getGlobalData } from "@/lib/shared/globalData";
+import PageHeader from "@/components/page-header";
 
 export const revalidate = 60;
 export const dynamicParams = true;
@@ -31,7 +32,7 @@ export async function generateMetadata(): Promise<Metadata> {
   return metadata;
 }
 
-async function getBaseContactPageData() {
+async function getBaseContactPageData(): Promise<ContactPageWithBranchesAndSocialLinks | null> {
   try {
     const res = await fetchContentType(
       "contact-us-page",
@@ -43,6 +44,9 @@ async function getBaseContactPageData() {
           say_hello_image: {
             fields: ["url"],
           },
+          header: {
+            populate: "*",
+          },
         },
       },
       true
@@ -50,7 +54,7 @@ async function getBaseContactPageData() {
     return res as ContactPageWithBranchesAndSocialLinks;
   } catch (error) {
     console.error("Error fetching base contact page data:", error);
-    return {} as ContactPageWithBranchesAndSocialLinks;
+    return null;
   }
 }
 
@@ -79,24 +83,11 @@ async function getBranchesData() {
   }
 }
 
-// async function getSocialLinksData() {
-//   try {
-//     const res = await fetchContentType('contact-us-page', {
-//       'populate': 'social_links',
-//     }, true) as ContactPageWithBranchesAndSocialLinks;
-//     return res;
-//   } catch (error) {
-//     console.error("Error fetching social links data:", error);
-//     return {} as ContactPageWithBranchesAndSocialLinks;
-//   }
-// }
-
 export default async function ContactUs() {
-  // Initiate both requests in sequence
   const contactPage = await getBaseContactPageData();
   const contactBranches = await getBranchesData();
   const globalData = await getGlobalData();
-  const branches = contactBranches?.branches || [] || [];
+  const branches = contactBranches?.branches || [];
   const socialLinks = [
     { id: 1, name: "facebook", url: globalData?.facebook_link || "#" },
     { id: 2, name: "instagram", url: globalData?.instagram_link || "#" },
@@ -131,17 +122,14 @@ export default async function ContactUs() {
         layout
         className="px-4 lg:pl-12 lg:pr-6 py-14 md:py-20 lg:py-26 flex gap-6 md:gap-8 flex-col lg:flex-row"
       >
-        <div className="flex items-center flex-col md:flex-row text-center lg:text-left gap-4 md:gap-12 xl:gap-8 w-full justify-center xl:justify-start xl:w-7/12 ">
-          <div className="size-[100px] min-w-[100px] relative lg:size-[115px] lg:min-w-[115px] xl:size-[130px] xl:min-w-[130px]">
-            <Image src="/icons/24hour.svg" alt="24 work hour" fill />
-          </div>
-          <h2 className="text-4xl md:text-5xl xl:text-[3.4rem] font-bold text-primary leading-12 md:leading-16">
-            {contactPage?.response_time_title}
-          </h2>
-        </div>
-        <div className="text-neutral-400 w-full text-center lg:text-left lg:w-5/12 relative top-2">
-          <p>{contactPage?.response_time_description}</p>
-        </div>
+        <PageHeader
+          iconUrl={contactPage?.header?.icon?.url || ""}
+          title={contactPage?.header?.title || "24/7 Response Time"}
+          description={
+            contactPage?.header?.description ||
+            "We are here to assist you at any time, day or night."
+          }
+        />
       </motion.section>
 
       {/* Contact Form and Say Hello Section */}
@@ -203,15 +191,28 @@ export default async function ContactUs() {
             {contactPage?.enquiries_title || "Enquiries"}
           </h3>
           <div className="flex gap-4 md:gap-3 lg:gap-8 flex-col sm:flex-row md:flex-col lg:flex-row">
-            <a href={`mailto:${globalData.email1}`} className="text-white">
-              {globalData.email1}
-            </a>
-            <a
-              href={`mailto:${globalData.email2 || globalData.email_career}`}
-              className="vs"
-            >
-              {globalData.email2 || globalData.email_career}
-            </a>
+            {globalData.email1 && (
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href={`https://mail.google.com/mail/?view=cm&to=${globalData.email1}&subject=Hello&body=Hello`}
+                className="text-white"
+              >
+                {globalData.email1}
+              </a>
+            )}
+            {(globalData.email2 || globalData.email_career) && (
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href={`https://mail.google.com/mail/?view=cm&to=${
+                  globalData.email2 || globalData.email_career
+                }&subject=Hello&body=Hello`}
+                className="vs"
+              >
+                {globalData.email2 || globalData.email_career}
+              </a>
+            )}
           </div>
 
           <div className="flex space-x-4 my-4">
