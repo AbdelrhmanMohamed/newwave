@@ -60,18 +60,14 @@ async function getBaseContactPageData(): Promise<ContactPageWithBranchesAndSocia
 
 async function getBranchesData() {
   try {
-    const res = await fetchContentType(
-      "branches",
-      {
-        populate: {
-          cover: {
-            fields: ["url"],
-          },
+    const res = await fetchContentType("branches", {
+      populate: {
+        cover: {
+          fields: ["url"],
         },
       },
-      false
-    );
-    return res as Branch[];
+    });
+    return res?.data as Branch[];
   } catch (error) {
     console.error("Error fetching branches data:", error);
     return [] as Branch[];
