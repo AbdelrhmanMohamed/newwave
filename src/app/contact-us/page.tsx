@@ -69,7 +69,7 @@ async function getBranchesData() {
           },
         },
       },
-      true
+      false
     );
     return res as ContactPageWithBranchesAndSocialLinks;
   } catch (error) {
