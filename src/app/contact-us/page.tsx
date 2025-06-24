@@ -61,16 +61,11 @@ async function getBaseContactPageData(): Promise<ContactPageWithBranchesAndSocia
 async function getBranchesData() {
   try {
     const res = await fetchContentType(
-      "contact-us-page",
+      "branches",
       {
         populate: {
-          branches: {
-            fields: ["id", "name", "address", "email", "tel"],
-            populate: {
-              cover: {
-                fields: ["url"],
-              },
-            },
+          cover: {
+            fields: ["url"],
           },
         },
       },
