@@ -17,7 +17,6 @@ export default function Stepper({ steps }: StepperProps) {
   const isMobile = useMediaQuery(ScreenSize.Mobile);
   const isTablet = useMediaQuery(ScreenSize.Tablet);
   const [newSteps, setNewSteps] = React.useState<Process[]>(steps);
-  console.log("Stepper rendered with steps:", steps);
 
   React.useEffect(() => {
     if (isMobile) {
@@ -79,7 +78,7 @@ function StepperItem({
         className={cn("relative h-[360px]", reverse ? "mt-20" : "mb-20")}
       >
         <Image
-          src={getImageUrl(step.iconUrl)}
+          src={getImageUrl(step?.icon?.url)}
           alt={step.title}
           fill
           className="object-cover"

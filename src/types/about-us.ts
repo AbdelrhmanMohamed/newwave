@@ -45,6 +45,7 @@ export interface Process {
   title: string;
   iconUrl: string;
   description: BlocksContent;
+  icon?: Media;
 }
 
 export interface ImpactHighlight {

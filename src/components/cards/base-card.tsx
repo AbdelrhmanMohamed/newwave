@@ -13,7 +13,6 @@ export default function BaseCard({
   title,
   description,
 }: BaseCardProps) {
-  console.log("BaseCard rendered with iconUrl:", iconUrl);
   return (
     <div className="p-8 border border-primary bg-black group flex flex-col items-center text-center gap-4 h-full">
       <div className="flex items-center justify-center p-4 border border-primary mb-2 rounded-full fill-primary group-hover:fill-white text-primary group-hover:bg-primary group-hover:text-white transition-colors duration-500 size-24">

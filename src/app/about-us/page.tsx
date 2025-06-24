@@ -99,45 +99,6 @@ async function getAboutUsData() {
   }
 }
 
-// const coreValues = [
-//   {
-//     icon: Lightbulb,
-//     title: "Innovation",
-//     description:
-//       "We relentlessly push boundaries, integrating creative solutions and pioneering technologies (VR, AR, AI, 360°) to deliver experiences that captivate and inspire.",
-//   },
-//   {
-//     icon: Award,
-//     title: "Excellence",
-//     description:
-//       "Our commitment to the highest standards ensures that every project, from conception to execution, stands out for its quality, precision, and lasting impact.",
-//   },
-//   {
-//     icon: Handshake,
-//     title: "Collaboration",
-//     description:
-//       "We believe in the power of partnership – with our clients, our international associates, and within our diverse team – fostering open communication and shared success.",
-//   },
-//   {
-//     icon: Shield,
-//     title: "Integrity & Transparency",
-//     description:
-//       "We build trust through honest, clear communication and complete operational transparency, ensuring our clients are informed and confident at every stage.",
-//   },
-//   {
-//     icon: TrendingUp,
-//     title: "Strategic Impact",
-//     description:
-//       "Beyond flawless execution, we focus on delivering measurable value, ensuring our PR and event solutions achieve tangible business objectives and contribute to our clients' growth.",
-//   },
-//   {
-//     icon: Zap,
-//     title: "Agility",
-//     description:
-//       "In a fast-paced industry, we adapt quickly to evolving trends and client needs, delivering timely and effective solutions without compromising quality.",
-//   },
-// ];
-
 export default async function AboutUsPage() {
   const aboutUsData = await getAboutUsData();
   const globalData = await getGlobalData();
@@ -170,10 +131,7 @@ export default async function AboutUsPage() {
           section="About Us"
           title={aboutUsData?.about_title || "About New Wave"}
           description={aboutUsData?.about_summary || []}
-          imageUrl={
-            getImageUrl(aboutUsData?.about_image?.url) ||
-            "https://gaaga.wpengine.com/wp-content/uploads/2023/06/gaaga-Process-Content-Img-1-1.png"
-          }
+          imageUrl={getImageUrl(aboutUsData?.about_image?.url) || ""}
         />
       </motion.section>
       <motion.section

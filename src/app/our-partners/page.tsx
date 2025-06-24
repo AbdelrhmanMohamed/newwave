@@ -86,6 +86,8 @@ export default async function PartnersPage() {
     return <div>Error loading partner data</div>;
   }
 
+  console.log("Page Data:", pageData);
+
   return (
     <div className="min-h-screen">
       <PageBanner
