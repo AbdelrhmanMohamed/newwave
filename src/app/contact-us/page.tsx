@@ -10,7 +10,7 @@ import { SocialIcon } from "@/components/social-icon";
 import fetchContentType from "@/lib/strapi/fetchContentType";
 import { generateMetadataObject } from "@/lib/shared/metadata";
 import { Metadata } from "next";
-import { ContactPageWithBranchesAndSocialLinks } from "@/types/contact";
+import { Branch, ContactPageWithBranchesAndSocialLinks } from "@/types/contact";
 import { getImageUrl } from "@/lib/utils";
 import { getGlobalData } from "@/lib/shared/globalData";
 import PageHeader from "@/components/page-header";
@@ -71,10 +71,10 @@ async function getBranchesData() {
       },
       false
     );
-    return res as ContactPageWithBranchesAndSocialLinks;
+    return res as Branch[];
   } catch (error) {
     console.error("Error fetching branches data:", error);
-    return {} as ContactPageWithBranchesAndSocialLinks;
+    return [] as Branch[];
   }
 }
 
@@ -82,7 +82,8 @@ export default async function ContactUs() {
   const contactPage = await getBaseContactPageData();
   const contactBranches = await getBranchesData();
   const globalData = await getGlobalData();
-  const branches = contactBranches?.branches || [];
+  const branches = contactBranches || [];
+  console.log("Branches Data:", branches);
   const socialLinks = [
     { id: 1, name: "facebook", url: globalData?.facebook_link || "#" },
     { id: 2, name: "instagram", url: globalData?.instagram_link || "#" },
