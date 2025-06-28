@@ -13,7 +13,7 @@ export default function MessagesSection({ message }: Props) {
       <div className="grid lg:grid-cols-6 gap-12 items-start text-sm">
         <div className="lg:col-span-2 mb-8 lg:mb-0">
           <Image
-            src={getImageUrl(message.image.url) || ""}
+            src={getImageUrl(message?.image?.url) || ""}
             alt={message.title || "Message Image"}
             width={620}
             height={500}

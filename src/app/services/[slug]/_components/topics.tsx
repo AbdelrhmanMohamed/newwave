@@ -50,7 +50,7 @@ export default function TopicsSection({
                 alt="Image 1"
                 width={300}
                 height={400}
-                className="object-contain relative top-5 lg:w-[300px] md:w-[400px]"
+                className="object-contain relative top-5 lg:w-[350px] md:w-[450px]"
               />
             </motion.div>
             <motion.div
@@ -69,7 +69,7 @@ export default function TopicsSection({
                 alt="Image 2"
                 width={300}
                 height={400}
-                className="object-contain relative top-20 lg:w-[300px] md:w-[400px]"
+                className="object-contain relative top-20 lg:w-[350px] md:w-[450px]"
               />
             </motion.div>
           </div>

@@ -66,4 +66,5 @@ export interface ServiceDetail {
   final_message: string;
   call_action_url: string;
   call_action_text: string;
+  cover?: Media;
 }

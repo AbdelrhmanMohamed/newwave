@@ -7,15 +7,25 @@ type Props = {
 };
 
 export default function RenderSubject({ subject }: Props) {
+  const renderColsSpan = () => {
+    if (subject.images && subject.images.length > 2) {
+      return "col-span-2";
+    } else if (subject.images && subject.images.length === 2) {
+      return "col-span-3";
+    } else if (subject.images && subject.images.length === 1) {
+      return "col-span-6";
+    }
+    return "col-span-6";
+  };
   return (
     <div key={subject.id} className="mt-6">
       <div className="grid grid-cols-6 gap-8 my-6">
-        {(subject.images || []).map((image) => (
-          <div key={image.id} className="col-span-2">
+        {(subject?.images || []).map((image) => (
+          <div key={image.id} className={renderColsSpan()}>
             <Image
               src={`${process.env.NEXT_PUBLIC_API_URL}${image.url}`}
               alt={image.alternativeText || ""}
-              width={500}
+              width={1200}
               height={300}
               className="object-cover"
             />

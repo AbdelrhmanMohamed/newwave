@@ -9,7 +9,8 @@ import { generateMetadataObject } from "@/lib/shared/metadata";
 import { Blog, BlogPageData } from "@/types/blog";
 import { getImageUrl } from "@/lib/utils";
 import { ClapperboardIcon } from "lucide-react";
-export const revalidate = 60;
+
+export const revalidate = 1;
 // export const dynamicParams = true
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -42,6 +43,7 @@ async function getBlogPageData() {
             populate: "*",
           },
         },
+        sort: ["createdAt:ASC"],
       },
       true
     );
@@ -56,7 +58,7 @@ async function fetchBlogs(): Promise<Blog[]> {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/api/blogs?populate=cover`,
     {
-      next: { revalidate: 60 }, // Revalidate every 60 seconds
+      next: { revalidate: 1 }, // Revalidate every 60 seconds
       method: "GET",
     }
   );
@@ -110,21 +112,27 @@ export default async function BlogPage() {
         className="px-8 lg:px-16 xl:px-20 min-h-40"
       >
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 mb-20 md:mb-30 gap-8">
-          {(blogs || []).map((blog) => (
-            <BlogCard
-              key={blog.id}
-              imageUrl={getImageUrl(blog?.cover?.url)}
-              imageAlt={blog?.cover?.alternativeText || ""}
-              date={blog?.date}
-              title={blog?.title}
-              excerpt={
-                blog?.summary
-                  ? blog?.summary.split(" ").slice(0, 20).join(" ") + "..."
-                  : ""
-              }
-              slug={blog?.slug}
-            />
-          ))}
+          {(blogs || [])
+            .sort(
+              (a, b) =>
+                new Date(a.createdAt).getTime() -
+                new Date(b.createdAt).getTime()
+            )
+            .map((blog) => (
+              <BlogCard
+                key={blog.id}
+                imageUrl={getImageUrl(blog?.cover?.url)}
+                imageAlt={blog?.cover?.alternativeText || ""}
+                date={blog?.date}
+                title={blog?.title}
+                excerpt={
+                  blog?.summary
+                    ? blog?.summary.split(" ").slice(0, 20).join(" ") + "..."
+                    : ""
+                }
+                slug={blog?.slug}
+              />
+            ))}
         </div>
         <CustomPagination totalPages={3} initialPage={2} />
       </motion.section>

@@ -64,6 +64,9 @@ async function getServiceData(slug: string): Promise<ServiceDetail | null> {
           image: {
             fields: ["url"],
           },
+          cover: {
+            fields: ["url"],
+          },
           main_content: "*",
           topics: {
             populate: ["icon", "image"],
@@ -116,7 +119,9 @@ export default async function ServiceDetails({
       <PageBanner
         title={service.title || "Service Details"}
         backgroundImage={
-          getImageUrl(service.image?.url) || "/images/blogs-bg.jpg"
+          getImageUrl(
+            service?.cover?.url ? service?.cover?.url : service.image.url
+          ) || "/images/blogs-bg.jpg"
         }
         breadcrumbs={[
           { label: "Home", href: "/" },
@@ -126,9 +131,13 @@ export default async function ServiceDetails({
         className="text-3xl sm:text-4xl lg:text-5xl max-w-11/12 mx-auto text-center line-clamp-3 break-words whitespace-break-spaces leading-10 md:leading-14 lg:leading-16"
       />
       <div className="px-4 md:px-8 lg:px-10 ">
-        <div className="relative w-full h-[320px] md:h-[450px] lg:h-[550px]">
+        <div className="relative w-full h-[350px] md:h-[500px] lg:h-[600px]">
           <Image
-            src={getImageUrl(service.image?.url) || "/images/blogs-bg.jpg"}
+            src={
+              getImageUrl(
+                service?.cover?.url ? service?.cover?.url : service.image.url
+              ) || "/images/blogs-bg.jpg"
+            }
             alt={service.title || "Service Image"}
             fill
             className="object-cover"
@@ -145,28 +154,28 @@ export default async function ServiceDetails({
           description2={service.main_content.content2 || ""}
         />
         {/* Messages and Topics Sections */}
-        <MessagesSection message={service.messages} />
+        <MessagesSection message={service?.messages} />
         <TopicsSection
-          topics={service.topics || []}
-          image1Url={getImageUrl(service.topics[0]?.image[0]?.url)}
-          image2Url={getImageUrl(service.topics[1]?.image[0]?.url)}
-          bgUrl="https://gaaga.wpengine.com/wp-content/uploads/2023/06/service-detail-bg-1.jpg"
+          topics={service?.topics || []}
+          image1Url={getImageUrl(service?.topics?.[0]?.image?.[0]?.url ?? "")}
+          image2Url={getImageUrl(service?.topics?.[1]?.image?.[0]?.url ?? "")}
+          bgUrl={getImageUrl(service?.cover?.url || service?.image?.url)}
           features={[
-            service.feature1 || "Feature 1",
-            service.feature2 || "Feature 2",
-            service.feature3 || "Feature 3",
+            service?.feature1 || "Feature 1",
+            service?.feature2 || "Feature 2",
+            service?.feature3 || "Feature 3",
           ]}
         />
       </div>
       <div className="mt-8 border border-primary/50 text-center p-6 text-neutral-300 mx-4 md:mx-8 lg:mx-16">
         <q>
-          {service.final_message ||
+          {service?.final_message ||
             "Partner with New Wave to transform your entertainment vision into a legendary spectacle that resonates deeply and leaves a lasting legacy."}
         </q>
         <div className="mt-6 flex justify-center">
-          <Link href={service.call_action_url || "/projects"}>
+          <Link href={service?.call_action_url || "/projects"}>
             <ButtonLine
-              title={service.call_action_text || "Discover Our Projects"}
+              title={service?.call_action_text || "Discover Our Projects"}
               className="text-primary hover:text-white"
             />
           </Link>
