@@ -158,7 +158,11 @@ export default async function ServiceDetails({
         <TopicsSection
           topics={service?.topics || []}
           image1Url={getImageUrl(service?.topics?.[0]?.image?.[0]?.url ?? "")}
-          image2Url={getImageUrl(service?.topics?.[1]?.image?.[0]?.url ?? "")}
+          image2Url={getImageUrl(
+            (service?.topics?.[1]?.image?.[0]?.url ||
+              service?.topics?.[0]?.image?.[1]?.url) ??
+              ""
+          )}
           bgUrl={getImageUrl(service?.cover?.url || service?.image?.url)}
           features={[
             service?.feature1 || "Feature 1",
