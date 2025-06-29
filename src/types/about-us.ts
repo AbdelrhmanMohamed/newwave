@@ -52,5 +52,5 @@ export interface ImpactHighlight {
   id: number;
   title: string;
   count: number;
-  icon: Media | null;
+  icon?: Media;
 }

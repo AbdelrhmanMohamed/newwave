@@ -69,19 +69,21 @@ export default async function Footer() {
           <div className="space-y-6 w-full md:w-1/2 mt-8 md:mt-0">
             <h3 className="text-2xl font-bold">Services</h3>
             <ul className="space-y-3 list-none">
-              {(services || [])?.map((service) => (
-                <li
-                  key={service.id}
-                  className="flex items-center text-neutral-400 hover:text-primary transition-colors duration-500 group"
-                >
-                  <Link href={`/services/${service.slug}`}>
-                    <div className="block group-hover:translate-x-3 transition-transform duration-500">
-                      <span className="opacity-0 min-w-[8px] min-h-[8px] bg-neutral-200 mr-1 inline-block rounded-full group-hover:bg-primary group-hover:opacity-100 transition-all duration-500" />
-                      {service?.title}
-                    </div>
-                  </Link>
-                </li>
-              ))}
+              {(services || [])
+                .sort((a, b) => a.order - b.order)
+                ?.map((service) => (
+                  <li
+                    key={service.id}
+                    className="flex items-center text-neutral-400 hover:text-primary transition-colors duration-500 group"
+                  >
+                    <Link href={`/services/${service.slug}`}>
+                      <div className="block group-hover:translate-x-3 transition-transform duration-500">
+                        <span className="opacity-0 min-w-[8px] min-h-[8px] bg-neutral-200 mr-1 inline-block rounded-full group-hover:bg-primary group-hover:opacity-100 transition-all duration-500" />
+                        {service?.title}
+                      </div>
+                    </Link>
+                  </li>
+                ))}
             </ul>
           </div>
         </div>

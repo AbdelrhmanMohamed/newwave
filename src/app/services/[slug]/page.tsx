@@ -100,9 +100,6 @@ export default async function ServiceDetails({
   const origin = `${protocol}://${host}`;
   const serviceUrl = `${origin}/services/${slug}`;
 
-  console.log("Service URL:", serviceUrl);
-  console.log("Service Data:", service);
-
   if (!service) {
     return <div className="text-center">Service not found</div>;
   }

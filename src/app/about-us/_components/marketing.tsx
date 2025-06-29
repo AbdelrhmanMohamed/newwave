@@ -10,14 +10,16 @@ type ProcedureProps = {
   bgUrl?: string;
   title?: string;
   highlights: ImpactHighlight[];
+  className?: string;
 };
 
 export default function MarketingSection({
   bgUrl,
   highlights,
+  className,
 }: ProcedureProps) {
   return (
-    <div className="relative bg-background">
+    <div className={`relative bg-background ${className}`}>
       {/* Content container */}
       <div className="z-10 pt-32 pb-20 px-4 md:px-8 lg:px-12 xl:px-16 relative">
         <motion.div
@@ -86,23 +88,6 @@ export default function MarketingSection({
               </span>
             </div>
           ))}
-          {/* <div className="flex items-center text-left gap-6 lg:gap-12">
-                        <StrokeNumber animate number={10} className='lg:text-[7rem] md:text-[6rem] text-[5rem]' />
-                        <span className='text-2xl text-neutral-300 leading-10'> Years Experience</span>
-                    </div>
-                    <div className="flex items-center text-left gap-6 lg:gap-12">
-                        <StrokeNumber animate number={12} className='lg:text-[7rem] md:text-[6rem] text-[5rem]' />
-                        <span className='text-2xl text-neutral-300 leading-10'> Professional Peoples</span>
-                    </div>
-                    <div className="flex items-center text-left gap-6 lg:gap-12">
-                        <StrokeNumber animate number={50} className='lg:text-[7rem] md:text-[6rem] text-[5rem]' />
-                        <span className='text-2xl text-neutral-300 leading-10'> Clients Statisfied</span>
-
-                    </div>
-                    <div className="flex items-center text-left gap-6 lg:gap-12">
-                        <StrokeNumber animate number={90} className='lg:text-[7rem] md:text-[6rem] text-[5rem]' />
-                        <span className='text-2xl text-neutral-300 leading-10'> Projects Compeleted</span>
-                    </div> */}
         </div>
       </div>
       <div
