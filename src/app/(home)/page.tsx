@@ -12,6 +12,7 @@ import TestimonialsSection from "./testimonials-section";
 import BlogsSection from "./blog-section";
 import InstagramCard from "@/components/cards/instagram-card";
 import FaqSection from "./faq-section";
+import ContactUsSection from "./contact-us-section";
 
 export default async function Home() {
   const queryClient = getQueryClient();
@@ -62,8 +63,9 @@ export default async function Home() {
         />
       </motion.section>
       <ServicesSections />
-      <TestimonialsSection />
       <FaqSection />
+      <TestimonialsSection />
+      <ContactUsSection />
       <BlogsSection />
       <motion.section
         initial={{ x: 200, opacity: 0 }}

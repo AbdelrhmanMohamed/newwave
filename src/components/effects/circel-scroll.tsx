@@ -18,14 +18,11 @@ export default function CircleScroll() {
   const rotate = useTransform(scrollYProgress, [0, 1], [0, 360]);
 
   return (
-    <div
-      ref={containerRef}
-      className="h-screen flex items-center justify-center"
-    >
+    <div ref={containerRef} className="flex items-center justify-center">
       <div className="relative">
         {/* Rotating outer circle */}
         <motion.div style={{ rotate }} className="relative">
-          <div className="w-48 h-48 rounded-full overflow-hidden shadow-2xl">
+          <div className="w-40 h-40 rounded-full overflow-hidden shadow-2xl">
             <Image
               src="/images/faq-Rotate-Widget-Large-Img.png"
               alt="Gaaga FAQ rotating widget"

@@ -22,7 +22,7 @@ export default function FAQAccordion({
       type="single"
       collapsible
       defaultValue={defaultOpenItem}
-      className="space-y-4 w-full"
+      className="space-y-2 w-full"
     >
       {faqs.map((faq) => (
         <AccordionItem
