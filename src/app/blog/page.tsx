@@ -10,7 +10,7 @@ import { Blog, BlogPageData } from "@/types/blog";
 import { getImageUrl } from "@/lib/utils";
 import { ClapperboardIcon } from "lucide-react";
 
-export const revalidate = 1;
+export const revalidate = 30; // Revalidate every 30 seconds;
 // export const dynamicParams = true
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -58,7 +58,6 @@ async function fetchBlogs(): Promise<Blog[]> {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/api/blogs?populate=cover`,
     {
-      next: { revalidate: 1 }, // Revalidate every 60 seconds
       method: "GET",
     }
   );

@@ -4,6 +4,7 @@ import SectionHead from "@/components/headings/section-head";
 import fetchContentType from "@/lib/strapi/fetchContentType";
 import { getImageUrl } from "@/lib/utils";
 import { ServiceDetail } from "@/types/service";
+import Link from "next/link";
 import React from "react";
 // import * as motion from "motion/react-client";
 
@@ -20,6 +21,9 @@ async function getServices(): Promise<ServiceDetail[] | null> {
           fields: ["url"],
         },
         main_content: "*",
+      },
+      pagination: {
+        limit: 4,
       },
     });
     return res?.data as ServiceDetail[] | null;
@@ -51,10 +55,10 @@ export default async function ServicesSections({
           text="What We Have to Offer"
         />
       </div>
-      <div className="">
+      <div className="w-full">
         {services?.length ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-y-20">
-            {services.map((service, index) => (
+            {(services || []).map((service, index) => (
               <div
                 key={service.id}
                 className="flex flex-col lg:flex-row flex-1"
@@ -81,6 +85,12 @@ export default async function ServicesSections({
         ) : (
           <p className="text-white">No services available</p>
         )}
+        <Link href="/services">
+          <button className="border mx-auto mt-16 hidden sm:flex border-neutral-600 px-8 py-3.5  items-center cursor-pointer text-base hover:border-primary hover:text-primary transition duration-500 group">
+            <span className="bg-primary mr-2 rounded-full size-2 group-hover:bg-white transition duration-500" />
+            View All
+          </button>
+        </Link>
       </div>
       <div
         className="bg-cover pointer-events-none absolute top-0 bg-center mix-blend-luminosity opacity-10 w-full h-full"
