@@ -16,8 +16,8 @@ export default function FeatureCard({
 }: FeatureProps) {
   return (
     <Link href={url}>
-      <div className="flex items-center justify-between gap-6">
-        <div className="w-32 h-32 relative">
+      <div className="flex items-center justify-between gap-6 ">
+        <div className="w-24 h-24 min-w-24 min-h-24 relative">
           <Image
             src={image_url}
             alt={title}
@@ -27,11 +27,11 @@ export default function FeatureCard({
           />
         </div>
 
-        <div>
-          <h3 className="text-white text-xl lg:text-3xl font-bold mb-4 transition duration-500 hover:text-primary">
+        <div className="text-left flex-1">
+          <h3 className="text-white text-xl lg:text-[1.4rem] font-bold mb-4 transition duration-500 hover:text-primary">
             {title}
           </h3>
-          <p className="text-neutral-400 max-w-11/12">{description}</p>
+          <p className="text-neutral-400 max-w-full">{description}</p>
         </div>
       </div>
     </Link>
