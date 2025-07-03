@@ -8,7 +8,7 @@ type ContactUsProps = {
 };
 
 export default function ContactUsSection({
-  bgUrl = "https://gaaga.wpengine.com/wp-content/uploads/2023/06/Gagaa-Home1-Banner-Bg-scaled.jpg",
+  bgUrl = "/images/home-bg-section-1.webp",
 }: ContactUsProps) {
   return (
     <div

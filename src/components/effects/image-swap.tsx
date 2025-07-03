@@ -21,7 +21,7 @@ export default function ImageSwap({
   firstAlt = "First image",
   secondAlt = "Second image",
   width = 144, // Default width (36 * 4 for better quality)
-  height = 40, // Default height (10 * 4 for better quality)
+  height = 70, // Default height (10 * 4 for better quality)
   className = "",
   animationDuration = 400,
 }: ImageSwapProps) {
@@ -38,7 +38,7 @@ export default function ImageSwap({
             alt={firstAlt}
             width={width}
             height={height}
-            className="object-contain w-full h-full"
+            className="object-contain w-full h-full grayscale-100"
           />
         </div>
 
@@ -52,7 +52,7 @@ export default function ImageSwap({
             alt={secondAlt}
             width={width}
             height={height}
-            className="object-contain w-full h-full"
+            className="object-contain w-full h-full "
           />
         </div>
 
