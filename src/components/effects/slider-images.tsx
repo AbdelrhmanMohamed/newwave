@@ -14,9 +14,16 @@ import { cn } from "@/lib/utils";
 type Props = {
   className?: string;
   items: React.ReactNode[];
+  carouselItemClassName?: string;
+  slidesToScroll?: number;
 };
 
-export function ImageSlider({ className, items }: Props) {
+export function ImageSlider({
+  className,
+  items,
+  carouselItemClassName,
+  slidesToScroll = 2,
+}: Props) {
   const plugin = React.useRef(
     Autoplay({ delay: 2000, stopOnInteraction: true })
   );
@@ -30,13 +37,16 @@ export function ImageSlider({ className, items }: Props) {
       opts={{
         loop: true,
         dragFree: true,
-        slidesToScroll: 2,
+        slidesToScroll: slidesToScroll,
       }}
     >
       <CarouselContent>
         {items.map((item, index) => (
           <CarouselItem
-            className="pl-1 basis-1/2 sm:basis-1/4 lg:basis-1/5"
+            className={cn(
+              "pl-1 basis-1/2 sm:basis-1/4 lg:basis-1/5",
+              carouselItemClassName
+            )}
             key={index}
           >
             {item}

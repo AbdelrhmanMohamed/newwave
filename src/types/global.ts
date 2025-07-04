@@ -17,4 +17,5 @@ export interface GlobalData {
   main_address: string;
   main_phone: string;
   support_title: string;
+  youtube_link: string;
 }

@@ -1,10 +1,12 @@
 "use client";
+import { cn } from "@/lib/utils";
 import { useRef, useEffect } from "react";
 
 type Props = {
   children: React.ReactNode;
+  className?: string;
 };
-export default function CardsSlider({ children }: Props) {
+export default function CardsSlider({ children, className }: Props) {
   const sliderRef = useRef<HTMLDivElement>(null);
   const isDragging = useRef(false);
   const startX = useRef(0);
@@ -62,10 +64,13 @@ export default function CardsSlider({ children }: Props) {
   }, []);
 
   return (
-    <div className="w-full p-6">
+    <div className={cn("w-full p-6 ")}>
       <div
         ref={sliderRef}
-        className="flex gap-6 overflow-x-auto scrollbar-hide cursor-grab select-none"
+        className={cn(
+          "flex gap-6 overflow-x-auto scrollbar-hide cursor-grab select-none",
+          className
+        )}
         style={{
           scrollBehavior: "smooth",
           scrollbarWidth: "none",

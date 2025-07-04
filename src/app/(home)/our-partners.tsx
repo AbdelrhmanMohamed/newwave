@@ -4,23 +4,37 @@ import React from "react";
 import * as motion from "motion/react-client";
 import { ImageSlider } from "@/components/effects/slider-images";
 import fetchContentType from "@/lib/strapi/fetchContentType";
-import { Partner } from "@/types/paterner";
 import { getImageUrl } from "@/lib/utils";
+import { Homepage } from "@/types/homepage";
 
-async function getPartners(): Promise<Partner[] | null> {
+async function getHomeData(): Promise<Homepage | null> {
   try {
-    const res = await fetchContentType("partners", {
-      populate: "*",
+    const res = await fetchContentType("home-page", {
+      populate: {
+        partners: {
+          populate: {
+            gray_logo: {
+              fields: ["url"],
+            },
+            base_logo: {
+              fields: ["url"],
+            },
+          },
+        },
+      },
     });
 
-    return res?.data as Partner[] | null;
+    return res?.data as Homepage | null;
   } catch (error) {
     console.error("Error fetching partners data:", error);
     return null;
   }
 }
+
 export default async function OurPartners() {
-  const partners = await getPartners();
+  const homeData = await getHomeData();
+  const partners = homeData?.partners || [];
+
   if (!partners || partners.length === 0) {
     return <div>No partners data available</div>;
   }
@@ -35,7 +49,7 @@ export default async function OurPartners() {
         }}
       >
         <SectionHead
-          title="Associated Partners"
+          title={homeData?.partners_title || "Associated Partners2"}
           animate
           show={{
             start: true,
@@ -53,25 +67,6 @@ export default async function OurPartners() {
           ))}
         />
       </div>
-      {/* <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 items-center mt-6 gap-8 flex-wrap">
-        {images.map((img, index) => (
-          <motion.div
-            key={img.img1}
-            initial={{ opacity: 0, y: 10, scale: 0.98 }}
-            whileInView={{ opacity: 1, y: 0, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{
-              duration: 0.6,
-              delay: index * 0.15,
-            }}
-          >
-            <ImageSwap
-              firstImage={`logos/${img.img1}`}
-              secondImage={`logos/${img.img2}`}
-            />
-          </motion.div>
-        ))}
-      </div> */}
     </div>
   );
 }

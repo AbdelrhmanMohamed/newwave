@@ -5,7 +5,6 @@ import React from "react";
 import * as motion from "motion/react-client";
 import CareerCard from "@/components/cards/career-card";
 import ContactSide from "@/components/contact-side";
-import InstagramCard from "@/components/cards/instagram-card";
 import { Metadata } from "next";
 import fetchContentType from "@/lib/strapi/fetchContentType";
 import { generateMetadataObject } from "@/lib/shared/metadata";
@@ -17,6 +16,7 @@ import AnimatedText from "@/components/effects/animate-text";
 import CareerForm from "./_components/form";
 import { getImageUrl } from "@/lib/utils";
 import PageHeader from "@/components/page-header";
+import GalleryMedia from "@/components/gallery-media";
 
 export const revalidate = 60;
 
@@ -200,30 +200,7 @@ export default async function CareerPage() {
           </div>
         </div>
       </motion.section>
-      <motion.section
-        initial={{ x: 200, opacity: 0 }}
-        whileInView={{ x: 0, opacity: 1 }}
-        transition={{
-          duration: 0.8,
-        }}
-        className="px-4 py-20"
-      >
-        <div className="flex overflow-hidden flex-nowrap gap-4 h-[420px] sm:h-[350px] md:h-[290px] lg:h-[270px] xl:h-[320px] items-center justify-center">
-          <InstagramCard bgUrl="http://gaaga.wpengine.com/wp-content/uploads/2023/05/Gaaga-Insta-Img-2-300x300.png" />
-          <InstagramCard
-            bgUrl="http://gaaga.wpengine.com/wp-content/uploads/2023/05/Gaaga-Insta-Img-2-300x300.png"
-            className="hidden sm:block"
-          />
-          <InstagramCard
-            bgUrl="http://gaaga.wpengine.com/wp-content/uploads/2023/05/Gaaga-Insta-Img-2-300x300.png"
-            className="hidden md:block"
-          />
-          <InstagramCard
-            bgUrl="http://gaaga.wpengine.com/wp-content/uploads/2023/05/Gaaga-Insta-Img-2-300x300.png"
-            className="hidden lg:block"
-          />
-        </div>
-      </motion.section>
+      <GalleryMedia />
     </div>
   );
 }

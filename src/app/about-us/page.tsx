@@ -4,7 +4,6 @@ import { PageBanner } from "@/components/page-banner";
 import * as motion from "motion/react-client";
 // import ProcedureSection from "./_components/proceture";
 import MarketingSection from "./_components/marketing";
-import InstagramCard from "@/components/cards/instagram-card";
 import Querries from "./_components/querries";
 import Stepper from "@/components/steper";
 import SectionHead from "@/components/headings/section-head";
@@ -20,6 +19,7 @@ import BorderCard from "@/components/cards/border-card";
 import OurTeam from "./_components/team";
 import GlobalPresence from "./_components/global-presence";
 import Market from "./_components/market";
+import GalleryMedia from "@/components/gallery-media";
 
 // export const revalidate = 120;
 
@@ -287,30 +287,7 @@ export default async function AboutUsPage() {
       <section className="py-20">
         <Querries aboutData={aboutUsData} globalData={globalData} />
       </section>
-      <motion.section
-        initial={{ x: 200, opacity: 0 }}
-        whileInView={{ x: 0, opacity: 1 }}
-        transition={{
-          duration: 0.8,
-        }}
-        className="px-4 py-20"
-      >
-        <div className="flex overflow-hidden flex-nowrap gap-4 h-[420px] sm:h-[350px] md:h-[290px] lg:h-[270px] xl:h-[320px] items-center justify-center">
-          <InstagramCard bgUrl="http://gaaga.wpengine.com/wp-content/uploads/2023/05/Gaaga-Insta-Img-2-300x300.png" />
-          <InstagramCard
-            bgUrl="http://gaaga.wpengine.com/wp-content/uploads/2023/05/Gaaga-Insta-Img-2-300x300.png"
-            className="hidden sm:block"
-          />
-          <InstagramCard
-            bgUrl="http://gaaga.wpengine.com/wp-content/uploads/2023/05/Gaaga-Insta-Img-2-300x300.png"
-            className="hidden md:block"
-          />
-          <InstagramCard
-            bgUrl="http://gaaga.wpengine.com/wp-content/uploads/2023/05/Gaaga-Insta-Img-2-300x300.png"
-            className="hidden lg:block"
-          />
-        </div>
-      </motion.section>
+      <GalleryMedia />
     </div>
   );
 }

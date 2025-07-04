@@ -1,23 +1,41 @@
-"use client";
 import SocialSidebar from "@/components/social-sidebar";
 import React from "react";
 import SectionHead from "@/components/headings/section-head";
 import ButtonLine from "@/components/headings/button-line";
 import Image from "next/image";
 import * as motion from "motion/react-client";
-import { useQuery } from "@tanstack/react-query";
-import { heroOptions } from "@/api/hero";
 import Link from "next/link";
+import fetchContentType from "@/lib/strapi/fetchContentType";
+import { Homepage } from "@/types/homepage";
+import { getImageUrl } from "@/lib/utils";
 
-export default function HeroSection() {
-  const { data: hero } = useQuery(heroOptions);
+async function getHomeData(): Promise<Homepage | null> {
+  try {
+    const res = await fetchContentType("home-page", {
+      populate: {
+        hero: {
+          populate: {
+            cover: {
+              fields: ["url"],
+            },
+          },
+        },
+      },
+    });
+    return res?.data as Homepage | null;
+  } catch (error) {
+    console.error("Error fetching partners data:", error);
+    return null;
+  }
+}
 
+export default async function HeroSection() {
+  const homeData = await getHomeData();
+  const hero = homeData?.hero;
+  if (!hero) {
+    return <div>No hero data available</div>;
+  }
   const parts = (hero?.title || "").split(hero?.highlight_text || "");
-
-  const imageUrl =
-    process.env.NODE_ENV === "development" && hero?.cover?.url
-      ? `${process.env.NEXT_PUBLIC_API_URL}${hero?.cover?.url}`
-      : hero?.cover?.url;
 
   return (
     <main className="relative  overflow-hidden min-h-screen max-h-screen">
@@ -28,7 +46,7 @@ export default function HeroSection() {
           {/* Content */}
           <div className="">
             <SectionHead
-              title="New Waves"
+              title={hero?.headline || "Welcome to Our World"}
               animate
               show={{
                 start: true,
@@ -47,7 +65,7 @@ export default function HeroSection() {
             <p className="text-neutral-400 max-w-xl ">{hero?.description}</p>
 
             <div className="flex items-center space-x-6 mt-10">
-              <Link href={"/services"}>
+              <Link href={hero?.button_link || "/"}>
                 <ButtonLine title={hero?.button_text || "Discover Our World"} />
               </Link>
             </div>
@@ -67,7 +85,7 @@ export default function HeroSection() {
           layout
         >
           <Image
-            src={imageUrl || "/images/slider-Image-1.jpg"}
+            src={getImageUrl(hero?.cover?.url) || "/images/hero-bg.webp"}
             alt="Person using VR headset"
             className="object-contain"
             fill
