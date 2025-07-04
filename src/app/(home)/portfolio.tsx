@@ -2,42 +2,33 @@ import ProjectCard from "@/components/cards/project-card";
 import AnimatedText from "@/components/effects/animate-text";
 import ButtonLine from "@/components/headings/button-line";
 import SectionHead from "@/components/headings/section-head";
+import fetchContentType from "@/lib/strapi/fetchContentType";
+import { getImageUrl } from "@/lib/utils";
+import { Project } from "@/types/Project";
 import Link from "next/link";
 
-const projects = [
-  {
-    title: "Madina Storefront",
-    description: "Madina storefront with red brick building",
-    imageUrl:
-      "https://gaaga.wpengine.com/wp-content/uploads/2023/06/home-portfolio-1.jpg",
-  },
-  {
-    title: "Bunny Tablet",
-    description: "Tablet displaying Bunny brand logo on red background",
-    imageUrl:
-      "https://gaaga.wpengine.com/wp-content/uploads/2023/06/home-portfolio-1.jpg",
-  },
-  {
-    title: "Business Card",
-    description: "Madina storefront with red brick building",
-    imageUrl:
-      "https://gaaga.wpengine.com/wp-content/uploads/2023/06/home-portfolio-1.jpg",
-  },
-  {
-    title: "Bunny Tablet",
-    description: "Tablet displaying Bunny brand logo on red background",
-    imageUrl:
-      "https://gaaga.wpengine.com/wp-content/uploads/2023/06/home-portfolio-1.jpg",
-  },
-  {
-    title: "Business Card",
-    description: "Madina storefront with red brick building",
-    imageUrl:
-      "https://gaaga.wpengine.com/wp-content/uploads/2023/06/home-portfolio-1.jpg",
-  },
-];
+async function getProjects(): Promise<Project[] | null> {
+  try {
+    const res = await fetchContentType("projects", {
+      populate: {
+        main_image: {
+          fields: ["url"],
+        },
+      },
+    });
 
-export default function PortfolioSection() {
+    return res?.data as Project[] | null;
+  } catch (error) {
+    console.error("Error fetching base project data:", error);
+    return null;
+  }
+}
+
+export default async function PortfolioSection() {
+  const projects = await getProjects();
+  if (!projects) {
+    return <div>Error loading projects</div>;
+  }
   return (
     <section className="text-white mt-40 px-4 md:px-12">
       {/* Header */}
@@ -59,7 +50,7 @@ export default function PortfolioSection() {
           <ProjectCard
             key={index}
             description={project.description}
-            imageUrl={project.imageUrl}
+            imageUrl={getImageUrl(project.main_image?.url) || ""}
             title={project.title}
             className={`${
               index === 1
@@ -96,9 +87,9 @@ export default function PortfolioSection() {
           {projects.slice(3, 6).map((project, index) => (
             <ProjectCard
               key={index}
-              description={project.description}
-              imageUrl={project.imageUrl}
-              title={project.title}
+              description={project?.description}
+              imageUrl={getImageUrl(project.main_image?.url) || ""}
+              title={project?.title}
               className="aspect-video"
             />
           ))}

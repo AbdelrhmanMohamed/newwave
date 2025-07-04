@@ -56,11 +56,13 @@ async function getProjectsData() {
 async function getProjects(): Promise<Project[] | null> {
   try {
     const res = await fetchContentType("projects", {
-      populate: "*",
+      populate: {
+        main_image: {
+          fields: ["url"],
+        },
+      },
     });
-    // main_image: {
-    //       fields: ["url"],
-    //     },
+
     return res?.data as Project[] | null;
   } catch (error) {
     console.error("Error fetching base project data:", error);

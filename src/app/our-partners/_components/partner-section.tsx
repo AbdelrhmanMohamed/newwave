@@ -1,55 +1,16 @@
 import ImageSwap from "@/components/effects/image-swap";
+import { getImageUrl } from "@/lib/utils";
+import { Partner } from "@/types/paterner";
 import * as motion from "motion/react-client";
 
-const images = [
-  {
-    img1: "Gaaga-Slider-Brand-Logo-1-1.png",
-    img2: "Gaaga-Slider-Brand-Logo-1-2.png",
-  },
-  {
-    img1: "Gaaga-Slider-Brand-Logo-2-1.png",
-    img2: "Gaaga-Slider-Brand-Logo-2-2.png",
-  },
-  {
-    img1: "Gaaga-Slider-Brand-Logo-3-1.png",
-    img2: "Gaaga-Slider-Brand-Logo-3-2.png",
-  },
-  {
-    img1: "Gaaga-Slider-Brand-Logo-4-1.png",
-    img2: "Gaaga-Slider-Brand-Logo-4-2.png",
-  },
-
-  {
-    img1: "Gaaga-Slider-Brand-Logo-6-1.png",
-    img2: "Gaaga-Slider-Brand-Logo-6-2.png",
-  },
-  {
-    img1: "Gaaga-Brand-Logo-4-1.png",
-    img2: "Gaaga-Brand-Logo-4-2.png",
-  },
-  {
-    img1: "Gaaga-Slider-Brand-Logo-4-1.png",
-    img2: "Gaaga-Slider-Brand-Logo-4-2.png",
-  },
-  {
-    img1: "Gaaga-Slider-Brand-Logo-5-1.png",
-    img2: "Gaaga-Slider-Brand-Logo-5-2.png",
-  },
-  {
-    img1: "Gaaga-Slider-Brand-Logo-6-1.png",
-    img2: "Gaaga-Slider-Brand-Logo-6-2.png",
-  },
-  {
-    img1: "Gaaga-Slider-Brand-Logo-3-1.png",
-    img2: "Gaaga-Slider-Brand-Logo-3-2.png",
-  },
-];
-
-export function PartnerSection() {
+type Props = {
+  partners: Partner[];
+};
+export function PartnerSection({ partners }: Props) {
   return (
     <div className="mb-16 mt-8">
       <div className="grid grid-cols-5 gap-5 space-y-5">
-        {images.map((img, index) => (
+        {partners.map((img, index) => (
           <motion.div
             key={index}
             initial={{ opacity: 0, y: 10, scale: 0.98 }}
@@ -61,8 +22,8 @@ export function PartnerSection() {
             }}
           >
             <ImageSwap
-              firstImage={`images/${img.img1}`}
-              secondImage={`images/${img.img2}`}
+              firstImage={getImageUrl(img.gray_logo?.url)}
+              secondImage={getImageUrl(img.base_logo?.url)}
             />
           </motion.div>
         ))}

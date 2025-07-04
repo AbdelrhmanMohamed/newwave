@@ -15,6 +15,7 @@ import { console } from "inspector";
 import { PartnersPageData } from "@/types/our-parterner";
 import { getImageUrl } from "@/lib/utils";
 import PageHeader from "@/components/page-header";
+import { Partner } from "@/types/paterner";
 
 export const revalidate = 1;
 
@@ -80,13 +81,26 @@ async function getPartnerPageData(): Promise<PartnersPageData | null> {
   }
 }
 
+async function getPartners(): Promise<Partner[] | null> {
+  try {
+    const res = await fetchContentType("partners", {
+      populate: "*",
+    });
+
+    return res?.data as Partner[] | null;
+  } catch (error) {
+    console.error("Error fetching partners data:", error);
+    return null;
+  }
+}
+
 export default async function PartnersPage() {
   const pageData = await getPartnerPageData();
+  const partners = await getPartners();
+
   if (!pageData) {
     return <div>Error loading partner data</div>;
   }
-
-  console.log("Page Data:", pageData);
 
   return (
     <div className="min-h-screen">
@@ -163,7 +177,7 @@ export default async function PartnersPage() {
               {pageData?.partners_description}
             </p>
           </div>
-          <PartnerSection />
+          <PartnerSection partners={partners || []} />
         </div>
       </section>
       <motion.div
