@@ -21,10 +21,10 @@ export default function ContactUsSection({
         <Marquee>
           <h1 className="text-white/20 text-7xl font-bold">OUR PORTFOLIO</h1>
         </Marquee>
-        <p className="text-white text-5xl font-semibold mb-8 px-16 max-w-7xl">
+        <p className="text-white text-5xl font-semibold mb-8 px-8 md:px-16 max-w-7xl leading-14">
           Creative Solutions. Tangible Results.
         </p>
-        <Link href="/contact-us" className="text-white px-16 block">
+        <Link href="/contact-us" className="text-white px-8 md:px-16 block">
           <ButtonLine title="Let's Talk" />
         </Link>
       </div>

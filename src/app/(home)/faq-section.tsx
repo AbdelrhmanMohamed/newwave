@@ -28,9 +28,9 @@ export default async function FaqSection() {
     return <div>No FAQ data available</div>;
   }
   return (
-    <div className="flex flex-nowrap items-center py-24 px-6 relative">
+    <div className="flex flex-col md:flex-row flex-wrap lg:flex-nowrap items-center py-24 px-6 relative">
       <div
-        className={`min-w-full max-w-full lg:min-w-[55%] lg:max-w-[55%] relative left-5 z-10 bg-background border border-primary p-8 h-fit`}
+        className={`min-w-full max-w-full lg:min-w-[55%] lg:max-w-[55%] relative left-0 md:left-5 z-10 bg-background border border-primary p-8 h-fit`}
       >
         <SectionHead
           title="Popular Questions"
@@ -48,7 +48,7 @@ export default async function FaqSection() {
       <div className="absolute z-40 top-16 left-[55%] transform -translate-x-1/2 pointer-events-none">
         <CircleScroll />
       </div>
-      <div className="h-[950px] max-w-4xl relative lg:min-w-[50%] lg:max-w-[50%]">
+      <div className="h-[950px] hidden md:block min-w-full max-w-4xl relative lg:min-w-[50%] lg:max-w-[50%]">
         <Image
           src={getImageUrl(faqGroups[0]?.image?.url)}
           alt="FAQ Image"

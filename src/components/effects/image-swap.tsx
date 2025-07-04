@@ -38,7 +38,7 @@ export default function ImageSwap({
             alt={firstAlt}
             width={width}
             height={height}
-            className="object-contain w-full h-full grayscale-100"
+            className="object-contain w-full h-full"
           />
         </div>
 

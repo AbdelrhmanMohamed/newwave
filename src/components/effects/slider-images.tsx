@@ -29,15 +29,16 @@ export function ImageSlider({ className, items }: Props) {
       onMouseLeave={plugin.current.reset}
       opts={{
         loop: true,
-        slidesToScroll: 1,
-        align: "start",
         dragFree: true,
-        containScroll: "trimSnaps",
+        slidesToScroll: 2,
       }}
     >
       <CarouselContent>
         {items.map((item, index) => (
-          <CarouselItem className="pl-1 md:basis-1/2 lg:basis-1/5" key={index}>
+          <CarouselItem
+            className="pl-1 basis-1/2 sm:basis-1/4 lg:basis-1/5"
+            key={index}
+          >
             {item}
           </CarouselItem>
         ))}

@@ -1,6 +1,7 @@
 import React from "react";
 import Image from "next/image";
-import { QuoteIcon, StarIcon } from "lucide-react";
+import { QuoteIcon } from "lucide-react";
+import StarRating from "../star-rating";
 
 interface TestimonialCardProps {
   quote: string;
@@ -17,30 +18,19 @@ export const TestimonialCard: React.FC<TestimonialCardProps> = ({
   author,
   position = "",
   rating,
-  maxRating = 5,
   avatarUrl,
   className,
 }) => {
-  const renderStars = () => {
-    return Array.from({ length: maxRating }).map((_, index) => (
-      <StarIcon
-        key={index}
-        className={`w-4 h-4 ${
-          index < rating ? "fill-white" : "fill-neutral-500"
-        }`}
-        stroke="none"
-      />
-    ));
-  };
-
   return (
     <div className={`w-full ${className}`}>
       <div className="flex justify-between items-start px-4">
         <QuoteIcon className="fill-primary stroke-primary w-5 h-5" />
-        <div className="flex gap-2">{renderStars()}</div>
+        <div className="flex gap-2">
+          <StarRating rating={rating} interactive={false} showValue={false} />
+        </div>
       </div>
 
-      <blockquote className="text-neutral-300 text-sm my-4 min-h-60 max-h-60 p-8 bg-[#1d1e22]">
+      <blockquote className="text-neutral-300 text-sm my-4 min-h-60 max-h-60 p-8 bg-[#1d1e22] font-[system-ui]">
         {quote}
       </blockquote>
 
@@ -54,12 +44,9 @@ export const TestimonialCard: React.FC<TestimonialCardProps> = ({
             height={64}
           />
         </div>
-        <div className="flex flex-row items-center gap-1 text-sm">
+        <div className="flex flex-col  gap-1 text-sm">
           <p className="text-primary ">{author}</p>
-          <p className="text-gray-400">
-            <span className="mx-2">—</span>
-            {position}
-          </p>
+          <p className="text-gray-400">{position}</p>
         </div>
       </div>
     </div>

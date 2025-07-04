@@ -25,9 +25,9 @@ export default function BlogCard2({
     <div
       className={`group/item overflow-hidden border border-primary bg-background ${className}`}
     >
-      <div className="flex h-full">
+      <div className="flex flex-col sm:flex-row h-full">
         {/* Image Section */}
-        <div className="relative w-2/5 overflow-hidden">
+        <div className="relative w-full sm:w-2/5 aspect-[4/3] sm:aspect-auto sm:min-h-[240px] overflow-hidden">
           <Image
             src={imageUrl || "/placeholder.svg"}
             alt={imageAlt}
@@ -37,7 +37,7 @@ export default function BlogCard2({
         </div>
 
         {/* Content Section */}
-        <div className="flex w-3/5 flex-col justify-between p-6">
+        <div className="flex w-full sm:w-3/5 flex-col justify-between p-6">
           <div className="space-y-4">
             {/* Date */}
             <div className="flex items-center gap-2 text-sm font-medium text-primary">

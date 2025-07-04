@@ -3,51 +3,27 @@ import SectionHead from "@/components/headings/section-head";
 import React from "react";
 import * as motion from "motion/react-client";
 import { ImageSlider } from "@/components/effects/slider-images";
+import fetchContentType from "@/lib/strapi/fetchContentType";
+import { Partner } from "@/types/paterner";
+import { getImageUrl } from "@/lib/utils";
 
-const images = [
-  {
-    img1: "raketamedia-logo.png",
-    img2: "raketamedia-logo.png",
-  },
-  {
-    img1: "botai-logo.png",
-    img2: "botai-logo.png",
-  },
-  {
-    img1: "vin-logo.png",
-    img2: "vin-logo.png",
-  },
-  {
-    img1: "air-logo.png",
-    img2: "air-logo.png",
-  },
-  {
-    img1: "vr-logo.png",
-    img2: "vr-logo.png",
-  },
-  {
-    img1: "sk-logo.png",
-    img2: "sk-logo.png",
-  },
-  {
-    img1: "icon-logo.png",
-    img2: "icon-logo.png",
-  },
-  {
-    img1: "key-films-logo.png",
-    img2: "key-films-logo.png",
-  },
-  {
-    img1: "be-logo.png",
-    img2: "be-logo.png",
-  },
-  {
-    img1: "veo-logo.png",
-    img2: "veo-logo.png",
-  },
-];
+async function getPartners(): Promise<Partner[] | null> {
+  try {
+    const res = await fetchContentType("partners", {
+      populate: "*",
+    });
 
-export default function OurPartners() {
+    return res?.data as Partner[] | null;
+  } catch (error) {
+    console.error("Error fetching partners data:", error);
+    return null;
+  }
+}
+export default async function OurPartners() {
+  const partners = await getPartners();
+  if (!partners || partners.length === 0) {
+    return <div>No partners data available</div>;
+  }
   return (
     <div className="px-6 md:px-12 xl:px-40  relative mt-20 ">
       <motion.div
@@ -68,11 +44,11 @@ export default function OurPartners() {
       </motion.div>
       <div className="w-full mt-6">
         <ImageSlider
-          items={images.map((img) => (
+          items={partners.map((partner) => (
             <ImageSwap
-              firstImage={`logos/${img.img1}`}
-              secondImage={`logos/${img.img2}`}
-              key={img.img1}
+              firstImage={getImageUrl(partner?.gray_logo?.url)}
+              secondImage={getImageUrl(partner?.base_logo?.url)}
+              key={partner.id}
             />
           ))}
         />

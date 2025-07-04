@@ -76,7 +76,7 @@ export default async function ServicesSections({
                     {/* Desktop divider */}
                     <div className="hidden lg:block w-px bg-neutral-600 my-8"></div>
                     {/* Mobile divider */}
-                    <div className="lg:hidden h-px bg-neutral-600 mx-8"></div>
+                    {/* <div className="lg:hidden h-px bg-neutral-600 mx-8"></div> */}
                   </>
                 )}
               </div>

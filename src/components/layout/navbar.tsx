@@ -6,6 +6,7 @@ import Image from "next/image";
 import { motion, useScroll } from "motion/react";
 import { MobileMenu } from "./mobil-menu";
 import { useEffect, useState } from "react";
+import Link from "next/link";
 
 export const menuItems: Link_Item[] = [
   { name: "HOME", href: "/" },
@@ -74,10 +75,12 @@ export default function NavBar() {
       </nav>
       <div className="flex items-center gap-4">
         <MobileMenu />
-        <button className="border hidden sm:flex border-neutral-600 px-8 py-3.5 font-bold  items-center cursor-pointer text-base hover:border-primary hover:text-primary transition duration-500 group">
-          <span className="bg-primary mr-2 rounded-full size-2 group-hover:bg-white transition duration-500" />
-          Lets start
-        </button>
+        <Link href={"/contact-us"}>
+          <button className="border hidden sm:flex border-neutral-600 px-8 py-3.5 font-bold  items-center cursor-pointer text-base hover:border-primary hover:text-primary transition duration-500 group">
+            <span className="bg-primary mr-2 rounded-full size-2 group-hover:bg-white transition duration-500" />
+            Lets start
+          </button>
+        </Link>
       </div>
     </motion.header>
   );

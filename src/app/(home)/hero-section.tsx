@@ -7,6 +7,7 @@ import Image from "next/image";
 import * as motion from "motion/react-client";
 import { useQuery } from "@tanstack/react-query";
 import { heroOptions } from "@/api/hero";
+import Link from "next/link";
 
 export default function HeroSection() {
   const { data: hero } = useQuery(heroOptions);
@@ -18,10 +19,8 @@ export default function HeroSection() {
       ? `${process.env.NEXT_PUBLIC_API_URL}${hero?.cover?.url}`
       : hero?.cover?.url;
 
-  console.log(imageUrl, "imageUrl");
-
   return (
-    <main className="relative">
+    <main className="relative  overflow-hidden min-h-screen max-h-screen">
       <div className="absolute inset-0 bg-[#3D3D3D] opacity-70 z-20 h-screen block xl:hidden " />
       <div className="flex flex-row">
         <div className="absolute w-full top-1/5 md:top-1/4 z-20 flex flex-row gap-3 px-3 lg:gap-10 lg:px-12">
@@ -48,7 +47,9 @@ export default function HeroSection() {
             <p className="text-neutral-400 max-w-xl ">{hero?.description}</p>
 
             <div className="flex items-center space-x-6 mt-10">
-              <ButtonLine title={hero?.button_text || "Discover Our World"} />
+              <Link href={"/services"}>
+                <ButtonLine title={hero?.button_text || "Discover Our World"} />
+              </Link>
             </div>
           </div>
         </div>

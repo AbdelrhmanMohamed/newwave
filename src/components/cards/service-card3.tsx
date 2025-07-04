@@ -16,10 +16,10 @@ export function ServiceCard3({
   href = "#",
 }: ServiceCardProps) {
   return (
-    <div className="relative flex-1 transition-all duration-300 ease-in-out cursor-pointer min-h-[500px] flex flex-col group/item">
+    <div className="relative flex-1 transition-all duration-300 ease-in-out cursor-pointer h-fit md:min-h-[500px] flex flex-col group/item">
       {/* Content */}
       <div className="h-full flex flex-col justify-between">
-        <div className="px-12">
+        <div className="px-6 md:px-12">
           <h3
             className={`text-2xl lg:text-2xl font-semibold mb-6 transition-colors duration-300 group-hover/item:text-primary text-white`}
           >
@@ -31,10 +31,10 @@ export function ServiceCard3({
         </div>
         <div>
           <div
-            className={`transition-all duration-500 opacity-0 overflow-hidden group-hover/item:scale-100 scale-95 group-hover/item:opacity-100 flex-1`}
+            className={`transition-all px-6 sm:px-0 duration-500 opacity-100 md:opacity-0 overflow-hidden group-hover/item:scale-100 scale-100 md:scale-95 group-hover/item:opacity-100 flex-1`}
           >
             <Link href={href}>
-              <div className="relative h-60 w-full overflow-hidden ">
+              <div className="relative h-60 w-full max-w-md mx-auto overflow-hidden ">
                 <Image
                   src={imageUrl || ""}
                   alt={title}
@@ -44,7 +44,7 @@ export function ServiceCard3({
               </div>
             </Link>
           </div>
-          <div className="px-12">
+          <div className="px-12 hidden  md:block">
             <Link
               href={href}
               className="text-white opacity-100 group-hover/item:opacity-0 duration-300 group-hover/item:text-gray-200 animate-none"
