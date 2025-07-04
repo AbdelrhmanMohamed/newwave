@@ -15,7 +15,7 @@ export default function VideoPreviewSection({
 
   return (
     <div className="">
-      <div className="relative w-full h-full overflow-hidden">
+      <div className="relative w-full h-[full] overflow-hidden">
         {/* Background Image */}
         <YouTubePlayer videoId={videoId} title={description} />
       </div>

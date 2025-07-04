@@ -61,7 +61,7 @@ async function getCareerData() {
     );
     return res as CareerPageData;
   } catch (error) {
-    console.error("Error fetching base FAQ page data:", error);
+    console.error("Error fetching base Career page data:", error);
     return {} as CareerPageData;
   }
 }

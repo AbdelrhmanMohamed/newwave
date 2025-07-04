@@ -43,7 +43,7 @@ export default function YouTubePlayer({ videoId, title }: YouTubePlayerProps) {
             <div className="absolute inset-0 flex items-center justify-center">
               <Button
                 size="icon"
-                className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-red-600 hover:bg-red-700 text-white shadow-lg transform group-hover:scale-110 transition-transform duration-200"
+                className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-black hover:bg-primary text-white shadow-lg transform group-hover:scale-110 transition-all duration-500 cursor-pointer"
                 onClick={handlePlayClick}
               >
                 <Play className="w-6 h-6 md:w-8 md:h-8 ml-1 fill-white" />
