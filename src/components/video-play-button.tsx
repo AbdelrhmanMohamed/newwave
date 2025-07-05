@@ -54,7 +54,7 @@ export function VideoPlayButton({
 }: VideoPlayButtonProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const videoId = getVideoIdFromYoutubeUrl(videoUrl);
+  const videoId = videoUrl ? getVideoIdFromYoutubeUrl(videoUrl) : null;
   const embedUrl = `https://www.youtube.com/embed/${videoId}${
     autoplay ? "?autoplay=1" : ""
   }`;

@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+// import InlineSvg from "../inline-svg";
 
 interface FeatureProps {
   image_url: string;
@@ -18,6 +19,10 @@ export default function FeatureCard({
     <Link href={url}>
       <div className="flex items-center justify-between gap-6 ">
         <div className="w-24 h-24 min-w-24 min-h-24 relative">
+          {/* <InlineSvg
+            className="size-[4rem] text-primary fill-primary stroke-4"
+            url={image_url}
+          /> */}
           <Image
             src={image_url}
             alt={title}

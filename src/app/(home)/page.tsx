@@ -2,14 +2,12 @@ import FeaturesSection from "./features";
 import HeroSection from "./hero-section";
 import OurPartners from "./our-partners";
 import PortfolioSection from "./portfolio";
-import * as motion from "motion/react-client";
-import MarketingSection from "../about-us/_components/marketing";
 import ServicesSections from "./services-sections";
 import TestimonialsSection from "./testimonials-section";
 import BlogsSection from "./blog-section";
-import FaqSection from "./faq-section";
 import ContactUsSection from "./contact-us-section";
 import GalleryMedia from "@/components/gallery-media";
+import MarketingSectionHome from "./marketing-section";
 
 export default function Home() {
   return (
@@ -18,44 +16,9 @@ export default function Home() {
       <OurPartners />
       <FeaturesSection />
       <PortfolioSection />
-      <motion.section
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        transition={{
-          duration: 0.5,
-        }}
-        className="py-20"
-      >
-        <MarketingSection
-          bgUrl=""
-          title="Our Marketing Approach"
-          className="bg-[#14171b] mt-20"
-          highlights={[
-            {
-              id: 1,
-              count: 10,
-              title: "Years of Experience",
-            },
-            {
-              id: 2,
-              count: 99,
-              title: "Successful Campaigns",
-            },
-            {
-              id: 3,
-              count: 50,
-              title: "Happy Clients",
-            },
-            {
-              id: 4,
-              count: 20,
-              title: "Projects Completed",
-            },
-          ]}
-        />
-      </motion.section>
+      <MarketingSectionHome />
       <ServicesSections />
-      <FaqSection />
+      {/* <FaqSection /> */}
       <TestimonialsSection />
       <ContactUsSection />
       <BlogsSection />

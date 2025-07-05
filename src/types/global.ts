@@ -18,4 +18,5 @@ export interface GlobalData {
   main_phone: string;
   support_title: string;
   youtube_link: string;
+  whatsapp: string;
 }

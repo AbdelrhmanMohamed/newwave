@@ -63,3 +63,28 @@ export interface DataWithMedia {
   description: string;
   icon?: Media;
 }
+
+export interface Marketing {
+  titleLine1: string;
+  titleLine2: string;
+  titleLine3: string;
+  image: Media | null;
+  avatars: Media[] | null;
+  youtube_link: string;
+  cover?: Media | null;
+}
+
+export interface Achievements {
+  id: number;
+  label: string;
+  value: number;
+  suffix: string;
+}
+
+export interface ContactBanner {
+  headline: string;
+  title: string;
+  button_text: string;
+  button_link: string;
+  cover: Media | null;
+}

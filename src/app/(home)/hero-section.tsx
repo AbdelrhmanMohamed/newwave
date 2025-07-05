@@ -8,6 +8,8 @@ import Link from "next/link";
 import fetchContentType from "@/lib/strapi/fetchContentType";
 import { Homepage } from "@/types/homepage";
 import { getImageUrl } from "@/lib/utils";
+import { VideoPlayButton } from "@/components/video-play-button";
+import { Play } from "lucide-react";
 
 async function getHomeData(): Promise<Homepage | null> {
   try {
@@ -64,10 +66,19 @@ export default async function HeroSection() {
 
             <p className="text-neutral-400 max-w-xl ">{hero?.description}</p>
 
-            <div className="flex items-center space-x-6 mt-10">
+            <div className="flex items-center gap-1 mt-10">
               <Link href={hero?.button_link || "/"}>
                 <ButtonLine title={hero?.button_text || "Discover Our World"} />
               </Link>
+              <VideoPlayButton videoUrl={hero?.youtube_link || ""} size="sm">
+                <button className="size-11 cursor-pointer mx-4 relative  rounded-full inline-flex justify-center text-white p-1 bg-primary hover:scale-105 transition-all duration-300">
+                  <span className="border border-white rounded-full w-full h-full flex items-center justify-center">
+                    <span className="bg-white rounded-full p-1">
+                      <Play className="w-4 h-4 text-primary fill-primary " />
+                    </span>
+                  </span>
+                </button>
+              </VideoPlayButton>
             </div>
           </div>
         </div>

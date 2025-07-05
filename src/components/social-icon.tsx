@@ -6,6 +6,8 @@ import {
   FacebookIcon,
   InstagramIcon,
   TwitterIcon,
+  YoutubeIcon,
+  XIcon,
 } from "./icons";
 import { cn } from "@/lib/utils";
 
@@ -14,8 +16,8 @@ export enum SocialPlatform {
   Twitter = "twitter",
   Facebook = "facebook",
   Instagram = "instagram",
-  // Github = "github",
-  // Youtube = "youtube",
+  Youtube = "youtube",
+  X = "x", // X is the new name for Twitter
 }
 
 type SocialIconProps = {
@@ -28,8 +30,9 @@ const iconMap: Record<SocialPlatform, React.ElementType> = {
   [SocialPlatform.Twitter]: TwitterIcon,
   [SocialPlatform.Facebook]: FacebookIcon,
   [SocialPlatform.Instagram]: InstagramIcon,
+  [SocialPlatform.Youtube]: YoutubeIcon,
+  [SocialPlatform.X]: XIcon,
   // [SocialPlatform.Github]: GithubIcon,
-  // [SocialPlatform.Youtube]: YoutubeIcon,
 };
 
 export const SocialIcon = ({ name, className }: SocialIconProps) => {

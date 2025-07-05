@@ -4,26 +4,49 @@ import SectionHead from "@/components/headings/section-head";
 import CardsSlider from "@/components/slider";
 import fetchContentType from "@/lib/strapi/fetchContentType";
 import { getImageUrl } from "@/lib/utils";
-import { Testimonial } from "@/types/testimonials";
+import { Homepage } from "@/types/homepage";
+// import { Testimonial } from "@/types/testimonials";
 
-async function getTestimonials(): Promise<Testimonial[] | null> {
+// async function getTestimonials(): Promise<Testimonial[] | null> {
+//   try {
+//     const res = await fetchContentType("testimonials", {
+//       populate: {
+//         avatar: {
+//           fields: ["url"],
+//         },
+//       },
+//       sort: ["createdAt:Asc"],
+//     });
+//     return res?.data as Testimonial[] | null;
+//   } catch (error) {
+//     console.error("Error fetching base service data:", error);
+//     return null;
+//   }
+// }
+
+async function getHomeData(): Promise<Homepage | null> {
   try {
-    const res = await fetchContentType("testimonials", {
+    const res = await fetchContentType("home-page", {
       populate: {
-        avatar: {
-          fields: ["url"],
+        testimonials: {
+          populate: {
+            avatar: {
+              fields: ["url"],
+            },
+          },
         },
       },
-      sort: ["createdAt:Asc"],
     });
-    return res?.data as Testimonial[] | null;
+
+    return res?.data as Homepage | null;
   } catch (error) {
-    console.error("Error fetching base service data:", error);
+    console.error("Error fetching partners data:", error);
     return null;
   }
 }
 export default async function TestimonialsSection() {
-  const testimonials = await getTestimonials();
+  const homeData = await getHomeData();
+  const testimonials = homeData?.testimonials || [];
   if (!testimonials || testimonials.length === 0) {
     return <div>No testimonials data available</div>;
   }

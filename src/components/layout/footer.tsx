@@ -4,7 +4,9 @@ import SubscriptionForm from "./susbscripe";
 import { Service } from "@/types/service";
 import fetchContentType from "@/lib/strapi/fetchContentType";
 import { getGlobalData } from "@/lib/shared/globalData";
-import { FacebookIcon, LinkedinIcon, TwitterIcon } from "../icons";
+// import { FacebookIcon, LinkedinIcon, YoutubeIcon } from "../icons";
+import { SocialIcon } from "../social-icon";
+import { YoutubeIcon, FacebookIcon, LinkedinIcon } from "lucide-react";
 
 async function getServices(): Promise<Service[] | null> {
   try {
@@ -53,12 +55,39 @@ export default async function Footer() {
               <p className="text-neutral-400">
                 {globalData?.main_address || ""}
               </p>
-              <p className="text-neutral-400">
-                Phone : {globalData?.main_phone || ""}
-              </p>
-              <p className="text-neutral-400">
-                Mail : {globalData?.email1 || ""}
-              </p>
+              <a
+                href={`tel:${globalData?.main_phone || ""}`}
+                className="block text-neutral-400"
+                // target="_blank"
+              >
+                Phone :{" "}
+                <span className="hover:text-primary transition-colors duration-300">
+                  {globalData?.main_phone || ""}
+                </span>
+              </a>
+              <a
+                href={`https://wa.me/${globalData?.whatsapp || ""}`}
+                className="block text-neutral-400"
+                target="_blank"
+              >
+                WhatsApp :{" "}
+                <span className="hover:text-primary transition-colors duration-300">
+                  {globalData?.whatsapp || ""}
+                </span>
+              </a>
+
+              <a
+                href={`https://mail.google.com/mail/?view=cm&to=${
+                  globalData.email1 || globalData.email2
+                }&subject=Hello&body=Hello`}
+                target="_blank"
+                className="block text-neutral-400"
+              >
+                Mail :{" "}
+                <span className="hover:text-primary transition-colors duration-300">
+                  {globalData?.email1 || ""}
+                </span>
+              </a>
               <p className="text-neutral-400">
                 {globalData?.working_hours || ""}
               </p>
@@ -74,7 +103,7 @@ export default async function Footer() {
                 ?.map((service) => (
                   <li
                     key={service.id}
-                    className="flex items-center text-neutral-400 hover:text-primary transition-colors duration-500 group"
+                    className="flex items-center text-neutral-400 hover:text-primary transition-colors duration-300 group"
                   >
                     <Link href={`/services/${service.slug}`}>
                       <div className="block group-hover:translate-x-3 transition-transform duration-500">
@@ -96,14 +125,17 @@ export default async function Footer() {
             <nav>
               <ul className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-8">
                 <li>
-                  <Link href="/" className="text-neutral-400 hover:text-white">
+                  <Link
+                    href="/"
+                    className="text-neutral-400 hover:text-primary"
+                  >
                     Home
                   </Link>
                 </li>
                 <li>
                   <Link
                     href="/projects"
-                    className="text-neutral-400 hover:text-white"
+                    className="text-neutral-400 hover:text-primary"
                   >
                     Projects
                   </Link>
@@ -111,7 +143,7 @@ export default async function Footer() {
                 <li>
                   <Link
                     href="/services"
-                    className="text-neutral-400 hover:text-white"
+                    className="text-neutral-400 hover:text-primary"
                   >
                     Services
                   </Link>
@@ -121,22 +153,35 @@ export default async function Footer() {
           </div>
           <div className="flex justify-center items-center gap-4 w-full md:w-4/12 mb-4 md:mb-0">
             <Link
-              href={globalData?.twitter_link || "#"}
-              className="p-2 border rounded-full hover:border-neutral-500"
+              href={globalData?.youtube_link || "#"}
+              className="p-2 border rounded-full  group"
+              target="_blank"
             >
-              <TwitterIcon className="h-4 w-4 text-neutral-400" />
+              <YoutubeIcon className="h-4 w-4 text-neutral-400 group-hover:text-primary transition-colors duration-300" />
+            </Link>
+            <Link
+              href={globalData?.twitter_link || "#"}
+              target="_blank"
+              className="p-2 border rounded-full  group"
+            >
+              <SocialIcon
+                name="x"
+                className="size-5 text-neutral-400 group-hover:text-primary transition-colors duration-300"
+              />
             </Link>
             <Link
               href={globalData?.facebook_link || "#"}
-              className="p-2 border rounded-full hover:border-neutral-500"
+              target="_blank"
+              className="p-2 border rounded-full  group"
             >
-              <FacebookIcon className="h-4 w-4 text-neutral-400" />
+              <FacebookIcon className="h-4 w-4 text-neutral-400 group-hover:text-primary transition-colors duration-300" />
             </Link>
             <Link
               href={globalData?.linkedin_link || "#"}
-              className="p-2 border rounded-full hover:border-neutral-500"
+              className="p-2 border rounded-full  group"
+              target="_blank"
             >
-              <LinkedinIcon className="h-4 w-4 text-neutral-400" />
+              <LinkedinIcon className="h-4 w-4 text-neutral-400 group-hover:text-primary transition-colors duration-300" />
             </Link>
           </div>
           <div className="text-center md:text-right text-neutral-400 text-sm w-full md:w-4/12">

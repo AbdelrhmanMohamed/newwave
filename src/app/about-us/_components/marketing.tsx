@@ -1,22 +1,25 @@
-/* eslint-disable @next/next/no-img-element */
 import StrokeNumber from "@/components/stroke-number";
 import { Play } from "lucide-react";
 import React from "react";
 import * as motion from "motion/react-client";
-import { ImpactHighlight } from "@/types/about-us";
 import { VideoPlayButton } from "@/components/video-play-button";
+import { Achievements, Marketing } from "@/types/common";
+import Image from "next/image";
+import { getImageUrl } from "@/lib/utils";
 
 type ProcedureProps = {
   bgUrl?: string;
   title?: string;
-  highlights: ImpactHighlight[];
+  highlights: Achievements[];
   className?: string;
+  marketing: Marketing;
 };
 
 export default function MarketingSection({
   bgUrl,
   highlights,
   className,
+  marketing,
 }: ProcedureProps) {
   return (
     <div className={`relative bg-background ${className}`}>
@@ -28,40 +31,34 @@ export default function MarketingSection({
           transition={{
             duration: 0.5,
           }}
-          className="flex flex-col items-center text-center container mx-auto max-w-5xl"
+          className="flex flex-col items-center justify-center text-center container mx-auto max-w-5xl"
         >
           {/* Main heading */}
           <h1 className="text-white text-4xl sm:text-4xl md:text-5xl font-bold leading-tight mb-8 text-center md:text-left lg:text-center">
-            It&apos;s Time To Take Your Digital Marketing
-            <img
-              src="https://gaaga.wpengine.com/wp-content/uploads/2023/06/content-image-small-size-4.png"
+            {marketing?.titleLine1 || "Our Marketing Approach"}
+            <Image
+              src={getImageUrl(marketing?.image?.url)}
               alt="Marketing visual"
-              className="overflow-hidden rounded-4xl inline-block md:relative top-[-0.5rem] md:top-0 md:left-[-1.5rem] mx-2 md:mx-4 h-full"
+              width={150}
+              height={30}
+              className="overflow-hidden rounded-4xl inline-block md:relative top-[-0.5rem] md:top-0  mx-2 md:mx-4 object-cover w-36 h-16"
             />
-            To The Next Level
+            {marketing?.titleLine2}
             <span className="inline-flex -space-x-2 relative">
-              <img
-                src="https://img.heroui.chat/image/avatar?w=50&h=50&u=team1"
-                alt="Team member"
-                className="w-8 h-8 rounded-full border-2 border-white"
-              />
-              <img
-                src="https://img.heroui.chat/image/avatar?w=50&h=50&u=team2"
-                alt="Team member"
-                className="w-8 h-8 rounded-full border-2 border-white"
-              />
-              <img
-                src="https://img.heroui.chat/image/avatar?w=50&h=50&u=team3"
-                alt="Team member"
-                className="w-8 h-8 rounded-full border-2 border-white"
-              />
+              {marketing?.avatars?.map((avatar, index) => (
+                <Image
+                  key={index}
+                  src={getImageUrl(avatar?.url)}
+                  alt={`Team member ${index + 1}`}
+                  width={32}
+                  height={32}
+                  className="w-12 h-12 rounded-full border-4 border-background object-cover"
+                />
+              ))}
             </span>
-            We Are Always Here To Help You Grow Your Business
-            <VideoPlayButton
-              videoUrl="https://www.youtube.com/watch?v=CfQXgDYzYZI"
-              size="sm"
-            >
-              <button className="size-11 cursor-pointer mx-4 relative top-0.5 rounded-full inline-flex justify-center text-white p-1 bg-primary">
+            {marketing?.titleLine3}
+            <VideoPlayButton videoUrl={marketing?.youtube_link || ""} size="sm">
+              <button className="size-11 cursor-pointer mx-4 relative top-0.5 rounded-full inline-flex justify-center text-white p-1 bg-primary hover:scale-105 transition-all duration-300">
                 <span className="border border-white rounded-full w-full h-full flex items-center justify-center">
                   <span className="bg-white rounded-full p-1">
                     <Play className="w-4 h-4 text-primary fill-primary " />
@@ -80,11 +77,11 @@ export default function MarketingSection({
             >
               <StrokeNumber
                 animate
-                number={highlight?.count}
+                number={highlight?.value}
                 className="lg:text-[7rem] md:text-[6rem] text-[5rem]"
               />
               <span className="text-2xl text-neutral-300 leading-10">
-                {highlight?.title}
+                {highlight?.label}
               </span>
             </div>
           ))}

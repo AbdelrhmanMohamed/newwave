@@ -4,29 +4,52 @@ import ButtonLine from "@/components/headings/button-line";
 import SectionHead from "@/components/headings/section-head";
 import fetchContentType from "@/lib/strapi/fetchContentType";
 import { getImageUrl } from "@/lib/utils";
-import { Project } from "@/types/Project";
+import { Homepage } from "@/types/homepage";
+// import { Project } from "@/types/Project";
 import Link from "next/link";
 
-async function getProjects(): Promise<Project[] | null> {
+// async function getProjects(): Promise<Project[] | null> {
+//   try {
+//     const res = await fetchContentType("projects", {
+//       populate: {
+//         main_image: {
+//           fields: ["url"],
+//         },
+//       },
+//     });
+
+//     return res?.data as Project[] | null;
+//   } catch (error) {
+//     console.error("Error fetching base project data:", error);
+//     return null;
+//   }
+// }
+
+async function getHomeData(): Promise<Homepage | null> {
   try {
-    const res = await fetchContentType("projects", {
+    const res = await fetchContentType("home-page", {
       populate: {
-        main_image: {
-          fields: ["url"],
+        projects: {
+          populate: {
+            main_image: {
+              fields: ["url"],
+            },
+          },
         },
       },
     });
 
-    return res?.data as Project[] | null;
+    return res?.data as Homepage | null;
   } catch (error) {
-    console.error("Error fetching base project data:", error);
+    console.error("Error fetching partners data:", error);
     return null;
   }
 }
 
 export default async function PortfolioSection() {
-  const projects = await getProjects();
-  if (!projects) {
+  const homeData = await getHomeData();
+  const projects = homeData?.projects || [];
+  if (!projects || projects.length === 0) {
     return <div>Error loading projects</div>;
   }
   return (
@@ -35,12 +58,12 @@ export default async function PortfolioSection() {
       <div className="flex flex-col items-center mb-12 text-center">
         <SectionHead
           show={{ start: true, end: true }}
-          title="Gallery"
+          title={homeData?.projects_headline || "Portfolio"}
           animate
         />
         <AnimatedText
           className="text-4xl md:text-5xl font-bold text-white mt-4 leading-tight"
-          text="Our Project Portfolio"
+          text={homeData?.projects_title || "Our Project Portfolio"}
         />
       </div>
 
@@ -72,10 +95,7 @@ export default async function PortfolioSection() {
             </h2>
           </div>
           <p className="text-neutral-400 text-base leading-relaxed mb-8 pl-4">
-            Dolor sit amet consectetur adipiscing elit ut aliquam purus sit.
-            Euismod nisi porta lorem mollis aliquam ut porttitor. In hac
-            habitasse platea dictumst. Amet massa vitae tortor condimentum
-            lacinia quis.
+            {homeData?.projects_description}
           </p>
           <Link href="/projects" className="pl-4">
             <ButtonLine title="View All" />
