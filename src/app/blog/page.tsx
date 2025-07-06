@@ -63,7 +63,7 @@ async function fetchBlogs(): Promise<Blog[]> {
   );
   const blogs = await res.json();
 
-  return blogs.data || [];
+  return blogs?.data || [];
 }
 
 export default async function BlogPage() {

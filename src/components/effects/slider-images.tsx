@@ -25,15 +25,15 @@ export function ImageSlider({
   slidesToScroll = 2,
 }: Props) {
   const plugin = React.useRef(
-    Autoplay({ delay: 2000, stopOnInteraction: true })
+    Autoplay({ delay: 2000, stopOnInteraction: false })
   );
 
   return (
     <Carousel
       plugins={[plugin.current]}
       className={cn("relative w-full overflow-hidden", className)}
-      onMouseEnter={plugin.current.stop}
-      onMouseLeave={plugin.current.reset}
+      // onMouseEnter={plugin.current.stop}
+      // onMouseLeave={plugin.current.reset}
       opts={{
         loop: true,
         dragFree: true,

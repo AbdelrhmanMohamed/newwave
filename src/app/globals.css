@@ -262,6 +262,32 @@
     }
   }
 
+  @keyframes marquee2 {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(calc(-100% - var(--gap)));
+    }
+  }
+
+  /* @keyframes marquee-vertical {
+    from {
+      transform: translateY(0);
+    }
+    to {
+      transform: translateY(calc(-100% - var(--gap)));
+    }
+  } */
+
+  .animate-marquee2 {
+    animation: marquee2 var(--duration) linear infinite;
+  }
+
+  /* .animate-marquee-vertical {
+    animation: marquee-vertical var(--duration) linear infinite;
+  } */
+
   .animate-marquee {
     animation: marquee 15s linear infinite;
   }

@@ -1,10 +1,11 @@
-import { TestimonialCard } from "@/components/cards/testimonial-card";
-import AnimatedText from "@/components/effects/animate-text";
-import SectionHead from "@/components/headings/section-head";
-import CardsSlider from "@/components/slider";
+// import { TestimonialCard } from "@/components/cards/testimonial-card";
+// import AnimatedText from "@/components/effects/animate-text";
+// import SectionHead from "@/components/headings/section-head";
+// import CardsSlider from "@/components/slider";
 import fetchContentType from "@/lib/strapi/fetchContentType";
-import { getImageUrl } from "@/lib/utils";
 import { Homepage } from "@/types/homepage";
+import TestimonialsSlider from "./testmonials-client";
+import { getImageUrl } from "@/lib/utils";
 // import { Testimonial } from "@/types/testimonials";
 
 // async function getTestimonials(): Promise<Testimonial[] | null> {
@@ -35,6 +36,9 @@ async function getHomeData(): Promise<Homepage | null> {
             },
           },
         },
+        testimonials_image: {
+          fields: ["url"],
+        },
       },
     });
 
@@ -51,8 +55,8 @@ export default async function TestimonialsSection() {
     return <div>No testimonials data available</div>;
   }
   return (
-    <div className="w-full px-6 relative py-20 text-white ">
-      <div className="flex flex-col items-center mb-12">
+    <div className="w-full px-6 relative py-40 text-white ">
+      {/* <div className="flex flex-col items-center mb-12">
         <SectionHead
           show={{
             start: true,
@@ -65,9 +69,14 @@ export default async function TestimonialsSection() {
           className="text-4xl md:text-5xl lg:text-4xl xl:text-5xl font-bold text-white my-4 leading-14 flex flex-wrap justify-center"
           text="Happy Words From Happy Customer"
         />
-      </div>
+      </div> */}
       {/* testimonials Grid */}
-      <CardsSlider>
+      <TestimonialsSlider
+        testimonials={testimonials}
+        imageUrl={getImageUrl(homeData?.testimonials_image?.url) || ""}
+        title={homeData?.testimonials_title || "What Our People Says"}
+      />
+      {/* <CardsSlider>
         {testimonials.map((testimonial, index) => (
           <TestimonialCard
             key={index}
@@ -79,7 +88,7 @@ export default async function TestimonialsSection() {
             className="min-w-[400px]"
           />
         ))}
-      </CardsSlider>
+      </CardsSlider> */}
     </div>
   );
 }

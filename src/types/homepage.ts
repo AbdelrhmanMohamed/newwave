@@ -38,5 +38,8 @@ export interface Homepage {
   blogs_headline: string;
   blogs: Blog[];
   testimonials: Testimonial[];
+  testimonials_title: string;
+  testimonials_headline: string;
+  testimonials_image: Media;
   contact: ContactBanner;
 }

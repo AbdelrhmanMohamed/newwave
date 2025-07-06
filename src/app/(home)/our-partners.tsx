@@ -2,10 +2,10 @@ import ImageSwap from "@/components/effects/image-swap";
 import SectionHead from "@/components/headings/section-head";
 import React from "react";
 import * as motion from "motion/react-client";
-import { ImageSlider } from "@/components/effects/slider-images";
 import fetchContentType from "@/lib/strapi/fetchContentType";
 import { getImageUrl } from "@/lib/utils";
 import { Homepage } from "@/types/homepage";
+import { Marquee2 } from "@/components/effects/marquee2";
 
 async function getHomeData(): Promise<Homepage | null> {
   try {
@@ -57,15 +57,15 @@ export default async function OurPartners() {
         />
       </motion.div>
       <div className="w-full mt-6">
-        <ImageSlider
-          items={partners.map((partner) => (
+        <Marquee2 reverse>
+          {partners.map((partner) => (
             <ImageSwap
               firstImage={getImageUrl(partner?.gray_logo?.url)}
               secondImage={getImageUrl(partner?.base_logo?.url)}
               key={partner.id}
             />
           ))}
-        />
+        </Marquee2>
       </div>
     </div>
   );
