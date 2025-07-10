@@ -23,6 +23,7 @@ export const formatNumber = (
 export const getImageUrl = (url: string | null | undefined): string => {
   if (!url) return "";
   if (process.env.NODE_ENV === "development" && url) {
+    console.log(`${process.env.NEXT_PUBLIC_API_URL}${url}`);
     return `${process.env.NEXT_PUBLIC_API_URL}${url}`;
   }
   return url;

@@ -3,7 +3,7 @@ import SkillCard from "./_components/skill-card";
 import { PageBanner } from "@/components/page-banner";
 import * as motion from "motion/react-client";
 // import ProcedureSection from "./_components/proceture";
-import MarketingSection from "./_components/marketing";
+// import MarketingSection from "./_components/marketing";
 import Querries from "./_components/querries";
 import Stepper from "@/components/steper";
 import SectionHead from "@/components/headings/section-head";
@@ -229,7 +229,7 @@ export default async function AboutUsPage() {
 
         <Stepper steps={aboutUsData?.process || []} />
       </div>
-      <motion.section
+      {/* <motion.section
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         transition={{
@@ -240,9 +240,10 @@ export default async function AboutUsPage() {
         <MarketingSection
           bgUrl="https://gaaga.wpengine.com/wp-content/uploads/2023/06/Gaaga-Process-Counter-Bg-Img-1-scaled.jpg"
           title="Our Marketing Approach"
-          highlights={aboutUsData?.impact_highlights || []}
+          highlights={[]}
+          marketing={}
         />
-      </motion.section>
+      </motion.section> */}
       <motion.div
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
