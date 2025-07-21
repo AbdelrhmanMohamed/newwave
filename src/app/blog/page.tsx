@@ -1,5 +1,5 @@
 import BlogCard from "@/components/cards/blog-card";
-import CustomPagination from "@/components/custom-pagination";
+// import CustomPagination from "@/components/custom-pagination";
 import { PageBanner } from "@/components/page-banner";
 import React from "react";
 import * as motion from "motion/react-client";
@@ -133,7 +133,7 @@ export default async function BlogPage() {
               />
             ))}
         </div>
-        <CustomPagination totalPages={3} initialPage={2} />
+        {/* <CustomPagination totalPages={3} initialPage={2} /> */}
       </motion.section>
     </div>
   );

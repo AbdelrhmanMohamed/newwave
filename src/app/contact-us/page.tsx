@@ -14,9 +14,11 @@ import { Branch, ContactPageWithBranchesAndSocialLinks } from "@/types/contact";
 import { getImageUrl } from "@/lib/utils";
 import { getGlobalData } from "@/lib/shared/globalData";
 import PageHeader from "@/components/page-header";
+import Link from "next/link";
+import { YoutubeIcon, FacebookIcon, LinkedinIcon } from "lucide-react";
 
 export const revalidate = 60;
-export const dynamicParams = true;
+// export const dynamicParams = true;
 
 export async function generateMetadata(): Promise<Metadata> {
   const pageData = await fetchContentType(
@@ -79,13 +81,6 @@ export default async function ContactUs() {
   const contactBranches = await getBranchesData();
   const globalData = await getGlobalData();
   const branches = contactBranches || [];
-  console.log("Branches Data:", branches);
-  const socialLinks = [
-    { id: 1, name: "facebook", url: globalData?.facebook_link || "#" },
-    { id: 2, name: "instagram", url: globalData?.instagram_link || "#" },
-    { id: 3, name: "linkedin", url: globalData?.linkedin_link || "#" },
-    // { id: 4, name: 'twitter', url: globalData?.twitter_link || '#', },
-  ];
 
   if (!contactPage) {
     return (
@@ -208,18 +203,36 @@ export default async function ContactUs() {
           </div>
 
           <div className="flex space-x-4 my-4">
-            {(socialLinks || []).map((link) => (
-              <a
-                key={link?.id}
-                href={link?.url}
+            <div className="flex space-x-4 my-4">
+              <Link
+                href={globalData?.youtube_link || "#"}
+                target="_blank"
                 className="size-6 rounded-full border border-white transition hover:border-primary flex items-center justify-center duration-500 hover:text-primary"
               >
-                <SocialIcon
-                  name={link?.name as keyof typeof SocialIcon}
-                  className="h-3 w-3"
-                />
-              </a>
-            ))}
+                <YoutubeIcon className="h-3 w-3" />
+              </Link>
+              <Link
+                href={globalData?.twitter_link || "#"}
+                target="_blank"
+                className="size-6 rounded-full border border-white transition hover:border-primary flex items-center justify-center duration-500 hover:text-primary"
+              >
+                <SocialIcon name="x" className="h-4 w-4" />
+              </Link>
+              <Link
+                href={globalData?.facebook_link || "#"}
+                target="_blank"
+                className="size-6 rounded-full border border-white transition hover:border-primary flex items-center justify-center duration-500 hover:text-primary"
+              >
+                <FacebookIcon className="h-3 w-3" />
+              </Link>
+              <Link
+                href={globalData?.linkedin_link || "#"}
+                target="_blank"
+                className="size-6 rounded-full border border-white transition hover:border-primary flex items-center justify-center duration-500 hover:text-primary"
+              >
+                <LinkedinIcon className="h-3 w-3" />
+              </Link>
+            </div>
           </div>
 
           <div className="text-neutral-400">
