@@ -60,7 +60,7 @@ export default async function HeroSection() {
                 {hero?.highlight_text}
               </span>{" "}
               <br className="hidden md:block" />
-              <span className="block md:inline">{parts[0]}</span>
+              <span className="block md:inline">{parts[1]}</span>
               <span className="text-2xl size-3 bg-primary inline-block rounded-full" />
             </h2>
 
