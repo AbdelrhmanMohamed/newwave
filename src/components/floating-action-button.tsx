@@ -60,7 +60,7 @@ export default function FloatingActionButton({
       icon: <WhatsAppIcon className="w-10 h-10" />,
       color: "bg-green-500 hover:bg-green-600",
       label: "WhatsApp",
-      href: `https://wa.me/${data.main_phone}?text=Hello%20NewWave!`,
+      href: `https://wa.me/${data.whatsapp}?text=Hello%20NewWave!`,
     },
     {
       icon: <Mail size={30} />,

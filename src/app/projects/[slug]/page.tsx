@@ -128,36 +128,47 @@ export default async function ProjectDetailPage({
           { label: projectData?.title },
         ]}
       />
-      <div className="grid grid-cols-12 gap-16 px-10 pb-20 items-start">
-        <div className="col-span-12 lg:col-span-6 pt-4">
-          <div className="flex items-center gap-4 mb-4">
-            <h1 className="text-3xl font-bold ">Description :</h1>
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 px-4 sm:px-6 lg:px-10 xl:px-12 pb-20 items-start">
+        {/* Content */}
+        <div className="pt-4">
+          <div className="flex items-center gap-4 mb-4 flex-wrap">
+            <h1 className="text-2xl sm:text-3xl font-bold">Description :</h1>
             <FloatingShare url={projectUrl} title={projectData.title} />
           </div>
-          <p className="text-lg text-neutral-400 mb-8">
+
+          <p className="text-base sm:text-lg text-neutral-400 mb-8">
             {projectData.description}
           </p>
+
           <div>
-            <h1 className="text-3xl font-bold mt-16 mb-4">Client :</h1>
-            <p className="text-lg text-neutral-400 mb-8">
+            <h2 className="text-2xl sm:text-3xl font-bold mt-12 mb-4">
+              Client :
+            </h2>
+            <p className="text-base sm:text-lg text-neutral-400 mb-8">
               {projectData.client}
             </p>
           </div>
+
           <div>
-            <h1 className="text-3xl font-bold mt-16 mb-4">Service :</h1>
-            <p className="text-lg text-neutral-400 mb-8">
+            <h2 className="text-2xl sm:text-3xl font-bold mt-12 mb-4">
+              Service :
+            </h2>
+            <p className="text-base sm:text-lg text-neutral-400 mb-8">
               {projectData.project_categories[0]?.title}
             </p>
           </div>
         </div>
-        <div className="col-span-12 lg:col-span-6 ">
+
+        {/* Image Slider */}
+        <div>
           <ImageSlider
             showArrows={false}
             autoPlay={true}
-            images={projectData.gallery || [] || []}
+            images={projectData.gallery || []}
           />
         </div>
       </div>
+
       <div className="px-4 py-20">
         <Stepper steps={aboutUsData?.process || []} />
       </div>

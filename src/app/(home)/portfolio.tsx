@@ -80,6 +80,7 @@ export default async function PortfolioSection() {
                 ? "lg:col-span-6 col-span-1"
                 : "lg:col-span-3 col-span-1"
             } col-span-1 aspect-video`}
+            href={`/projects/${project.slug}`}
           />
         ))}
       </div>
@@ -111,6 +112,7 @@ export default async function PortfolioSection() {
               imageUrl={getImageUrl(project.main_image?.url) || ""}
               title={project?.title}
               className="aspect-video"
+              href={`/projects/${project.slug}`}
             />
           ))}
         </div>
