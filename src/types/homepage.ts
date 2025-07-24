@@ -2,6 +2,7 @@ import { Blog } from "./blog";
 import { Achievements, ContactBanner, Marketing, Media } from "./common";
 import { Partner } from "./paterner";
 import { Project } from "./Project";
+import { ServiceDetail } from "./service";
 import { Testimonial } from "./testimonials";
 
 interface HeroSection {
@@ -32,6 +33,7 @@ export interface Homepage {
   projects_title: string;
   projects_description: string;
   projects: Project[];
+  services: ServiceDetail[];
   marketing: Marketing;
   achievements: Achievements[];
   blogs_title: string;
@@ -42,4 +44,5 @@ export interface Homepage {
   testimonials_headline: string;
   testimonials_image: Media;
   contact: ContactBanner;
+  services_cover: Media;
 }

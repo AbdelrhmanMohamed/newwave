@@ -11,6 +11,11 @@ import {
   type CarouselApi,
 } from "@/components/ui/carousel";
 import { QuoteIcon } from "@/components/icons";
+import {
+  HoverCard,
+  HoverCardContent,
+  HoverCardTrigger,
+} from "@/components/ui/hover-card";
 
 type TestimonialsProps = {
   testimonials: Testimonial[];
@@ -65,11 +70,32 @@ export default function TestimonialsSlider({
                 <CarouselContent>
                   {testimonials.map((testimonial) => (
                     <CarouselItem key={testimonial.id}>
-                      <div className="space-y-16">
+                      <div className="space-y-8">
                         {/* Testimonial Text */}
-                        <p className="text-gray-300 text-2xl leading-relaxed tracking-wide font-medium">
-                          {testimonial.message}
-                        </p>
+                        {testimonial?.post_image ? (
+                          <HoverCard>
+                            <HoverCardTrigger className="cursor-pointer">
+                              <p className="text-gray-300 mb-16 text-2xl leading-relaxed tracking-wide font-medium">
+                                {testimonial.message}
+                              </p>
+                            </HoverCardTrigger>
+                            <HoverCardContent
+                              className="bg-background relative p-2"
+                              sideOffset={-1}
+                            >
+                              <Image
+                                src={getImageUrl(testimonial?.post_image?.url)}
+                                alt=""
+                                width={300}
+                                height={300}
+                              />
+                            </HoverCardContent>
+                          </HoverCard>
+                        ) : (
+                          <p className="text-gray-300 mb-16 text-2xl leading-relaxed tracking-wide font-medium">
+                            {testimonial.message}
+                          </p>
+                        )}
 
                         {/* Author Info */}
                         <div className="flex items-center space-x-4">

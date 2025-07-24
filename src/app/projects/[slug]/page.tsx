@@ -8,7 +8,6 @@ import fetchContentType from "@/lib/strapi/fetchContentType";
 import { Project } from "@/types/Project";
 import { Metadata } from "next/types";
 import { generateMetadataObject } from "@/lib/shared/metadata";
-import { getImageUrl } from "@/lib/utils";
 import { headers } from "next/headers";
 import FloatingShare from "@/components/floating-share";
 import ShareSection from "@/components/share-section";
@@ -61,7 +60,10 @@ async function getProjectData(slug: string): Promise<Project | null> {
             fields: ["url"],
           },
           gallery: {
-            fields: ["url"],
+            fields: ["url", "width", "height"],
+          },
+          project_categories: {
+            populate: "*",
           },
         },
       },
@@ -101,6 +103,7 @@ export default async function ProjectDetailPage({
 }) {
   const { slug } = await params;
   const projectData = await getProjectData(slug);
+  console.log(projectData, "projectData");
   const aboutUsData = await getAboutUsData();
   const headersList = await headers();
   const protocol = headersList.get("x-forwarded-proto") || "http";
@@ -125,25 +128,33 @@ export default async function ProjectDetailPage({
           { label: projectData?.title },
         ]}
       />
-      <div className="grid grid-cols-12 gap-16 px-10 pb-20">
-        <div className="col-span-12 lg:col-span-6">
-          <div className="flex items-center gap-4 mb-6">
-            <h1 className="text-4xl font-bold ">{projectData.title}</h1>
+      <div className="grid grid-cols-12 gap-16 px-10 pb-20 items-start">
+        <div className="col-span-12 lg:col-span-6 pt-4">
+          <div className="flex items-center gap-4 mb-4">
+            <h1 className="text-3xl font-bold ">Description :</h1>
             <FloatingShare url={projectUrl} title={projectData.title} />
           </div>
           <p className="text-lg text-neutral-400 mb-8">
             {projectData.description}
           </p>
+          <div>
+            <h1 className="text-3xl font-bold mt-16 mb-4">Client :</h1>
+            <p className="text-lg text-neutral-400 mb-8">
+              {projectData.client}
+            </p>
+          </div>
+          <div>
+            <h1 className="text-3xl font-bold mt-16 mb-4">Service :</h1>
+            <p className="text-lg text-neutral-400 mb-8">
+              {projectData.project_categories[0]?.title}
+            </p>
+          </div>
         </div>
         <div className="col-span-12 lg:col-span-6 ">
           <ImageSlider
             showArrows={false}
             autoPlay={true}
-            images={
-              (projectData.gallery || []).map((image) =>
-                getImageUrl(image.url)
-              ) || []
-            }
+            images={projectData.gallery || [] || []}
           />
         </div>
       </div>

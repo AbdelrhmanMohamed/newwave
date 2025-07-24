@@ -12,6 +12,11 @@ export interface ProjectPageData {
   call_action_text: string;
 }
 
+export interface ProjectCategory {
+  id: number;
+  title: string;
+}
+
 export interface Project {
   id: string;
   title: string;
@@ -29,4 +34,5 @@ export interface Project {
   youtube_link: string;
   createdAt: string;
   publishedAt: string;
+  project_categories: ProjectCategory[];
 }

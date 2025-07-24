@@ -5,7 +5,12 @@ import * as motion from "motion/react-client";
 import fetchContentType from "@/lib/strapi/fetchContentType";
 import { getImageUrl } from "@/lib/utils";
 import { Homepage } from "@/types/homepage";
-import { Marquee2 } from "@/components/effects/marquee2";
+import {
+  Marquee,
+  MarqueeContent,
+  MarqueeFade,
+  MarqueeItem,
+} from "@/components/ui/kibo-ui/marquee";
 
 async function getHomeData(): Promise<Homepage | null> {
   try {
@@ -56,16 +61,25 @@ export default async function OurPartners() {
           }}
         />
       </motion.div>
-      <div className="w-full mt-6">
-        <Marquee2 reverse>
-          {partners.map((partner) => (
-            <ImageSwap
-              firstImage={getImageUrl(partner?.gray_logo?.url)}
-              secondImage={getImageUrl(partner?.base_logo?.url)}
-              key={partner.id}
-            />
-          ))}
-        </Marquee2>
+      <div className="flex w-full mt-6 size-full items-center justify-center">
+        <Marquee>
+          <MarqueeFade side="left" />
+          <MarqueeFade side="right" />
+          <MarqueeContent autoFill pauseOnHover={false} direction="right">
+            {partners.map((partner) => (
+              <MarqueeItem className="h-32 w-32 mr-8" key={partner.id}>
+                <ImageSwap
+                  firstImage={getImageUrl(partner?.gray_logo?.url)}
+                  secondImage={getImageUrl(partner?.base_logo?.url)}
+                  key={partner.id}
+                  firstAlt={partner.name}
+                  secondAlt={partner.name}
+                  href={partner.website}
+                />
+              </MarqueeItem>
+            ))}
+          </MarqueeContent>
+        </Marquee>
       </div>
     </div>
   );

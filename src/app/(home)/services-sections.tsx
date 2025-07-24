@@ -3,41 +3,45 @@ import AnimatedText from "@/components/effects/animate-text";
 import SectionHead from "@/components/headings/section-head";
 import fetchContentType from "@/lib/strapi/fetchContentType";
 import { getImageUrl } from "@/lib/utils";
-import { ServiceDetail } from "@/types/service";
+import { Homepage } from "@/types/homepage";
 import Link from "next/link";
 import React from "react";
 // import * as motion from "motion/react-client";
 
 type ProcedureProps = {
-  bgUrl?: string;
   className?: string;
 };
 
-async function getServices(): Promise<ServiceDetail[] | null> {
+async function getHomeData(): Promise<Homepage | null> {
   try {
-    const res = await fetchContentType("services", {
+    const res = await fetchContentType("home-page", {
       populate: {
-        image: {
+        services_cover: {
           fields: ["url"],
         },
-        main_content: "*",
-      },
-      pagination: {
-        limit: 4,
+        services: {
+          populate: {
+            image: {
+              fields: ["url"],
+            },
+          },
+        },
       },
     });
-    return res?.data as ServiceDetail[] | null;
+
+    return res?.data as Homepage | null;
   } catch (error) {
-    console.error("Error fetching base service data:", error);
+    console.error("Error fetching partners data:", error);
     return null;
   }
 }
 
-export default async function ServicesSections({
-  bgUrl = "https://gaaga.wpengine.com/wp-content/uploads/2023/06/service-detail-bg-1.jpg",
-  className,
-}: ProcedureProps) {
-  const services = await getServices();
+export default async function ServicesSections({ className }: ProcedureProps) {
+  const homeData = await getHomeData();
+  const services = homeData?.services || [];
+  if (!services || services.length === 0) {
+    return <div>No services data available</div>;
+  }
 
   return (
     <div className={`relative bg-background py-40  ${className}`}>
@@ -58,7 +62,7 @@ export default async function ServicesSections({
       <div className="w-full">
         {services?.length ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-y-20">
-            {(services || []).map((service, index) => (
+            {(services || []).slice(0, 4).map((service, index) => (
               <div
                 key={service.id}
                 className="flex flex-col lg:flex-row flex-1"
@@ -95,7 +99,7 @@ export default async function ServicesSections({
       <div
         className="bg-cover pointer-events-none absolute top-0 bg-center mix-blend-luminosity opacity-10 w-full h-full"
         style={{
-          backgroundImage: `url(${bgUrl})`,
+          backgroundImage: `url(${getImageUrl(homeData?.services_cover?.url)})`,
         }}
       />
     </div>

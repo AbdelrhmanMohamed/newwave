@@ -5,11 +5,11 @@ import Image from "next/image";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { cn, getImageUrl } from "@/lib/utils";
+import { Media } from "@/types/common";
 
 export interface ImageSliderProps {
-  images: string[];
-  aspectRatio?: string;
+  images: Media[];
   showArrows?: boolean;
   showIndicators?: boolean;
   autoPlay?: boolean;
@@ -22,11 +22,10 @@ export interface ImageSliderProps {
 
 export default function ImageSlider({
   images,
-  aspectRatio = "aspect-[4/3]",
   showArrows = true,
   showIndicators = true,
   autoPlay = false,
-  autoPlayInterval = 3000, // Default to 3 seconds
+  autoPlayInterval = 3000,
   className,
   imageClassName,
   indicatorType = "strips",
@@ -53,7 +52,6 @@ export default function ImageSlider({
     onImageChange?.(index);
   };
 
-  // Auto-play functionality - Fixed to use useEffect
   useEffect(() => {
     if (autoPlay && images.length > 1) {
       const interval = setInterval(nextImage, autoPlayInterval);
@@ -65,8 +63,7 @@ export default function ImageSlider({
     return (
       <div
         className={cn(
-          "flex items-center justify-center bg-neutral-200 rounded-lg",
-          aspectRatio,
+          "flex items-center justify-center bg-neutral-200 rounded-lg h-64",
           className
         )}
       >
@@ -76,19 +73,19 @@ export default function ImageSlider({
   }
 
   return (
-    <Card className={cn("bg-transparent border-0 overflow-hidden", className)}>
-      <div className={cn("relative overflow-hidden ", aspectRatio)}>
+    <Card className={cn("bg-transparent border-0", className)}>
+      <div className="relative w-full flex justify-center">
         <Image
-          src={images[currentImageIndex] || "/placeholder.svg"}
+          src={getImageUrl(images[currentImageIndex].url) || "/placeholder.svg"}
           alt={`Slide ${currentImageIndex + 1}`}
-          fill
+          width={images[currentImageIndex].width || 800}
+          height={images[currentImageIndex].height || 600}
           className={cn(
-            "object-cover transition-all duration-500",
+            "object-contain max-h-[80vh] h-auto w-auto transition-all duration-500",
             imageClassName
           )}
         />
 
-        {/* Navigation Arrows */}
         {showArrows && images.length > 1 && (
           <>
             <Button
@@ -114,7 +111,6 @@ export default function ImageSlider({
         )}
       </div>
 
-      {/* Indicators */}
       {showIndicators && images.length > 1 && (
         <div className="flex justify-center space-x-3 mt-6">
           {images.map((_, index) => (

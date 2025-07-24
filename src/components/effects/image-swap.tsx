@@ -13,6 +13,7 @@ interface ImageSwapProps {
   height?: number;
   className?: string;
   animationDuration?: number;
+  href: string;
 }
 
 export default function ImageSwap({
@@ -20,13 +21,14 @@ export default function ImageSwap({
   secondImage,
   firstAlt = "First image",
   secondAlt = "Second image",
-  width = 144, // Default width (36 * 4 for better quality)
-  height = 70, // Default height (10 * 4 for better quality)
+  width = 300, // Default width (36 * 4 for better quality)
+  height = 80, // Default height (10 * 4 for better quality)
   className = "",
   animationDuration = 400,
+  href,
 }: ImageSwapProps) {
   return (
-    <Link href="/">
+    <Link href={href} target="_blank">
       <div className={cn("relative overflow-hidden group", className)}>
         {/* First image (visible by default, slides up and fades out on hover) */}
         <div

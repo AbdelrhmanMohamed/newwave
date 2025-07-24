@@ -34,6 +34,9 @@ async function getHomeData(): Promise<Homepage | null> {
             avatar: {
               fields: ["url"],
             },
+            post_image: {
+              fields: ["url"],
+            },
           },
         },
         testimonials_image: {

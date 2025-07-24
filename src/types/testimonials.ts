@@ -7,4 +7,5 @@ export interface Testimonial {
   message: string;
   avatar: Media;
   rate?: number;
+  post_image?: Media;
 }

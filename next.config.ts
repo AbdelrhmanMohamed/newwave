@@ -10,13 +10,18 @@ const nextConfig: NextConfig = {
         hostname: "newwav.net",
         pathname: "/wp-content/uploads/**",
       },
-      // Add this if you need placeholder images
+      // {
+      //   protocol: "https",
+      //   hostname: "placeholder.svg",
+      // },
       {
         protocol: "https",
-        hostname: "placeholder.svg",
+        hostname: "srv918361.hstgr.cloud",
+        pathname: "/uploads/**",
       },
     ],
   },
+  output: "standalone",
 };
 
 export default nextConfig;
