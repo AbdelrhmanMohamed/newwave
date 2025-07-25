@@ -103,7 +103,6 @@ export default async function ProjectDetailPage({
 }) {
   const { slug } = await params;
   const projectData = await getProjectData(slug);
-  console.log(projectData, "projectData");
   const aboutUsData = await getAboutUsData();
   const headersList = await headers();
   const protocol = headersList.get("x-forwarded-proto") || "http";

@@ -62,7 +62,6 @@ export default async function RootLayout({
 }>) {
   // You can fetch data here if needed, but for now, we are just returning the layout
   const data = await getGlobalData();
-  // console.log(data); // For debugging purposes
   return (
     <html lang="en">
       <body className={`${promptFont.variable} antialiased overflow-x-hidden`}>

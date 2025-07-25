@@ -76,7 +76,6 @@ export default async function ProjectPage() {
   if (!projects || projects.length === 0) {
     return <div>No projects available</div>;
   }
-  console.log("Projects:", projects);
   if (!pageData) {
     return <div>No project data available</div>;
   }

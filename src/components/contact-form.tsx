@@ -28,7 +28,6 @@ export default function ContactForm() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    console.log("formData", formData);
     const res = await send_message(formData);
 
     setLoading(false);

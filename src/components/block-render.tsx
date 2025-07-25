@@ -2,35 +2,34 @@
 import Image from "next/image";
 
 import {
-    BlocksRenderer,
-    type BlocksContent,
+  BlocksRenderer,
+  type BlocksContent,
 } from "@strapi/blocks-react-renderer";
 
 export default function BlockRendererClient({
-    content,
+  content,
 }: {
-    readonly content: BlocksContent;
+  readonly content: BlocksContent;
 }) {
-    if (!content) return null;
-    return (
-        <BlocksRenderer
-            content={content}
-            blocks={{
-                image: ({ image }) => {
-                    console.log(image);
-                    return (
-                        <Image
-                            src={image.url}
-                            width={image.width}
-                            height={image.height}
-                            alt={image.alternativeText || ""}
-                        />
-                    );
-                },
-                list: ({ children }) => {
-                    return <ul className="list-disc pl-5 [&_li]:mb-2">{children}</ul>;
-                }
-            }}
-        />
-    );
+  if (!content) return null;
+  return (
+    <BlocksRenderer
+      content={content}
+      blocks={{
+        image: ({ image }) => {
+          return (
+            <Image
+              src={image.url}
+              width={image.width}
+              height={image.height}
+              alt={image.alternativeText || ""}
+            />
+          );
+        },
+        list: ({ children }) => {
+          return <ul className="list-disc pl-5 [&_li]:mb-2">{children}</ul>;
+        },
+      }}
+    />
+  );
 }

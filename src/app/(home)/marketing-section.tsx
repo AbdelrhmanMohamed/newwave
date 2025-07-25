@@ -38,7 +38,7 @@ export default async function MarketingSectionHome() {
       transition={{
         duration: 0.5,
       }}
-      className="py-20"
+      className=""
     >
       <MarketingSection
         bgUrl=""
