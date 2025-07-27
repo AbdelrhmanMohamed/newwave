@@ -51,9 +51,8 @@ export default function YouTubePlayer({ videoId, title }: YouTubePlayerProps) {
             </div>
           </div>
         ) : (
-          // YouTube iframe
           <iframe
-            src={`https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0`}
+            src={`https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1&showinfo=0&controls=1&end=${"ss"}&loop=1&playlist=${videoId}`}
             title={title}
             className="w-full h-full"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"

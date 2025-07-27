@@ -32,6 +32,9 @@ export interface Project {
   video_title: string;
   video_description: string;
   youtube_link: string;
+  youtube_link2: string;
+  youtube_link3: string;
+  youtube_link4: string;
   createdAt: string;
   publishedAt: string;
   project_categories: ProjectCategory[];

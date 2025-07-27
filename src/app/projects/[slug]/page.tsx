@@ -3,7 +3,7 @@ import { PageBanner } from "@/components/page-banner";
 import React from "react";
 import * as motion from "motion/react-client";
 // import InstagramCard from "@/components/cards/instagram-card";
-import VideoPreviewSection from "./video-preview";
+// import VideoPreviewSection from "./video-preview";
 import fetchContentType from "@/lib/strapi/fetchContentType";
 import { Project } from "@/types/Project";
 import { Metadata } from "next/types";
@@ -14,6 +14,8 @@ import ShareSection from "@/components/share-section";
 import Stepper from "@/components/steper";
 import { AboutUsData } from "@/types/about-us";
 import GalleryMedia from "@/components/gallery-media";
+import VideoSlider from "@/components/video-slider";
+import VideoPreviewSection from "./video-preview";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -116,10 +118,20 @@ export default async function ProjectDetailPage({
       <div className="text-center py-20">No data found for this project.</div>
     );
   }
+  const videoLinks = () => {
+    const links: (string | undefined)[] = [
+      projectData?.youtube_link,
+      projectData?.youtube_link2,
+      projectData?.youtube_link3,
+      projectData?.youtube_link4,
+    ];
+
+    return links.filter((link): link is string => Boolean(link && link.trim()));
+  };
   return (
     <div>
       <PageBanner
-        title={projectData.title || "Project Details"}
+        title={projectData?.title || "Project Details"}
         backgroundImage={"/images/office.png"}
         breadcrumbs={[
           { label: "Home", href: "/" },
@@ -132,11 +144,11 @@ export default async function ProjectDetailPage({
         <div className="pt-4">
           <div className="flex items-center gap-4 mb-4 flex-wrap">
             <h1 className="text-2xl sm:text-3xl font-bold">Description :</h1>
-            <FloatingShare url={projectUrl} title={projectData.title} />
+            <FloatingShare url={projectUrl} title={projectData?.title} />
           </div>
 
           <p className="text-base sm:text-lg text-neutral-400 mb-8">
-            {projectData.description}
+            {projectData?.description}
           </p>
 
           <div>
@@ -144,7 +156,7 @@ export default async function ProjectDetailPage({
               Client :
             </h2>
             <p className="text-base sm:text-lg text-neutral-400 mb-8">
-              {projectData.client}
+              {projectData?.client}
             </p>
           </div>
 
@@ -153,7 +165,7 @@ export default async function ProjectDetailPage({
               Service :
             </h2>
             <p className="text-base sm:text-lg text-neutral-400 mb-8">
-              {projectData.project_categories[0]?.title}
+              {projectData?.project_categories[0]?.title}
             </p>
           </div>
         </div>
@@ -163,7 +175,7 @@ export default async function ProjectDetailPage({
           <ImageSlider
             showArrows={false}
             autoPlay={true}
-            images={projectData.gallery || []}
+            images={projectData?.gallery || []}
           />
         </div>
       </div>
@@ -171,7 +183,7 @@ export default async function ProjectDetailPage({
       <div className="px-4 py-20">
         <Stepper steps={aboutUsData?.process || []} />
       </div>
-      {projectData.youtube_link ? (
+      {projectData?.youtube_link ? (
         <motion.section
           initial={{ x: -200, opacity: 0 }}
           whileInView={{ x: 0, opacity: 1 }}
@@ -180,13 +192,30 @@ export default async function ProjectDetailPage({
           }}
           className="px-10 py-20"
         >
-          <VideoPreviewSection
-            videoUrl={projectData.youtube_link || ""}
-            description={
-              projectData.description ||
-              "Watch the video to see how we brought this project to life."
-            }
-          />
+          {videoLinks().length === 1 ? (
+            <VideoPreviewSection
+              videoUrl={projectData?.youtube_link || ""}
+              description={
+                projectData?.description ||
+                "Watch the video to see how we brought this project to life."
+              }
+            />
+          ) : (
+            <>
+              <VideoSlider
+                links={[
+                  projectData?.youtube_link,
+                  projectData?.youtube_link2,
+                  projectData?.youtube_link3,
+                  projectData?.youtube_link4,
+                ]}
+                indicatorType="dots"
+              />
+              <p className="text-neutral-300 leading-relaxed text-center px-4 mt-8">
+                {projectData?.description}
+              </p>
+            </>
+          )}
         </motion.section>
       ) : (
         <div className="mb-20" />
@@ -194,7 +223,7 @@ export default async function ProjectDetailPage({
 
       <ShareSection
         url={projectUrl}
-        title={projectData.title}
+        title={projectData?.title}
         shareTitle="Share"
         className="mb-20 mt-10"
       />

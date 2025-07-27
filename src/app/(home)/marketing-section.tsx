@@ -43,7 +43,7 @@ export default async function MarketingSectionHome() {
       <MarketingSection
         bgUrl=""
         title="Our Marketing Approach"
-        className="bg-[#14171b] mt-20"
+        className="bg-[#14171b] py-0 mt-8"
         highlights={homeData?.achievements || []}
         marketing={marketing}
       />

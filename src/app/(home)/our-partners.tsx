@@ -44,7 +44,7 @@ export default async function OurPartners() {
     return <div>No partners data available</div>;
   }
   return (
-    <div className="px-6 md:px-12 xl:px-40  relative mt-20 ">
+    <div className="px-6 md:px-12 xl:px-40 relative mt-20">
       <motion.div
         initial={{ y: -10, opacity: 0 }}
         whileInView={{ y: 1, opacity: 100 }}

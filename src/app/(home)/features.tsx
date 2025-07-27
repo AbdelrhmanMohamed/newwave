@@ -65,7 +65,7 @@ export default async function FeaturesSection() {
     return <div>No key services data available</div>;
   }
   return (
-    <section className="px-6 lg:px-12 mt-36 z-50">
+    <section className="px-6 lg:px-12 mt-40 z-50">
       <div className="w-full">
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-12">
           {keyServices.map((service, index) => (
