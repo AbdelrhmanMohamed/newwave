@@ -25,7 +25,7 @@ export const getImageUrl = (url: string | null | undefined): string => {
   if (process.env.NODE_ENV === "development" && url) {
     return `${process.env.NEXT_PUBLIC_API_URL}${url}`;
   }
-  return `${url}`;
+  return `${process.env.NEXT_PUBLIC_API_URL}${url}`;
 };
 
 // Extract video ID from YouTube URL if full URL is provided
