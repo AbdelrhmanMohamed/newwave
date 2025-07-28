@@ -10,7 +10,7 @@ import { Blog, BlogPageData } from "@/types/blog";
 import { getImageUrl } from "@/lib/utils";
 import { ClapperboardIcon } from "lucide-react";
 
-export const revalidate = 30; // Revalidate every 30 seconds;
+export const revalidate = 120;
 // export const dynamicParams = true
 
 export async function generateMetadata(): Promise<Metadata> {

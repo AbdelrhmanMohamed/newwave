@@ -17,7 +17,7 @@ import PageHeader from "@/components/page-header";
 import Link from "next/link";
 import { YoutubeIcon, FacebookIcon, LinkedinIcon } from "lucide-react";
 
-export const revalidate = 60;
+export const revalidate = 120;
 // export const dynamicParams = true;
 
 export async function generateMetadata(): Promise<Metadata> {

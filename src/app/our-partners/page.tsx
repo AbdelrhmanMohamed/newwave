@@ -17,7 +17,7 @@ import { getImageUrl } from "@/lib/utils";
 import PageHeader from "@/components/page-header";
 import { Partner } from "@/types/paterner";
 
-export const revalidate = 1;
+export const revalidate = 120;
 
 export async function generateMetadata(): Promise<Metadata> {
   const pageData = await fetchContentType(

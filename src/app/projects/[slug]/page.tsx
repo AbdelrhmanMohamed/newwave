@@ -46,7 +46,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
   const seo = project?.seo;
   const metadata = generateMetadataObject(seo);
-  return metadata;
+  return { ...metadata, title: project?.seo?.metaTitle || slug };
 }
 
 async function getProjectData(slug: string): Promise<Project | null> {
@@ -202,15 +202,7 @@ export default async function ProjectDetailPage({
             />
           ) : (
             <>
-              <VideoSlider
-                links={[
-                  projectData?.youtube_link,
-                  projectData?.youtube_link2,
-                  projectData?.youtube_link3,
-                  projectData?.youtube_link4,
-                ]}
-                indicatorType="dots"
-              />
+              <VideoSlider links={videoLinks()} indicatorType="dots" />
               <p className="text-neutral-300 leading-relaxed text-center px-4 mt-8">
                 {projectData?.description}
               </p>

@@ -49,7 +49,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
   const seo = service?.seo;
   const metadata = generateMetadataObject(seo);
-  return metadata;
+  return { ...metadata, title: service?.seo?.metaTitle || slug };
 }
 
 async function getServiceData(slug: string): Promise<ServiceDetail | null> {

@@ -21,7 +21,7 @@ import GlobalPresence from "./_components/global-presence";
 import Market from "./_components/market";
 import GalleryMedia from "@/components/gallery-media";
 
-export const revalidate = 60;
+export const revalidate = 120;
 
 // export const dynamic = "force-dynamic";
 

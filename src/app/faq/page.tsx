@@ -17,7 +17,7 @@ import Querries from "@/components/querries";
 import { getGlobalData } from "@/lib/shared/globalData";
 import GalleryMedia from "@/components/gallery-media";
 
-export const revalidate = 60;
+export const revalidate = 120;
 
 export async function generateMetadata(): Promise<Metadata> {
   const pageData = await fetchContentType(

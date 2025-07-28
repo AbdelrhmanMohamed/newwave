@@ -96,7 +96,7 @@ export function generateMetadataObject(seo: SEO_Response) {
       openGraph: {
         title: seo?.metaTitle,
         description: seo?.metaDescription,
-        url: seo?.canonicalURL || "https://newwave.com",
+        url: seo?.canonicalURL || "https://newwav.com",
         siteName: "NewWave",
         type: "article",
         images: [
