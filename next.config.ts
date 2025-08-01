@@ -16,12 +16,11 @@ const nextConfig: NextConfig = {
       // },
       {
         protocol: "https",
-        hostname: "srv918361.hstgr.cloud",
+        hostname: "srv936239.hstgr.cloud",
         pathname: "/uploads/**",
       },
     ],
   },
-  output: "standalone",
 };
 
 export default nextConfig;
