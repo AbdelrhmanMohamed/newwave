@@ -20,7 +20,7 @@ const AnimatedText = ({ text, className = "", once = true }: Props) => {
       x: 0,
       transition: {
         delay: i * 0.06,
-        type: "spring",
+        type: "spring" as const,
         damping: 12,
         stiffness: 100,
       },
@@ -43,10 +43,7 @@ const AnimatedText = ({ text, className = "", once = true }: Props) => {
   return (
     <h1 className={cn("flex flex-wrap text-white", className)}>
       {words.map((word, wordIdx) => (
-        <span
-          key={wordIdx}
-          className="inline-flex mr-2 whitespace-nowrap"
-        >
+        <span key={wordIdx} className="inline-flex mr-2 whitespace-nowrap">
           {Array.from(word).map((letter) => {
             const index = letterIndex++;
             return (
