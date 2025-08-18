@@ -4,7 +4,7 @@ import SectionHead from "@/components/headings/section-head";
 import React from "react";
 import Image from "next/image";
 import { Dots } from "@/components/icons";
-import ButtonLine from "@/components/headings/button-line";
+// import ButtonLine from "@/components/headings/button-line";
 import { BlocksContent } from "@strapi/blocks-react-renderer";
 import BlockRendererClient from "@/components/block-render";
 import { getImageUrl } from "@/lib/utils";
