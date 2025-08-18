@@ -40,9 +40,9 @@ export default function OurTeam({
         />
         <div className="text-gray-300 text-[15px] leading-7">
           <BlockRendererClient content={description || []} />
-          <div className="mt-8">
+          {/* <div className="mt-8">
             <ButtonLine title="Read More" />
-          </div>
+          </div> */}
         </div>
       </div>
       <div

@@ -56,13 +56,15 @@ export default function NavBar() {
       transition={{ duration: 0.5, ease: "easeInOut" }}
       className={`z-30 px-8 md:px-[4.5rem] py-6 flex justify-between items-center text-white fixed top-0 w-full bg-background/5 backdrop-blur-3xl xl:backdrop-blur-lg`}
     >
-      <Image
-        src="/images/logo.png"
-        alt="NEW WAVE Logo"
-        width={140}
-        height={50}
-        className="object-contain"
-      />
+      <Link href={"/"}>
+        <Image
+          src="/images/logo.png"
+          alt="NEW WAVE Logo"
+          width={140}
+          height={50}
+          className="object-contain"
+        />
+      </Link>
       <nav className="hidden xl:flex items-center space-x-10">
         {menuItems.map((item) => (
           <LinkItem
